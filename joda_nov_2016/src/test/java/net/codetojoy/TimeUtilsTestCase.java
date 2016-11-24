@@ -39,7 +39,8 @@ public class TimeUtilsTestCase {
     @Parameters(name = "test #{index}: IS {0} IN RANGE ({1}, {2}) ? {3}")
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
-                // t, start, end, expected
+                // { t, start, end, expected } 
+                // expected == is t in (start, end) interval ?
                 {DAY_A + "12:00", DAY_A + START, DAY_A + END, true},
                 {DAY_A + "07:00", DAY_A + START, DAY_A + END, false},
                 {DAY_B + "00:00", DAY_A + START, DAY_A + END, false},
