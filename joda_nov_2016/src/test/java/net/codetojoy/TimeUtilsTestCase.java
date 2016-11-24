@@ -36,9 +36,10 @@ public class TimeUtilsTestCase {
         this.expected = expected;
     }
 
-    @Parameters(name = "{index}: {0} in range ({1}, {2}) ? {3}")
+    @Parameters(name = "test #{index}: IS {0} IN RANGE ({1}, {2}) ? {3}")
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
+                // t, start, end, expected
                 {DAY_A + "12:00", DAY_A + START, DAY_A + END, true},
                 {DAY_A + "07:00", DAY_A + START, DAY_A + END, false},
                 {DAY_B + "00:00", DAY_A + START, DAY_A + END, false},
