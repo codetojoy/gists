@@ -3,7 +3,7 @@
 stage "initial checkout"
 
 node {
-    git url: "https://github.com/codetojoy/easter_egg_jenkins_artifactory.git"
+    git url: "https://github.com/codetojoy/gists/tree/master/artifactory_jan_2017"
 }
 
 stage "build"
