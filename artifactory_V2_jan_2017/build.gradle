@@ -4,5 +4,5 @@ task clean() {
 }
 
 task build() {
-    dependsOn 'utils:jar','component:jar','web:war'
+    dependsOn 'utils:pTML','component:pTML','web:war'
 }
