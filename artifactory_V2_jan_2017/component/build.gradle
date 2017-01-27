@@ -1,0 +1,89 @@
+
+apply plugin: 'java'
+apply plugin: 'distribution'
+apply plugin: 'maven-publish'
+
+allprojects {
+    apply from: "${rootDir}/gradle/version.gradle"
+    apply from: "${rootDir}/gradle/info.gradle"
+}
+
+repositories {
+    mavenLocal()
+
+    maven {
+        name "remoteArtifactory"
+        url REPOSITORY_URL
+
+        credentials {
+            username = artifactoryUsername
+            password = artifactoryPassword
+        }
+    }
+
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.apache.httpcomponents:httpclient:4.5.2'
+    compile "net.codetojoy:utils:${project.version}"
+}
+
+archivesBaseName = 'web-component'
+def thisArtifactId  = 'web-component'
+group = 'net.codetojoy'
+
+// see ~/gradle/version.gradle
+version = project.version
+
+compileJava.doFirst {
+    def newBuildInfoFile = new File("${projectDir}/src/main/java/net/codetojoy/component/BuildInfo.java")
+    def templateBuildInfoFile = new File("${projectDir}/resources/TemplateBuildInfo.java")
+    newBuildInfoFile.withWriter { def writer ->
+        templateBuildInfoFile.eachLine { def line ->
+            def newLine = line.replace("__PACKAGE","net.codetojoy.component")
+                              .replace("__ARTIFACT",thisArtifactId)
+                              .replace("__VERSION",project.version)
+                              .replace("__BUILD_TIMESTAMP",buildTimeStamp)
+            writer.write(newLine + "\n");
+        }
+    }
+}
+
+// -----------------------------------------
+
+distributions {
+    main {
+        baseName = archivesBaseName
+
+        contents {
+            from libsDir
+        }
+    }
+}
+
+publishing {
+    publications {
+        codetojoy(MavenPublication) {
+            from components.java 
+            artifactId thisArtifactId
+
+            pom.withXml {
+                asNode().appendNode('properties')
+                        .appendNode('buildTimestamp',buildTimeStamp)
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name "remoteArtifactory"
+            url REPOSITORY_URL
+
+            credentials {
+                username = artifactoryUsername
+                password = artifactoryPassword
+            }
+        }
+    }
+}

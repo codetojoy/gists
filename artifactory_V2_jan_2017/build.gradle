@@ -1,0 +1,8 @@
+
+task clean() {
+    dependsOn 'utils:clean','component:clean','web:clean'
+}
+
+task build() {
+    dependsOn 'utils:jar','component:jar','web:war'
+}
