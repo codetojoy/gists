@@ -1,0 +1,5 @@
+stage "stage 1"
+node {
+    sh "echo `date` >> /Users/measter/tmp/08.02.2017/jenkinsfile.log"
+}
+
