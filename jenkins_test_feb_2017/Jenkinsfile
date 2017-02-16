@@ -13,7 +13,7 @@ timeout(time: 1, unit: 'DAYS') {
                     id: 'userInput', 
                     message: 'Which apps?',
                     parameters: [
-                        [$class: 'TextParameterDescription', description: 'Foo desc', name: 'foo']
+                        [$class: 'StringParameterDescription', description: 'Foo desc', name: 'foo', defaultValue: '123']
                     ])
 }
 
