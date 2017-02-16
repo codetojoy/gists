@@ -1,7 +1,7 @@
 
 ### useful commands
 
-* list installations:
+* list installed packages:
 
 `npm list --depth=0`
 
