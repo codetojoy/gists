@@ -5,20 +5,15 @@ node {
     echo "TRACER : before input"
 }
 
-def fooInput
+def appInput
 
 stage "input stage"
 timeout(time: 1, unit: 'DAYS') {
-    fooInput = input(
-                    id: 'userInput', 
-                    message: 'Which apps?',
-                    parameters: [
-                        [$class: 'hudson.model.StringParameterDescription', description: 'Foo desc', name: 'foo', defaultValue: '123']
-                    ])
+    appInput = input(id: 'Apps', message: 'Which application(s) ?', parameters: [[$class: 'ChoiceParameter', choiceType: 'PT_MULTI_SELECT', description: '', filterable: false, name: 'app', randomName: 'choice-parameter-444855049411275', script: [$class: 'GroovyScript', fallbackScript: [classpath: [], sandbox: false, script: ''], script: [classpath: [], sandbox: false, script: 'return [\'abc\',\'def\',\'ijk\',\'xyz\',\'all\']']]]], submitterParameter: 'whoApproved')
 }
 
 stage "after input"
 node {
-    echo "TRACER : after input : " + fooInput
+    echo "TRACER : after input : " + appInput
 }
 
