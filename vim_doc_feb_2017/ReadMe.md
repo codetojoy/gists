@@ -13,7 +13,7 @@
 
 ### visual mode example 2
 
-* select contents of <p>this inner string</p>
+* select contents of `<p>this inner string</p>`
 * `vit`
 
 ### visual mode example 3
