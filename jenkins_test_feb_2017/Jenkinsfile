@@ -13,10 +13,13 @@ timeout(time: 1, unit: 'DAYS') {
 
     appInput = input(message: 'which apps?', 
                parameters: [
-                booleanParam(defaultValue: false, description: '', name: 'app_a'), 
-                booleanParam(defaultValue: false, description: '', name: 'app_b'),
-                booleanParam(defaultValue: false, description: '', name: 'ALL')
-               ])
+               booleanParam(defaultValue: false, description: '', name: 'app_a'), 
+               booleanParam(defaultValue: false, description: '', name: 'app_b'),
+               booleanParam(defaultValue: false, description: '', name: 'ALL')
+               ],
+               // submitter: 'measter', 
+               submitterParameter: 'approver'
+               )
 /*
     appInput = input(id: 'Apps', message: 'Which application(s) ?', parameters: [[$class: 'ChoiceParameter', choiceType: 'PT_MULTI_SELECT', description: '', filterable: false, name: 'app', randomName: 'choice-parameter-444855049411275', script: [$class: 'GroovyScript', script: [classpath: [], sandbox: true, script: 'return [\'abc\',\'def\',\'ijk\',\'xyz\',\'all\']']]]], submitterParameter: 'whoApproved')
 */
@@ -25,6 +28,10 @@ timeout(time: 1, unit: 'DAYS') {
 
 stage "after input"
 node {
-    echo "TRACER : after input : " + appInput
+    echo "TRACER after input : " + appInput
+    echo "TRACER app_a ? " + appInput['app_a']
+    echo "TRACER app_b ? " + appInput['app_b']
+    echo "TRACER ALL ? " + appInput['ALL']
+    echo "TRACER approver : " + appInput['approver']
 }
 
