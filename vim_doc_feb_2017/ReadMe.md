@@ -1,4 +1,9 @@
 
+### misc
+
+* '*' search for currently selected word
+* '%' move to matching delimiter 
+
 ### substitution example
 
 * change `myStuff` to `doStuff`
