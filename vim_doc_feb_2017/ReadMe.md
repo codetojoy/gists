@@ -1,8 +1,9 @@
 
 ### misc
 
-* '*' search for currently selected word
-* '%' move to matching delimiter 
+* `*` search for currently selected word
+* `%` move to matching delimiter 
+* `/target\c` is case insensitive search 
 
 ### substitution example
 
