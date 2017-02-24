@@ -1,11 +1,12 @@
 'use strict';
 
-var path = require('path')
+const path = require('path');
 
-var DIST_DIR = path.resolve(__dirname + '/dist') 
-var APP_DIR = path.resolve(__dirname + '/app')
+const DIST_DIR = path.resolve(__dirname + '/dist');
+const APP_DIR = path.resolve(__dirname + '/app');
 
 const HtmlPlugin = require('html-webpack-plugin');
+const webpack = require('webpack'); // for built-in plugins
 
 module.exports = {
     devServer: {
@@ -25,14 +26,21 @@ module.exports = {
             }
         ],
     },
-    plugins: [new HtmlPlugin({
-        title: 'CustomTitle',
-        template: APP_DIR + '/index.html', // Load a custom template
-        inject: 'body' // Inject all scripts into the body
-    })],
+    plugins: [
+        new HtmlPlugin({ title: 'CustomTitle', 
+                            template: APP_DIR + '/index.html', 
+                            inject: 'body' })
+    ],
     entry: APP_DIR + '/index.jsx',
     output: {
         path: `${__dirname}/dist`,
         filename: 'bundle.js'
     }
 };
+
+if (process.env.PROD_ENV === 'production') {
+    config.plugins.push(
+        new webpack.optimize.UglifyJsPlugin()
+    );
+}
+
