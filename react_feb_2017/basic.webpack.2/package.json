@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-localdev": "webpack",
-    "build": "NODE_ENV=production webpack -p",
-    "localdev": "webpack-dev-server"
+    "build:localdev": "webpack --env=localdev --progress --profile --colors",
+    "build:dist": "webpack --env=prod --progress --profile --colors",
+    "localdev": "webpack-dev-server --env=localdev"
   },
   "author": "",
   "license": "ISC",

@@ -1,46 +1,9 @@
+
 'use strict';
 
-const path = require('path');
-
-const DIST_DIR = path.resolve(__dirname + '/dist');
-const APP_DIR = path.resolve(__dirname + '/app');
-
-const HtmlPlugin = require('html-webpack-plugin');
-const webpack = require('webpack'); // for built-in plugins
-
-module.exports = {
-    devServer: {
-        inline: true
-      , contentBase: DIST_DIR
-      , port: 3333 
-    },
-    module: {
-        loaders: [
-            {
-                test: /\.jsx?$/,
-                loader: 'babel-loader',
-                exclude: /node_modules/,
-                query: {
-                    presets: ['react', 'es2015']
-                }
-            }
-        ],
-    },
-    plugins: [
-        new HtmlPlugin({ title: 'CustomTitle', 
-                            template: APP_DIR + '/index.html', 
-                            inject: 'body' })
-    ],
-    entry: APP_DIR + '/index.jsx',
-    output: {
-        path: `${__dirname}/dist`,
-        filename: 'bundle.js'
-    }
-};
-
-if (process.env.PROD_ENV === 'production') {
-    config.plugins.push(
-        new webpack.optimize.UglifyJsPlugin()
-    );
+function buildConfig(env) {
+    let config_file = require('./' + env + '.js');
+    return config_file({ env: env });
 }
 
+module.exports = buildConfig;
