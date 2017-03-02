@@ -10,6 +10,14 @@ const webpack = require('webpack'); // for built-in plugins
 
 module.exports = function(env) {
     return {
+        entry: {
+            main: APP_DIR + '/index.jsx',
+            vendor: ['react', 'react-dom'],
+        },
+        output: {
+            filename: '[chunkhash].[name].js',
+            path: DIST_DIR
+        },
         devServer: {
             inline: true
           , contentBase: DIST_DIR
@@ -31,12 +39,10 @@ module.exports = function(env) {
             new HtmlPlugin({ title: 'CustomTitle', 
                                 template: APP_DIR + '/index.html', 
                                 inject: 'body' }),
-            new webpack.optimize.UglifyJsPlugin()
-        ],
-        entry: APP_DIR + '/index.jsx',
-        output: {
-            path: `${__dirname}/dist`,
-            filename: 'bundle.js'
-        }
+            new webpack.optimize.UglifyJsPlugin(),
+            new webpack.optimize.CommonsChunkPlugin({
+                names: ['vendor', 'manifest'] 
+            })
+        ]
     }
 };
