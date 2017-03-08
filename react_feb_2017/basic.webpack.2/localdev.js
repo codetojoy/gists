@@ -6,6 +6,7 @@ const DIST_DIR = path.resolve(__dirname + '/dist');
 const APP_DIR = path.resolve(__dirname + '/app');
 
 const HtmlPlugin = require('html-webpack-plugin');
+
 const webpack = require('webpack'); // for built-in plugins
 
 module.exports = function (env) {
@@ -16,21 +17,33 @@ module.exports = function (env) {
           , port: 3333 
         },
         module: {
-            loaders: [
+            rules: [{
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            },
                 {
-                    test: /\.jsx?$/,
-                    loader: 'babel-loader',
-                    exclude: /node_modules/,
-                    query: {
-                        presets: ['react', 'es2015']
-                    }
+                test: /\.jsx?$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/,
+                query: {
+                    presets: ['react', 'es2015']
                 }
-            ],
+            }],
+/*
+                use: ExtractTextPlugin.extract({
+                  fallback: "style-loader",
+                  use: "css-loader"
+                })
+            rules: [{
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            }],
+*/
         },
         plugins: [
             new HtmlPlugin({ title: 'CustomTitle', 
                                 template: APP_DIR + '/index.html', 
-                                inject: 'body' })
+                                inject: 'body' }),
         ],
         entry: APP_DIR + '/index.jsx',
         output: {

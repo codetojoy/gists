@@ -24,6 +24,20 @@ module.exports = function(env) {
           , port: 3333 
         },
         module: {
+            rules: [
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.jsx?$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/,
+                query: {
+                    presets: ['react', 'es2015']
+            },
+            }],
+
             loaders: [
                 {
                     test: /\.jsx?$/,
