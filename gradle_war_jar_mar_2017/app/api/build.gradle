@@ -1,0 +1,26 @@
+
+apply plugin: 'war'
+
+buildscript {
+  repositories {
+    jcenter()
+  }
+
+  dependencies {
+    classpath 'org.akhikhl.gretty:gretty:+'
+  }
+}
+
+repositories {
+  jcenter()
+}
+
+dependencies {
+    compile project(":lib:utils")
+}
+
+apply plugin: 'org.akhikhl.gretty'
+
+
+war.baseName "api"
+
