@@ -1,0 +1,15 @@
+
+subprojects { Project subProject ->
+    afterEvaluate {
+        def hasJarTask = subProject.tasks.find { it.name == "jar" }
+
+        if (hasJarTask) {
+            task reportJar {
+                def msg = "        " +
+                          " project ${subProject.name} produces" +
+                          " jar '${subProject.archivesBaseName}'"
+                println msg
+            }
+        }
+    }
+}
