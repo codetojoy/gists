@@ -1,0 +1,99 @@
+
+apply plugin: 'java'
+apply plugin: 'distribution'
+apply plugin: 'maven-publish'
+
+allprojects {
+    apply from: "${rootDir}/gradle/version.gradle"
+    apply from: "${rootDir}/gradle/info.gradle"
+}
+
+repositories {
+    maven {
+        name "remoteArtifactory"
+        url REPOSITORY_URL
+
+        credentials {
+            username = artifactoryUsername
+            password = artifactoryPassword
+        }
+    }
+
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.apache.commons:commons-lang3:3.5'
+    testCompile 'junit:junit:4.12'
+}
+
+def didCompileJavaExecute = false 
+
+archivesBaseName = 'utils'
+def thisArtifactId  = 'utils'
+group = 'net.codetojoy'
+
+// see ~/gradle/version.gradle
+version = project.version
+
+// -----------------------------------------
+
+distributions {
+    main {
+        baseName = archivesBaseName
+
+        contents {
+            from libsDir
+        }
+    }
+}
+
+publishing {
+    publications {
+        codetojoy(MavenPublication) {
+            from components.java 
+            artifactId thisArtifactId
+
+            pom.withXml {
+                asNode().appendNode('properties')
+                        .appendNode('buildTimestamp',buildTimeStamp)
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name "remoteArtifactory"
+            url REPOSITORY_URL
+
+            credentials {
+                username = artifactoryUsername
+                password = artifactoryPassword
+            }
+        }
+    }
+}
+
+compileJava.doLast {
+    didCompileJavaExecute = true
+}
+
+tasks.matching { it.name ==~ "publish.*" }.all {
+    onlyIf { didCompileJavaExecute }
+}
+
+/*
+tasks.matching { it.name == "publishMavenJavaPublicationToMavenRepository" }.all {
+    onlyIf { myCustomUpToDateCheck.isBuildRequired() }
+}
+
+    model {
+        tasks.generatePomFileForMavenPublication {
+            enabled = false
+        }
+        tasks.publishMavenPublicationToMavenRepository {
+            enabled = false
+        }
+    }
+    tasks.publish.enabled = false
+*/
