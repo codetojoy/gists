@@ -1,0 +1,52 @@
+
+def readLines(def file) {
+    def lines = []
+
+    file.eachLine { line ->
+        def trimLine = line.trim()
+        def isComment = (trimLine ==~ /^#.*$/)
+
+        if ((! isComment) && (! trimLine.isEmpty())) {
+            lines << line
+        }
+    }
+
+    lines
+}
+
+def writeLn(writer, line) {
+    writer.write(line + "\n")
+}
+
+def writeSh(def lines) {
+    def setVarsSh = new File("${projectDir}/setvars.sh")
+    ant.delete(file: setVarsSh)
+
+    setVarsSh.withWriter { writer ->
+        writeLn(writer, "# AUTO-GENERATED ... DO NOT EDIT") 
+        lines.each { line ->
+            writeLn(writer, "export " + line)
+        }
+    }
+}
+
+def writeBat(def lines) {
+    def setVarsBat = new File("${projectDir}/setvars.bat")
+    ant.delete(file: setVarsBat)
+
+    setVarsBat.withWriter { writer ->
+        writeLn(writer, "REM AUTO-GENERATED ... DO NOT EDIT") 
+        lines.each { line ->
+            writeLn(writer, "set " + line)
+        }
+    }
+}
+
+task generateSetVars() {
+    doLast {
+        def setVarsProperties = new File("${projectDir}/setvars.properties")
+        def lines = readLines(setVarsProperties)
+        writeSh(lines)
+        writeBat(lines)
+    }
+}
