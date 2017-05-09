@@ -1,3 +1,11 @@
 
 apply from: "${projectDir}/gradle/setvars.gradle"
 
+gradle.taskGraph.whenReady { graph ->
+    def isGenerateSetVars = graph.allTasks.find { it.name == "generateSetVars" }
+
+    if (! isGenerateSetVars) {
+        apply from: "${projectDir}/gradle/version.gradle"
+    }
+}
+
