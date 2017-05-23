@@ -1,0 +1,68 @@
+
+apply plugin: 'maven-publish'
+
+ext {
+    ARTIFACTORY_BASE_URL = "http://127.0.0.1:8081/artifactory"
+    RELEASE_REPO_URL = "${ARTIFACTORY_BASE_URL}/libs-release-local" 
+}
+
+// abc-2.3.6.zip
+task abcJar(type: Jar) {
+    baseName "abc"
+    from "${projectDir}/sandbox"
+    includes ['abc.txt']
+    extension 'zip'
+}
+
+// def-2.3.6.jar
+task defJar(type: Jar) {
+    baseName "def"
+    from "${projectDir}/sandbox"
+    includes ['def.txt']
+}
+
+// ijk-2.3.6.jar
+task ijkJar(type: Jar) {
+    baseName "ijk"
+    from "${projectDir}/sandbox"
+    includes ['ijk.txt']
+}
+
+publishing {
+    publications {
+        abc(MavenPublication) {
+            groupId 'com.acme'
+            artifactId 'abc'
+            version '2.3.6'
+
+            artifact abcJar
+        }
+        defx(MavenPublication) {
+            groupId 'com.acme'
+            artifactId 'def'
+            version '2.3.6'
+
+            artifact defJar
+        }
+        ijk(MavenPublication) {
+            groupId 'com.acme'
+            artifactId 'ijk'
+            version '2.3.6'
+
+            artifact ijkJar
+        }
+    }
+
+    repositories {
+        maven {
+            name "remoteArtifactory"
+            url RELEASE_REPO_URL
+
+            credentials {
+                username = artifactoryUsername
+                password = artifactoryPassword
+            }
+        }
+    }
+}
+
