@@ -1,0 +1,35 @@
+
+final File _BUILD_REQUIRED_FILE = new File("build.required.txt")
+
+task upToDateChecker {
+    inputs.file new File("foo.txt")
+    outputs.file new File("bar.txt")
+
+    doLast {
+        println "build required !"
+        _BUILD_REQUIRED_FILE.delete()
+        _BUILD_REQUIRED_FILE.withWriter { writer ->
+            writer.write("${new Date()}\n")
+        }
+    }
+}
+
+task build {
+    outputs.upToDateWhen {
+        return ! _BUILD_REQUIRED_FILE.exists()
+    }
+    doLast {
+        println "building ..."
+        ant.copy(file: "foo.txt", tofile: "bar.txt")
+    }
+}
+
+task publish {
+    outputs.upToDateWhen {
+        return ! _BUILD_REQUIRED_FILE.exists()
+    }
+    doLast {
+        println "publishing ..."
+        _BUILD_REQUIRED_FILE.delete()
+    }
+}
