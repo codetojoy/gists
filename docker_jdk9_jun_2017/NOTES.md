@@ -1,4 +1,8 @@
 
+### note
+
+* this is a resuable container for a given project/volume
+
 ### initial steps
 
 * ensure current directory contains `resources/jdk-9+175_linux-x64_bin.tar.gz`
