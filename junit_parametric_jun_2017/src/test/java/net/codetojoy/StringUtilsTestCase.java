@@ -26,7 +26,7 @@ public class StringUtilsTestCase {
         this.note = note;
     }
 
-    @Parameters(name = "#{index} ____ {0} ____ {1} ____ {2}")
+    @Parameters(name = "#{index}  __  str: {0}  __  uuid? {1}  __  note: {2}")
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
             {"d8bebfbc-aea2-4c13-9122-264217042fa3", Y, "basic",},
