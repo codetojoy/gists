@@ -32,8 +32,8 @@ public class StringUtilsTestCase {
             {"d8bebfbc-aea2-4c13-9122-264217042fa3", Y, "basic",},
             {"d8bebfbc-aea2-4c13-9122-264217042fa3", Y, "group3[0] is 4",},
             {"d8bebfbc-aea2-6c13-9122-264217042fa3", N, "group3[0] is 4 !",},
-            {"d8bebfbc-aea2-4c13-8122-264217042fa3", Y, "group4[0] in 8,9,A,B",},
-            {"d8bebfbc-aea2-4c13-2122-264217042fa3", N, "group4[0] in 8,9,A,B !",},
+            {"d8bebfbc-aea2-4c13-8122-264217042fa3", Y, "group4[0] in {8,9,A,B}",},
+            {"d8bebfbc-aea2-4c13-2122-264217042fa3", N, "group4[0] in {8,9,A,B} !",},
         });
     }
 
