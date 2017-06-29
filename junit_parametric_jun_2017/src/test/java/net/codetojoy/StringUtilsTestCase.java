@@ -38,7 +38,7 @@ public class StringUtilsTestCase {
     }
 
     @Test
-    public void testIsValidUUID() {
+    public void testIsUUID() {
         boolean expectedResult = (expected.equals("Y"));
 
         // test
