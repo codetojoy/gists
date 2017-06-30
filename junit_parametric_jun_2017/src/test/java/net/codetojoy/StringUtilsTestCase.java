@@ -30,7 +30,8 @@ public class StringUtilsTestCase {
     public static Collection<Object[]> data() {
         // { str, expected, note }
         //
-        // * if (`expected` == Y) then assert `str` is UUID
+        // * if (`expected` is Y) then assert `str` is UUID else assert not
+        // 
         // * `note` is only used as a comment for the test report
         //     * this is just my notation, but I use "!" in notes to capture
         //       why a given `str` is not a UUID
