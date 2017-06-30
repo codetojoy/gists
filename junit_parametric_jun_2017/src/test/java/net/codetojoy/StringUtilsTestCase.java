@@ -33,7 +33,7 @@ public class StringUtilsTestCase {
         // * if (`expected` == Y) then assert `str` is UUID
         // * `note` is only used as a comment for the test report
         //     * this is just my notation, but I use "!" in notes to capture
-        //     * why a given `str` is not a UUID
+        //       why a given `str` is not a UUID
          
         return Arrays.asList(new Object[][]{
             {"d8bebfbc-aea2-4c13-9122-264217042fa3", Y, "basic",},
