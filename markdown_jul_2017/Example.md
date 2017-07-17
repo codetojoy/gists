@@ -23,4 +23,6 @@ a[href="#spoiler"]:active::after {
 
 Q: How many guitarists does it take to change a lightbulb?
 
-[](#spoiler "Two: one to change bulb and one to watch, arms crossed, and say _I can do that_.")
+<p>
+  <a href="#spoiler" title="Spoiler Filled Text"></a>
+</p>
