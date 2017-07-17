@@ -1,10 +1,14 @@
 
 ### Show/Hide Example
 
-Q: Example question about code?
+More info here based on desired text.
 
-A:
-<details>
-  <summary>Find all Java files (click to show)</summary>
-  <p><pre>find . -name "*.java</pre></p>
-</details>
+Step 1:
+<details><summary>Find all Java files:</summary>
+<p><pre>find . -name "*.java</pre></p></details>
+
+Step 2:
+<details><summary>Find all Java tests:</summary>
+<p><pre>find . -name "*Test.java</pre></p></details>
+
+More info here based on desired text.
