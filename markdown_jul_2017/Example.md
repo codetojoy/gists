@@ -1,5 +1,3 @@
-<head>
-<style>
 a[href="#spoiler"] {
   text-decoration: none !important;
   cursor: default;
@@ -20,14 +18,9 @@ a[href="#spoiler"]:active::after {
   color: black;
   transition: color .5s ease-in-out;
 }
-</style>
-</head>
-<body>
 
 ### Show/Hide Example
 
 Q: How many guitarists does it take to change a lightbulb?
 
 [](#spoiler "Two: one to change bulb and one to watch, arms crossed, and say _I can do that_.")
-</body>
-</html>
