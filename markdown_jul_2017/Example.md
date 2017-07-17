@@ -1,10 +1,10 @@
 
 ### Show/Hide Example
 
-Q: How many guitarists does it take to change a lightbulb?
+Q: Example question about code?
 
 A:
 <details>
-  <summary>Show/Hide me</summary>
-  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+  <summary>Find all Java files (click to show)</summary>
+  <p>`find . -name "*.java"`</p>
 </details>
