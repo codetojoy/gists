@@ -1,11 +1,20 @@
 
 package net.codetojoy;
 
-import java.io.*;
-import java.nio.*;
-import java.nio.channels.*;
+import java.io.Closeable;
+import java.io.InputStream;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileOutputStream;
+
+import java.nio.ByteBuffer;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
+import java.nio.channels.WritableByteChannel;
 
 public class Extractor {
+    private static final int BLOCK_SIZE = 16 * 1024;
+
     public static void main(String[] args) {
         try {
             Extractor extractor = new Extractor();
@@ -30,23 +39,6 @@ public class Extractor {
 
             safeClose(inputChannel, outputChannel, input, output);
 
-            /*
-            // BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-
-            final int blockSize = 8 * 1024;
-            byte[] buf = new byte[blockSize];
-            int len;
-
-            while((len = in.read(buf)) != -1) {
-                out.write(buf,0,len);
-            }
-
-            safeClose(out);
-            safeClose(in);
-
-            out = null;
-            in = null;
-            */
         } catch(Exception ex) {
             System.err.println("Internal Error! ex: " + ex.getMessage());
         }
@@ -54,22 +46,16 @@ public class Extractor {
 
     public static void fastChannelCopy(final ReadableByteChannel src, 
                         final WritableByteChannel dest) throws IOException {
-        final ByteBuffer buffer = ByteBuffer.allocateDirect(16 * 1024);
+        final ByteBuffer buffer = ByteBuffer.allocateDirect(BLOCK_SIZE);
 
         while (src.read(buffer) != -1) {
-            // prepare the buffer to be drained
             buffer.flip();
-            // write to the channel, may block
             dest.write(buffer);
-            // If partial transfer, shift remainder down
-            // If buffer is empty, same as doing clear()
             buffer.compact();
         }
 
-        // EOF will leave buffer in fill state
         buffer.flip();
 
-        // make sure the buffer is fully drained.
         while (buffer.hasRemaining()) {
           dest.write(buffer);
         }
