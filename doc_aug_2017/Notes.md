@@ -9,7 +9,7 @@ In this talk, we'll examine the main concepts of Java 9 modules. Note: this talk
 
 ### Tweetable:
 
-* @codetojoy presents "Moonshine on the Subway: An Intro To Java 9 Modules"
+* @codetojoy presents "Moonshine on the Subway: An Intro To Java 9 Modules" #jdk9
 
 ### Misc
 
