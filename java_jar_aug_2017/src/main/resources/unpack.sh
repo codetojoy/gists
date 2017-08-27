@@ -4,7 +4,7 @@
 ORIGINAL_DIR=$PWD
 TARGET_DIR=/tmp/test_aug27
 
-mkdir $TARGET_DIR
+mkdir -p $TARGET_DIR
 
 touch $TARGET_DIR/boo.txt
  
