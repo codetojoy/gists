@@ -1,0 +1,2 @@
+Main-Class: net.codetojoy.Extractor
+Class-Path: ./unpack.sh ./payload.zip
