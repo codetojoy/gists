@@ -1,0 +1,38 @@
+
+def replaceRegexes = { def filename, def map ->
+    def newLines = []
+
+    def file = new File(filename)
+
+    file.eachLine { line ->
+        def newLine = line
+
+        map.each { def regex, value ->
+            if (line ==~ regex) {
+                newLine = line.replaceAll(regex, value)
+            } 
+        }
+
+        newLines << newLine
+    }
+
+    file.delete()
+
+    file.withWriter { writer ->
+        newLines.each { 
+            writer.write(it + "\n")
+        }
+    }
+}
+
+task go() {
+    doLast {
+        def map = [
+            "EXAMPLE_DATE :.*" : "EXAMPLE_DATE : ${new Date()}",
+            "EXAMPLE_VERSION :.*" : "EXAMPLE_VERSION : ${System.getProperty('VERSION')}",
+            "EXAMPLE_ENV :.*" : "EXAMPLE_ENV : ${System.getProperty('ENV')}",
+        ]
+
+        replaceRegexes("buildinfo.html", map)
+    }
+}
