@@ -1,0 +1,47 @@
+
+def CACHE_FILE = new File("${projectDir}/git.commit.cache.txt")
+
+def readCacheFile = { ->
+    def result = "N/A"
+    
+    if (CACHE_FILE.exists()) {
+        CACHE_FILE.getText().eachLine { line ->
+            result = line
+        }
+    }
+
+    return result
+}
+
+def writeCacheFile = { value ->
+    CACHE_FILE.delete()
+    
+    CACHE_FILE.withWriter { writer ->
+        writer.write(value)
+        writer.write("\n")
+    }
+}
+
+task go() {
+    doLast {
+        def cmd = 'git log --pretty=format:"%h" -1'
+        def args = ['sh', '-c', cmd]
+        def process = new ProcessBuilder(args).directory(projectDir).start()
+
+        def latestCommit = ""
+        process.inputStream.eachLine { latestCommit = it }
+        process.waitFor()
+
+        def cachedCommit = readCacheFile()
+
+        println "TRACER latestCommit: ${latestCommit} cachedCommit: ${cachedCommit}"
+
+        if (cachedCommit == latestCommit) {
+            println "TRACER skipping build !"
+        } else {
+            println "TRACER TODO: long build/publish here"
+            println "TRACER writing new cache"
+            writeCacheFile(latestCommit)
+        }
+    }
+}
