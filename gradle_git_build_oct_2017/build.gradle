@@ -1,4 +1,5 @@
 
+project.ext.buildRequired = true 
 def CACHE_FILE = new File("${projectDir}/git.commit.cache.txt")
 
 def readCacheFile = { ->
@@ -22,7 +23,8 @@ def writeCacheFile = { value ->
     }
 }
 
-task go() {
+
+task checkCachedCommit() {
     doLast {
         def cmd = 'git log --pretty=format:"%h" -1'
         def args = ['sh', '-c', cmd]
@@ -38,10 +40,23 @@ task go() {
 
         if (cachedCommit == latestCommit) {
             println "TRACER skipping build !"
+           project.ext.buildRequired = false
         } else {
             println "TRACER TODO: long build/publish here"
             println "TRACER writing new cache"
             writeCacheFile(latestCommit)
+        }
+    }
+}
+
+task buildAndPublish(dependsOn: ['checkCachedCommit']) {
+    doLast {
+        if (project.ext.buildRequired) {
+            println "TRACER working ..."
+            try { Thread.sleep(5000) } catch (Exception ex) {} 
+            println "TRACER expensive build/publish here"
+        } else {
+            println "TRACER build skipped!"
         }
     }
 }
