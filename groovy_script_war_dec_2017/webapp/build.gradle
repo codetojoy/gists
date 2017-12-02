@@ -1,0 +1,12 @@
+
+apply plugin: 'war'
+apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.apache.commons:commons-lang3:3.7'
+}
+
