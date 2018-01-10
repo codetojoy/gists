@@ -1,0 +1,17 @@
+
+apply plugin: 'java-library'
+
+compileJava {
+    doFirst {
+        def resourcesDir = new File("${projectDir}/src/main/resources")
+        resourcesDir.mkdir()
+
+        def file = new File("${resourcesDir}/autogen_service_build_timestamp.properties")
+    
+        if (file.exists()) { file.delete() }
+
+        file.withWriter { writer ->
+            writer.write("BUILD_TIMESTAMP=${new Date().toString()}\n")
+        }
+    }
+}
