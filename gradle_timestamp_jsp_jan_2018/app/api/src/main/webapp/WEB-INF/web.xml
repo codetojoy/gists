@@ -11,4 +11,14 @@
            allow="192\.168\.\d+\.\d+"/>
 </Context>
 
+<servlet>
+    <servlet-name>TimestampServlet</servlet-name>
+    <servlet-class>net.codetojoy.web.TimestampServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>TimestampServlet</servlet-name>
+    <url-pattern>/timestamp</url-pattern>
+</servlet-mapping>
+
 </web-app>

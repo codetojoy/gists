@@ -18,10 +18,11 @@ repositories {
 dependencies {
     compile project(":lib:utils")
     compile project(":lib:service")
+
+    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
 }
 
 apply plugin: 'org.akhikhl.gretty'
-
 
 war.baseName "api"
 
