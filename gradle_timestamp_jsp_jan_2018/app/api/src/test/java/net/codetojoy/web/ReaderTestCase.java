@@ -36,6 +36,15 @@ public class ReaderTestCase {
     }
 
     @Test
+    public void testRead_TimestampFoundInLib() {
+        // test
+        String result = new Reader().read("autogen_utils_build_timestamp.properties");
+
+        assertTrue(result != null);
+        assertTrue(! result.isEmpty());
+    }
+
+    @Test
     public void testRead_PropertyFileNotFound() {
         // test
         String result = reader.read("bogus.properties");
