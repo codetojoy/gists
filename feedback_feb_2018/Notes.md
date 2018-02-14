@@ -19,6 +19,6 @@
 
 ### Overall
 
-* I think the site has potential to make a contribution in the arena of "KISS advice, not esoterica". But more importantly, if the writing itself is inherently motivating (per larger conversation), then pursue this, for sure! 
+* I think the site has potential to make a contribution in the arena of "simple, effective techniques, not esoteric grand-standing". But more importantly, if the writing itself is inherently motivating (per larger conversation), then pursue this, for sure! 
 
 
