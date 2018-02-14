@@ -14,5 +14,11 @@
 
 * One suggestion: be concise. I've been slammed by editors for several things in the past, but the biggest lesson learned is to be concise. For example: 
     * _One big folly I see happening is trying to implement too many tests at once._ This is fine in conversation, but wordy when written down. 
-    * It could be _Don't write too many tests at once!_
+    * It could be: _Don't write too many tests at once!_
 * Perhaps consider more punctuation? For example: _More commas for clauses, as in this sentence_. It's a pain, but helps the reader big-time. 
+
+### Overall
+
+* I think the site has potential to make a contribution in the arena of "KISS advice, not esoterica". But more importantly, if the writing itself is inherently motivating (per larger conversation), then pursue this, for sure! 
+
+
