@@ -8,7 +8,7 @@
 ### aspirational
  
 * [Dalai Lama](https://twitter.com/DalaiLama)
-* [Daily Zen])(ttps://twitter.com/dailyzen)
+* [Daily Zen](https://twitter.com/dailyzen)
 
 ### peeps
 
