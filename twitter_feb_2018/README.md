@@ -1,4 +1,18 @@
 
+## more stuff
+
+* [Calvin and Hobbes](https://twitter.com/calvinandhobbes)
+* [Lifehacker](https://twitter.com/lifehacker)
+* [We Rate Dogs](https://twitter.com/dog_rates)
+* [Conan O'Brien](https://twitter.com/ConanOBrien)
+* [AP Oddities](https://twitter.com/AP_Oddities)
+* [Saved You A Click](https://twitter.com/SavedYouAClick)
+* [Neil deGrasse Tyson](https://twitter.com/neiltyson)
+* [Faces in Things](https://twitter.com/facespics)
+* [Canadian Poli Haiku](https://twitter.com/CdnPoliHaiku)
+
+## older stuff
+
 ### fun 
 
 * [NY Times Minus Context](https://twitter.com/NYTMinusContext)
