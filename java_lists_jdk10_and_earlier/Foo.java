@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Foo {
     public static void main(String[] args) {
-        List jdk_14 = new ArrayList();
+        List jdk_1_2 = new ArrayList();
 
         List<Foo> jdk_5 = new ArrayList<Foo>();
 
