@@ -10,10 +10,10 @@ public class BuildInfo {
     public String toString() {
         StringBuilder buffer = new StringBuilder();
 
-        buffer.append("\nartifact: " + artifact + "\n");
-        buffer.append("version: " + version + "\n");
-        buffer.append("build timestamp: " + buildTimestamp + "\n");
-        buffer.append("git commit: " + gitCommitInfo + "\n");
+        buffer.append("\nartifact      : " + artifact + "\n");
+        buffer.append("version         : " + version + "\n");
+        buffer.append("build timestamp : " + buildTimestamp + "\n");
+        buffer.append("git info        : " + gitCommitInfo + "\n");
 
         return buffer.toString();
     }
