@@ -75,5 +75,7 @@ String buildInfo = new BuildInfo().toString();
 <%= currentTime %>
 </pre>
 
+<h3>tag</h3><pre>no tag</pre>
+
 </body>
 </html>
