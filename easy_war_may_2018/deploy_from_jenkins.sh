@@ -6,7 +6,7 @@ $TOMCAT_HOME/bin/shutdown.sh
 
 sleep 3
 
-export JOB_BUILD_HOME=~/.jenkins/jobs/Easy_Too_May_2018/workspace/artifactory_jan_2017/build/libs
+export JOB_BUILD_HOME=~/.jenkins/jobs/Easy_Too_May_2018/workspace/easy_war_may_2018/build/libs
 
 cp $JOB_BUILD_HOME/easytoo-1.0.0-SNAPSHOT.war /Users/measter/tools/tomcat_7062_on_5150/webapps/easytoo.war
 
