@@ -75,7 +75,7 @@ String buildInfo = new BuildInfo().toString();
 <%= currentTime %>
 </pre>
 
-<h3>tag</h3><pre>latest: NO TAG</pre>
+<h3>tag</h3><pre>v0.1.0</pre>
 
 </body>
 </html>
