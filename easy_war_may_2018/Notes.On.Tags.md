@@ -7,6 +7,7 @@
     * repo for `gists`
 * Build Env
     * inject env vars with properties file path: `./easy_war_may_2018/setvars.properties`
+* valid tags are E, F, G
 
 ### Notes for building from tag
 
@@ -19,8 +20,9 @@
     * branches to build can use tags
     * see https://stackoverflow.com/a/19632917/12704
     * e.g. in Branches to build, build specifier `refs/tags/tag_E_20_MAY_2018`
-    * *unification of [1] and [2]:
+    * *unification of [1] and [2]* :
         * e.g. in Branches to build, build specifier `refs/tags/${MY_GIT_TAG}`
+        * this works in a deploy test for tagF -> tagG -> tagF
 
 ### Questions
 
