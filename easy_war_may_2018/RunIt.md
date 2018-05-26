@@ -15,7 +15,11 @@
 
 ### Useful Commands
 
-* list remote tags:  `git ls-remote --tags origin`
+* list remote tags:  
+    * `git ls-remote --tags origin`
+* remove a tag:
+    * `git tag -d 12345`
+    * `git push origin :refs/tags/12345`
 
 ### Legacy Deploy Notes
 

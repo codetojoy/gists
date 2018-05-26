@@ -194,6 +194,17 @@ task createTag() {
 }
 
 // ---------------------------------------------
+// Deploying
+
+task mockDeploy() {
+    doLast {
+        println "TRACER MOCK DEPLOY"
+        println "TRACER MY_GIT_TAG : " + project.MY_GIT_TAG
+    }
+}
+
+// ---------------------------------------------
+// Publishing
 
 publishing {
     publications {
