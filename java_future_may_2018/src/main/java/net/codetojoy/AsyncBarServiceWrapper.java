@@ -5,11 +5,14 @@ import java.util.Date;
 import java.util.concurrent.*;
 
 public class AsyncBarServiceWrapper {
-    // TODO: call shutdown on the service
-    private ExecutorService executor = Executors.newFixedThreadPool(1);
+    private ExecutorService executor = Executors.newSingleThreadExecutor(); 
 
     public Future<BarService> startHandshake() {
         return executor.submit(new HandshakeTask());
+    }
+
+    public void shutdown() {
+        executor.shutdownNow();
     }
 }
 
@@ -18,8 +21,12 @@ class HandshakeTask implements Callable<BarService> {
     public BarService call() throws Exception {
         BarService barService = new BarService();
         // mock work:
-        System.out.println("TRACER beginning 'handshake'");
-        try { Thread.sleep(10*1000); } catch (Exception ex) {}
+        System.out.println("TRACER handshake: start");
+        int N = 10;
+        for (int i = 0; i < N; i++) {
+            System.out.println("TRACER handsake. working i: " + i);
+            try { Thread.sleep(1*1000); } catch (Exception ex) { }
+        }
         return barService;
     }
 }
