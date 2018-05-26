@@ -18,8 +18,19 @@ repositories {
         }
     }
 
-    mavenCentral()
+    jcenter()
 }
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'org.apache.httpcomponents:httpclient:4.5.5'
+    }
+}
+
 
 dependencies {
 }
@@ -32,6 +43,9 @@ war {
         into('WEB-INF/classes')
     }
 }
+
+// ---------------------------------------------
+// war file
 
 group 'net.codetojoy'
 def thisArtifactId = "easytoo_may"
@@ -95,6 +109,87 @@ newBuildInfoFile.withWriter { def writer ->
 task testGitCommitInfo() {
     doLast {
         println "TRACER gitCommitInfo: " + getGitCommitInfo()
+    }
+}
+
+// ---------------------------------------------
+// Git & Artifactory 
+
+import org.apache.http.client.methods.*
+import org.apache.http.impl.client.*
+import org.apache.http.entity.*
+
+def getBuildInfo = { def METADATA_URL ->
+    def buildInfo = ""
+
+    def metadataRequest = new HttpGet(METADATA_URL)
+    def client = HttpClientBuilder.create().build()
+    def response = client.execute(metadataRequest)
+
+    def bufferedReader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()))
+    def metadataText = bufferedReader.getText()
+    def buildInfoRegex = /.*<value>(.*)<\/value>.*/
+
+    metadataText.eachLine { line ->
+        def matcher = (line =~ buildInfoRegex)
+
+        if (matcher.matches()) {
+            buildInfo = matcher[0][1]
+        }
+    }
+
+    return buildInfo
+}
+
+def getLatestURL = { ->
+    def REPO_URL = "${project.ext.REPOSITORY_URL}/net/codetojoy/easytoo_may"
+    def METADATA_URL = "${REPO_URL}/${project.version}/maven-metadata.xml"
+    def ARTIFACT_URL_FORMAT = "${REPO_URL}/${project.version}/easytoo_may-%s.war"
+    def buildInfo = getBuildInfo(METADATA_URL)
+
+    def result = String.format(ARTIFACT_URL_FORMAT, buildInfo)
+    return result
+}
+
+// TODO: this should be done via an Exec task, but do it imperatively for now
+def callBashScript = { command ->
+    def sysout = new StringBuilder()
+    def syserr = new StringBuilder()
+    def process = command.execute()
+    process.consumeProcessOutput(sysout, syserr)
+    process.waitForOrKill(7000)
+    if (process.exitValue() != 0) { 
+        println "ERROR: cmd: ${command} error: ${syserr}"
+    }
+    assert 0 == process.exitValue()
+}
+
+task createTag() {
+    doLast {
+        def formatter = new java.text.SimpleDateFormat("yyyy-MMM-dd-HHmm")
+        def timestamp = formatter.format(new Date()) 
+        def tag = "easywar-${project.version}-${timestamp}"
+        def artifactoryURL = getLatestURL()
+
+        // write to mapping file
+
+        def mappingFile = new File("${projectDir}/devops/tag.artifact.mapping.csv")
+        assert mappingFile.exists()
+        mappingFile.append("\n" + /"${timestamp}","${tag}","${artifactoryURL}"/)
+
+        /*
+        mappingFile.withWriterAppend { file -> 
+            file.write(/\n"${timestamp}","${tag}","${artifactoryURL}"/)
+        }
+        */
+
+        // commit mapping file with presumptive tag
+
+        callBashScript "${projectDir}/devops/git.commit.tag.artifact.mapping.csv.sh ${projectDir}" 
+
+        // perform tagging
+
+        callBashScript "${projectDir}/devops/create.tag.sh ${tag}"
     }
 }
 

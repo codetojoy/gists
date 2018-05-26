@@ -8,6 +8,15 @@
         * build timestamp
         * git commit info 
         * TODO: tag info
+
+### Tag Notes
+
+* `gradle createTag`
+
+### Useful Commands
+
+* list remote tags:  `git ls-remote --tags origin`
+
 ### Legacy Deploy Notes
 
 * for local Tomcat: 
@@ -16,4 +25,6 @@
     * './run.sh` to build and deploy 
 * for local Jenkins, it is simple to set up as a Free-Form job
     * be sure to use `-p artifactory_jan_2017` for Gradle switch
+
+
 
