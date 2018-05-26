@@ -25,7 +25,7 @@ dependencies {
 }
 
 war {
-    baseName = 'easytoo'
+    baseName = 'easytoo_may'
 
     from(buildDir) {
         include 'build-info.properties'
@@ -34,24 +34,45 @@ war {
 }
 
 group 'net.codetojoy'
-def thisArtifactId = "easytoo"
+def thisArtifactId = "easytoo_may"
+
+def extractOneIfMatching = { s, regex ->
+    def result = null
+    def matcher = (s =~ regex)
+    if (matcher.matches()) {
+        result = matcher[0][1]
+    }
+    return result
+}
 
 def getGitCommitInfo = { ->
-    def result = new StringBuilder()
+    def infoMap = [:]
+
     def sysout = new StringBuilder()
     def syserr = new StringBuilder()
     def command = "git log -n 1"
     def process = command.execute()
     process.consumeProcessOutput(sysout, syserr)
-    process.waitForOrKill(3000)
+    process.waitForOrKill(2000)
     if (syserr) { assert syserr.toString().isEmpty() }
     def lines = sysout.toString().split("\n")
+
     lines.each { line ->
-        if ( (line ==~ /.*commit.*/) || (line ==~ /.*Author.*/) || (line ==~ /.*Date.*/) ) {
-            result.append(line + "||")
-        }
+        def trimLine = line.trim()
+        def field
+
+        field = extractOneIfMatching(trimLine, /commit (.*)/)
+        if (field) { infoMap['commit'] = field }
+
+        field = extractOneIfMatching(trimLine, /Author: (.*)/)
+        if (field) { infoMap['author'] = field }
+
+        field = extractOneIfMatching(trimLine, /Date: (.*)/)
+        if (field) { infoMap['date'] = field }
     }
-    return result.toString()
+
+    def resultJSON = new groovy.json.JsonBuilder(infoMap)
+    return resultJSON.toString()
 }
 
 // do during config phase:
@@ -66,8 +87,14 @@ newBuildInfoFile.withWriter { def writer ->
                           .replace("__ARTIFACT", thisArtifactId)
                           .replace("__VERSION", project.version)
                           .replace("__BUILD_TIMESTAMP", buildTimeStamp)
-                          .replace("__GIT_COMMIT_INFO", gitCommitInfo)
+                          .replace("__GIT_COMMIT_INFO", gitCommitInfo.replaceAll(/"/, /'/))
         writer.write(newLine + "\n");
+    }
+}
+
+task testGitCommitInfo() {
+    doLast {
+        println "TRACER gitCommitInfo: " + getGitCommitInfo()
     }
 }
 
@@ -81,8 +108,10 @@ publishing {
 
             pom.withXml {
                 def root = asNode()
-                root.appendNode('properties')
-                    .appendNode('buildTimeStamp', buildTimeStamp)
+                def props = root.appendNode('properties')
+                props.appendNode('foo-buildTimeStamp', buildTimeStamp)
+                props.appendNode('foo-gitCommitInfo', gitCommitInfo)
+                props.appendNode('foo-gitTagInfo', 'tag-one')
             }
         }
     }

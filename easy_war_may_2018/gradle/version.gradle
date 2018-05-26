@@ -30,7 +30,7 @@ String currentTime = halifaxTime.format(formatter)
 
 ext.buildTimeStamp = currentTime
 
-def DOCKER_HOST = "192.168.99.100"
+def DOCKER_HOST = "localhost" // "192.168.99.100"
 def ARTIFACTORY_BASE_URL = "http://${DOCKER_HOST}:8081/artifactory"
 
 if (ext.qualifier ==~ /RELEASE/) {
