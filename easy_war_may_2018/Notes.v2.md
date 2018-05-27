@@ -1,9 +1,10 @@
 
-* handle multi-ENV ?
-    * multiple CSV files
-    * for now, just use the same repo URL ?
+* X - handle multi-ENV ?
+    * X - multiple CSV files
+    * X - for now, just use the same repo URL ?
 * consider JSON over CSV
-* consider the random words
+    * CSV offers the easy view/search
+* X - consider the random words
 * X - re-establish publishing
 * X - alter the meta-data so it contains the Git commit
 * X - automate tagging

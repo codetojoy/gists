@@ -115,6 +115,7 @@ def callBashScript = { command ->
         println "ERROR: cmd: ${command} error: ${syserr}"
     }
     assert 0 == process.exitValue()
+    return sysout.toString()
 }
 
 def getArtifactoryURLForTag = { def targetTag, def targetEnv ->
@@ -145,6 +146,11 @@ def getArtifactoryURLForTag = { def targetTag, def targetEnv ->
     return artifactoryURL
 }
 
+def generateMnemonics = {
+    def result = callBashScript "${projectDir}/devops/generate.mnemonics.sh ${projectDir}"
+    return result.replaceAll(/_/, /-/).trim()
+}
+
 // --------------------------
 // exports
 
@@ -155,3 +161,5 @@ project.ext.getLatestURL = getLatestURL
 project.ext.getTagArtifactMapForEnv = getTagArtifactMapForEnv 
 project.ext.getArtifactoryURLForTag = getArtifactoryURLForTag
 project.ext.ALL_ENVS = ALL_ENVS
+
+project.ext.generateMnemonics = generateMnemonics

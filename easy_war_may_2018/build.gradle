@@ -71,7 +71,9 @@ task createTag() {
     doLast {
         def formatter = new java.text.SimpleDateFormat("yyyy-MMM-dd-HHmm")
         def timestamp = formatter.format(new Date()) 
-        def tag = "easywar-${project.version}-${timestamp}"
+        def mnemonics = project.ext.generateMnemonics()
+        def tag = "easywar-${project.version}-${timestamp}-${mnemonics}"
+        println "TRACER tag: ${tag}"
 
         project.ext.ALL_ENVS.each { env ->
             println "TRACER writing map for env: ${env}"
