@@ -180,7 +180,7 @@ task createTag() {
 
         // write to mapping file
 
-        MAPPING_FILE.append("\n" + /"${timestamp}","${tag}","${artifactoryURL}"/)
+        MAPPING_FILE.append(/"${timestamp}","${tag}","${artifactoryURL}"/ + "\n")
 
         // commit mapping file with presumptive tag
 
