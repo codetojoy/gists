@@ -28,12 +28,11 @@ buildscript {
 
     dependencies {
         classpath 'org.apache.httpcomponents:httpclient:4.5.5'
+        classpath 'com.xlson.groovycsv:groovycsv:1.0'
     }
 }
 
-
-dependencies {
-}
+dependencies {}
 
 war {
     baseName = 'easytoo_may'
@@ -43,6 +42,12 @@ war {
         into('WEB-INF/classes')
     }
 }
+
+// ---------------------------------------------
+// constants
+
+final File MAPPING_FILE = new File("${projectDir}/devops/tag.artifact.mapping.csv")
+assert MAPPING_FILE.exists()
 
 // ---------------------------------------------
 // war file
@@ -119,6 +124,8 @@ import org.apache.http.client.methods.*
 import org.apache.http.impl.client.*
 import org.apache.http.entity.*
 
+import com.xlson.groovycsv.CsvParser
+
 def getBuildInfo = { def METADATA_URL ->
     def buildInfo = ""
 
@@ -173,15 +180,7 @@ task createTag() {
 
         // write to mapping file
 
-        def mappingFile = new File("${projectDir}/devops/tag.artifact.mapping.csv")
-        assert mappingFile.exists()
-        mappingFile.append("\n" + /"${timestamp}","${tag}","${artifactoryURL}"/)
-
-        /*
-        mappingFile.withWriterAppend { file -> 
-            file.write(/\n"${timestamp}","${tag}","${artifactoryURL}"/)
-        }
-        */
+        MAPPING_FILE.append("\n" + /"${timestamp}","${tag}","${artifactoryURL}"/)
 
         // commit mapping file with presumptive tag
 
@@ -200,6 +199,27 @@ task mockDeploy() {
     doLast {
         println "TRACER MOCK DEPLOY"
         println "TRACER MY_GIT_TAG : " + project.MY_GIT_TAG
+        def targetTag = project.MY_GIT_TAG
+
+        // read mapping file to get Artifactory URL 
+        def artifactoryURL = null
+
+        def INDEX_DATE = 0
+        def INDEX_TAG = 1
+        def INDEX_ARTIFACTORY_URL = 2
+
+        def text = MAPPING_FILE.getText()
+        def data = CsvParser.parseCsv(text)
+        data.each { def line ->
+            def thisTag = line.getAt(INDEX_TAG)
+
+            if (thisTag == targetTag) {
+                artifactoryURL = line.getAt(INDEX_ARTIFACTORY_URL)
+            }
+        }
+
+        println "TRACER tag: ${targetTag}"
+        println "TRACER url: ${artifactoryURL}"
     }
 }
 

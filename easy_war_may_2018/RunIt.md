@@ -15,11 +15,13 @@
 
 ### Useful Commands
 
-* list remote tags:  
-    * `git ls-remote --tags origin`
-* remove a tag:
-    * `git tag -d 12345`
-    * `git push origin :refs/tags/12345`
+* see scripts in `devops`
+
+### Deploy Notes
+
+* Jenkins job uses Git Parameter plugin, passes ENV var as property to Gradle
+* Gradle `mockDeploy` task maps the target tag to the Artifactory URL
+* actual deployment should be simple from there
 
 ### Legacy Deploy Notes
 
