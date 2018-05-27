@@ -11,9 +11,11 @@ buildscript {
 }
 
 def DEV = "DEV"
-def ENVS = [DEV]
+def QA = "QA"
+def UAT = "UAT"
+def ALL_ENVS = [DEV, QA, UAT]
 
-ENVS.each { env ->
+ALL_ENVS.each { env ->
     assert new File("${projectDir}/devops/${env}.tag.artifact.map.csv").exists()
 }
 
@@ -152,4 +154,4 @@ project.ext.getLatestURL = getLatestURL
 
 project.ext.getTagArtifactMapForEnv = getTagArtifactMapForEnv 
 project.ext.getArtifactoryURLForTag = getArtifactoryURLForTag
- 
+project.ext.ALL_ENVS = ALL_ENVS 
