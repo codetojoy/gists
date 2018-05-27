@@ -154,4 +154,4 @@ project.ext.getLatestURL = getLatestURL
 
 project.ext.getTagArtifactMapForEnv = getTagArtifactMapForEnv 
 project.ext.getArtifactoryURLForTag = getArtifactoryURLForTag
-project.ext.ALL_ENVS = ALL_ENVS 
+project.ext.ALL_ENVS = ALL_ENVS
