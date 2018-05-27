@@ -2,10 +2,12 @@
 * X - re-establish publishing
 * X - alter the meta-data so it contains the Git commit
 * X - automate tagging
-* refactor gradle build
+* X - refactor gradle build
 * handle multi-ENV ?
+    * multiple CSV files
+    * for now, just use the same repo URL ?
 * consider JSON over CSV
-* automate deployment via tags
+* X - mock deployment via tags
 
 ### misc
 
