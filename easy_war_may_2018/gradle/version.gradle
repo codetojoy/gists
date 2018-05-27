@@ -17,6 +17,7 @@ ext.minorVersion = getEnvVarWithCheck "TRUNK_MINOR_VERSION"
 ext.incrementalVersion = getEnvVarWithCheck "TRUNK_INCREMENTAL_VERSION"
 ext.qualifier = getEnvVarWithCheck "TRUNK_QUALIFIER"
 ext.buildNumber = getEnvVarWithCheck "TRUNK_BUILD_NUMBER"
+ext.targetEnv = getEnvVarWithCheck "TARGET_ENV"
 
 project.version = ext.majorVersion + "." + ext.minorVersion + "." +
                   ext.incrementalVersion + "-" + ext.qualifier 

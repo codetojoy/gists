@@ -78,12 +78,13 @@ task createTag() {
 
         // write to mapping file
 
-        project.ext.MAPPING_FILE.append(/"${timestamp}","${tag}","${artifactoryURL}"/ + "\n")
+        def mapFile = getTagArtifactMapForEnv(project.ext.targetEnv)
+        mapFile.append(/"${timestamp}","${tag}","${artifactoryURL}"/ + "\n")
 
         // commit mapping file with presumptive tag
 
         // see ~/gradle/git.tag.gradle
-        project.ext.callBashScript "${projectDir}/devops/git.commit.tag.artifact.mapping.csv.sh ${projectDir}" 
+        project.ext.callBashScript "${projectDir}/devops/git.commit.tag.artifact.maps.sh ${projectDir}" 
 
         // perform tagging
 
@@ -108,7 +109,8 @@ task mockDeploy() {
         def INDEX_TAG = 1
         def INDEX_ARTIFACTORY_URL = 2
 
-        def text = project.ext.MMAPPING_FILE.getText()
+        def mapFile = getTagArtifactMapForEnv(project.ext.targetEnv)
+        def text = mapFile.getText()
         def data = CsvParser.parseCsv(text)
         data.each { def line ->
             def thisTag = line.getAt(INDEX_TAG)

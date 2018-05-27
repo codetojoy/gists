@@ -10,8 +10,18 @@ buildscript {
     }
 }
 
-final File MAPPING_FILE = new File("${projectDir}/devops/tag.artifact.mapping.csv")
-assert MAPPING_FILE.exists()
+def DEV = "DEV"
+def ENVS = [DEV]
+
+ENVS.each { env ->
+    assert new File("${projectDir}/devops/${env}.tag.artifact.map.csv").exists()
+}
+
+def getTagArtifactMapForEnv = { env ->
+    def mapFile = new File("${projectDir}/devops/${env}.tag.artifact.map.csv")
+    assert mapFile.exists()
+    return mapFile
+}
 
 def extractOneIfMatching = { s, regex ->
     def result = null
@@ -112,5 +122,4 @@ project.ext.callBashScript = callBashScript
 project.ext.getGitCommitInfo = getGitCommitInfo
 project.ext.getLatestURL = getLatestURL
 
-project.ext.MAPPING_FILE = MAPPING_FILE
-
+project.ext.getTagArtifactMapForEnv = getTagArtifactMapForEnv 
