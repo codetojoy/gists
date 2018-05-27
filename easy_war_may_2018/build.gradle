@@ -100,8 +100,12 @@ task mockDeploy() {
     doLast {
         println "TRACER MOCK DEPLOY"
         println "TRACER MY_GIT_TAG : " + project.MY_GIT_TAG
+        println "TRACER TARGET_ENV : " + project.ext.targetEnv
         def targetTag = project.MY_GIT_TAG
 
+        def artifactoryURL = project.ext.getArtifactoryURLForTag(targetTag, project.ext.targetEnv) 
+
+        /*
         // read mapping file to get Artifactory URL 
         def artifactoryURL = null
 
@@ -119,6 +123,7 @@ task mockDeploy() {
                 artifactoryURL = line.getAt(INDEX_ARTIFACTORY_URL)
             }
         }
+        */
 
         println "TRACER tag: ${targetTag}"
         println "TRACER url: ${artifactoryURL}"

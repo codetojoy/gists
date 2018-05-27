@@ -115,6 +115,34 @@ def callBashScript = { command ->
     assert 0 == process.exitValue()
 }
 
+def getArtifactoryURLForTag = { def targetTag, def targetEnv ->
+    def artifactoryURL = null
+
+    def INDEX_DATE = 0
+    def INDEX_TAG = 1
+    def INDEX_ARTIFACTORY_URL = 2
+
+    def mapFile = getTagArtifactMapForEnv(targetEnv)
+    def text = mapFile.getText()
+    def data = CsvParser.parseCsv(text)
+    def isFound = false
+
+    data.each { def line ->
+        if (! isFound) {
+            def thisTag = line.getAt(INDEX_TAG)
+
+            if (thisTag == targetTag) {
+                artifactoryURL = line.getAt(INDEX_ARTIFACTORY_URL)
+                isFound = true
+            }
+        }
+    }
+
+    assert isFound
+
+    return artifactoryURL
+}
+
 // --------------------------
 // exports
 
@@ -123,3 +151,5 @@ project.ext.getGitCommitInfo = getGitCommitInfo
 project.ext.getLatestURL = getLatestURL
 
 project.ext.getTagArtifactMapForEnv = getTagArtifactMapForEnv 
+project.ext.getArtifactoryURLForTag = getArtifactoryURLForTag
+ 
