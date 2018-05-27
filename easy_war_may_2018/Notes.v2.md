@@ -2,6 +2,9 @@
 * X - re-establish publishing
 * X - alter the meta-data so it contains the Git commit
 * X - automate tagging
+* refactor gradle build
+* handle multi-ENV ?
+* consider JSON over CSV
 * automate deployment via tags
 
 ### misc
