@@ -4,6 +4,7 @@ apply plugin: 'maven-publish'
 
 apply from: "${rootDir}/gradle/version.gradle"
 apply from: "${rootDir}/gradle/info.gradle"
+apply from: "${rootDir}/gradle/git.tag.gradle"
 
 repositories {
     mavenLocal() 
@@ -21,17 +22,6 @@ repositories {
     jcenter()
 }
 
-buildscript {
-    repositories {
-        jcenter()
-    }
-
-    dependencies {
-        classpath 'org.apache.httpcomponents:httpclient:4.5.5'
-        classpath 'com.xlson.groovycsv:groovycsv:1.0'
-    }
-}
-
 dependencies {}
 
 war {
@@ -44,61 +34,18 @@ war {
 }
 
 // ---------------------------------------------
-// constants
-
-final File MAPPING_FILE = new File("${projectDir}/devops/tag.artifact.mapping.csv")
-assert MAPPING_FILE.exists()
-
-// ---------------------------------------------
 // war file
 
 group 'net.codetojoy'
 def thisArtifactId = "easytoo_may"
 
-def extractOneIfMatching = { s, regex ->
-    def result = null
-    def matcher = (s =~ regex)
-    if (matcher.matches()) {
-        result = matcher[0][1]
-    }
-    return result
-}
-
-def getGitCommitInfo = { ->
-    def infoMap = [:]
-
-    def sysout = new StringBuilder()
-    def syserr = new StringBuilder()
-    def command = "git log -n 1"
-    def process = command.execute()
-    process.consumeProcessOutput(sysout, syserr)
-    process.waitForOrKill(2000)
-    if (syserr) { assert syserr.toString().isEmpty() }
-    def lines = sysout.toString().split("\n")
-
-    lines.each { line ->
-        def trimLine = line.trim()
-        def field
-
-        field = extractOneIfMatching(trimLine, /commit (.*)/)
-        if (field) { infoMap['commit'] = field }
-
-        field = extractOneIfMatching(trimLine, /Author: (.*)/)
-        if (field) { infoMap['author'] = field }
-
-        field = extractOneIfMatching(trimLine, /Date: (.*)/)
-        if (field) { infoMap['date'] = field }
-    }
-
-    def resultJSON = new groovy.json.JsonBuilder(infoMap)
-    return resultJSON.toString()
-}
-
 // do during config phase:
 ant.mkdir(dir: "${projectDir}/src/main/java/net/codetojoy/web")
 def newBuildInfoFile = new File("${projectDir}/src/main/java/net/codetojoy/web/BuildInfo.java")
 def templateBuildInfoFile = new File("${projectDir}/resources/TemplateBuildInfo.java")
-def gitCommitInfo = getGitCommitInfo()
+
+// see ~/gradle/git.tag.gradle
+def gitCommitInfo = project.ext.getGitCommitInfo()
 
 newBuildInfoFile.withWriter { def writer ->
     templateBuildInfoFile.eachLine { def line ->
@@ -120,75 +67,28 @@ task testGitCommitInfo() {
 // ---------------------------------------------
 // Git & Artifactory 
 
-import org.apache.http.client.methods.*
-import org.apache.http.impl.client.*
-import org.apache.http.entity.*
-
-import com.xlson.groovycsv.CsvParser
-
-def getBuildInfo = { def METADATA_URL ->
-    def buildInfo = ""
-
-    def metadataRequest = new HttpGet(METADATA_URL)
-    def client = HttpClientBuilder.create().build()
-    def response = client.execute(metadataRequest)
-
-    def bufferedReader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()))
-    def metadataText = bufferedReader.getText()
-    def buildInfoRegex = /.*<value>(.*)<\/value>.*/
-
-    metadataText.eachLine { line ->
-        def matcher = (line =~ buildInfoRegex)
-
-        if (matcher.matches()) {
-            buildInfo = matcher[0][1]
-        }
-    }
-
-    return buildInfo
-}
-
-def getLatestURL = { ->
-    def REPO_URL = "${project.ext.REPOSITORY_URL}/net/codetojoy/easytoo_may"
-    def METADATA_URL = "${REPO_URL}/${project.version}/maven-metadata.xml"
-    def ARTIFACT_URL_FORMAT = "${REPO_URL}/${project.version}/easytoo_may-%s.war"
-    def buildInfo = getBuildInfo(METADATA_URL)
-
-    def result = String.format(ARTIFACT_URL_FORMAT, buildInfo)
-    return result
-}
-
-// TODO: this should be done via an Exec task, but do it imperatively for now
-def callBashScript = { command ->
-    def sysout = new StringBuilder()
-    def syserr = new StringBuilder()
-    def process = command.execute()
-    process.consumeProcessOutput(sysout, syserr)
-    process.waitForOrKill(7000)
-    if (process.exitValue() != 0) { 
-        println "ERROR: cmd: ${command} error: ${syserr}"
-    }
-    assert 0 == process.exitValue()
-}
-
 task createTag() {
     doLast {
         def formatter = new java.text.SimpleDateFormat("yyyy-MMM-dd-HHmm")
         def timestamp = formatter.format(new Date()) 
         def tag = "easywar-${project.version}-${timestamp}"
-        def artifactoryURL = getLatestURL()
+
+        // see ~/gradle/git.tag.gradle
+        def artifactoryURL = project.ext.getLatestURL()
 
         // write to mapping file
 
-        MAPPING_FILE.append(/"${timestamp}","${tag}","${artifactoryURL}"/ + "\n")
+        project.ext.MAPPING_FILE.append(/"${timestamp}","${tag}","${artifactoryURL}"/ + "\n")
 
         // commit mapping file with presumptive tag
 
-        callBashScript "${projectDir}/devops/git.commit.tag.artifact.mapping.csv.sh ${projectDir}" 
+        // see ~/gradle/git.tag.gradle
+        project.ext.callBashScript "${projectDir}/devops/git.commit.tag.artifact.mapping.csv.sh ${projectDir}" 
 
         // perform tagging
 
-        callBashScript "${projectDir}/devops/create.tag.sh ${tag}"
+        // see ~/gradle/git.tag.gradle
+        project.ext.callBashScript "${projectDir}/devops/create.tag.sh ${tag}"
     }
 }
 
@@ -208,7 +108,7 @@ task mockDeploy() {
         def INDEX_TAG = 1
         def INDEX_ARTIFACTORY_URL = 2
 
-        def text = MAPPING_FILE.getText()
+        def text = project.ext.MMAPPING_FILE.getText()
         def data = CsvParser.parseCsv(text)
         data.each { def line ->
             def thisTag = line.getAt(INDEX_TAG)
