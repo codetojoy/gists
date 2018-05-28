@@ -1,9 +1,12 @@
 
-* address the append problem
+### Items
+
 * consider adding the git commit hash to the CSV file
-* consider the git commit hash in the tag itself ?
+* verify user input ?
+* add short hash to tag ?
 * unmock the deploy ?
 
+* X - address the append problem
 * X - consider a utility that reads the POM for an Artifactory URL
 * X - consider a log statement that states the latest Git hash with the Artifactory one
 * X - handle multi-ENV ?
