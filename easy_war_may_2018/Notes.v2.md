@@ -1,9 +1,11 @@
 
-* X - consider a utility that reads the POM for an Artifactory URL
-* X - consider a log statement that states the latest Git hash with the Artifactory one
 * address the append problem
 * consider adding the git commit hash to the CSV file
 * consider the git commit hash in the tag itself ?
+* unmock the deploy ?
+
+* X - consider a utility that reads the POM for an Artifactory URL
+* X - consider a log statement that states the latest Git hash with the Artifactory one
 * X - handle multi-ENV ?
     * X - multiple CSV files
     * X - for now, just use the same repo URL ?
