@@ -67,7 +67,17 @@ task testGitCommitInfo() {
 // ---------------------------------------------
 // Git & Artifactory 
 
-task createTag() {
+// auto-setup for ~/devops/utils/Mnemonic
+
+task setupMnemonic(description: 'npm install for devops/utils/Mnemonic') {
+    def mnemonicDir = "${projectDir}/devops/utils/Mnemonic"
+    def nodeModules = new File("${mnemonicDir}/node_modules")
+    if (! nodeModules.exists()) {
+        project.ext.callBashScript "${mnemonicDir}/run_install.sh ${mnemonicDir}"
+    }
+}
+
+task createTag(dependsOn: 'setupMnemonic') {
     doLast {
         def formatter = new java.text.SimpleDateFormat("yyyy-MMM-dd-HHmm")
         def timestamp = formatter.format(new Date()) 

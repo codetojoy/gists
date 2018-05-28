@@ -1,6 +1,7 @@
 
 ### Items
 
+* auto-setup for Node
 * consider adding the git commit hash to the CSV file
 * verify user input ?
 * add short hash to tag ?
