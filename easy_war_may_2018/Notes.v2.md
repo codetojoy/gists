@@ -1,9 +1,8 @@
 
 ### Alternatives
 
-* how to query Artifactory ?
-    * easy to do a basic query: see `~/devops/area51`
-    * it would be simple to walk the data structure and search the POM for the git commit
+* X - how to query Artifactory ?
+    * see `devops/utils/PomSearcher`
 * what are GitHub Releases ? Is there an API ?
     * one concern is having servers connecting to source-code repo? 
 
@@ -13,8 +12,8 @@
 * verify user input ?
 * add short hash to tag ?
 * unmock the deploy ?
-* consider Artifactory walker ?
 
+* X - consider Artifactory walker ?
 * X - auto-setup for Node
 * X - address the append problem
 * X - consider a utility that reads the POM for an Artifactory URL
