@@ -72,15 +72,23 @@ import org.apache.http.impl.client.*
 import org.apache.http.entity.*
 import com.xlson.groovycsv.CsvParser
 
+import groovy.util.XmlSlurper
+import groovy.json.JsonSlurper
+
+def httpGet = { def url ->
+    def request = new HttpGet(url)
+    def client = HttpClientBuilder.create().build()
+    def response = client.execute(request)
+
+    def bufferedReader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()))
+    def result = bufferedReader.getText()
+    return result
+}
+
 def getBuildInfo = { def METADATA_URL ->
     def buildInfo = ""
 
-    def metadataRequest = new HttpGet(METADATA_URL)
-    def client = HttpClientBuilder.create().build()
-    def response = client.execute(metadataRequest)
-
-    def bufferedReader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()))
-    def metadataText = bufferedReader.getText()
+    def metadataText = httpGet(METADATA_URL)
     def buildInfoRegex = /.*<value>(.*)<\/value>.*/
 
     metadataText.eachLine { line ->
@@ -151,6 +159,16 @@ def generateMnemonics = {
     return result.replaceAll(/_/, /-/).trim()
 }
 
+def getBuildInfoForArtifact = { def artifactURL ->
+    def pomURL = artifactURL.replaceAll("war", "pom")
+    def pomXML = httpGet(pomURL)
+    def xml = new XmlSlurper().parseText(pomXML)
+    def buildInfoJSONString = xml.properties."foo-gitCommitInfo".text()
+    def buildInfoJSON = new JsonSlurper().parseText(buildInfoJSONString)
+
+    return buildInfoJSON
+}
+
 // --------------------------
 // exports
 
@@ -163,3 +181,4 @@ project.ext.getArtifactoryURLForTag = getArtifactoryURLForTag
 project.ext.ALL_ENVS = ALL_ENVS
 
 project.ext.generateMnemonics = generateMnemonics
+project.ext.getBuildInfoForArtifact = getBuildInfoForArtifact

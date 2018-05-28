@@ -76,9 +76,12 @@ task createTag() {
         println "TRACER tag: ${tag}"
 
         project.ext.ALL_ENVS.each { env ->
-            println "TRACER writing map for env: ${env}"
             // TODO: per ENV 
             def artifactoryURL = project.ext.getLatestURL()
+
+            def buildInfoJSON = project.ext.getBuildInfoForArtifact(artifactoryURL)
+            println "TRACER latest ${env} artifact commit hash: " + buildInfoJSON["commit"]
+            println ""
 
             // write to mapping file
 
