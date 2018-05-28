@@ -1,0 +1,5 @@
+items.find({
+"name":{"$match":"easytoo_may*.war"},
+"repo":{"$match":"libs-snapshot-local"},
+"path":{"$match":"net/codetojoy/easytoo_may/1.0.0-SNAPSHOT"}
+}).include("repo","path","name")
