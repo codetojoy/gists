@@ -1,1 +1,1 @@
-git tag --list -n20 $1
+git tag --list -n80 $1

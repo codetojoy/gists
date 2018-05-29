@@ -126,6 +126,16 @@ def callBashScript = { command ->
     return sysout.toString()
 }
 
+def getArtifactoryURLFromTag_V2  = { def targetTag, def targetEnv ->
+    def viewResult = callBashScript "${projectDir}/devops/view.tag.sh ${targetTag}"
+    def tagInfo = viewResult.replaceAll(targetTag, "")
+    def tagInfoJson = new JsonSlurper().parseText(tagInfo)
+    def artifactoryURL = tagInfoJson["${targetEnv}.artifact.url"]
+    assert artifactoryURL 
+
+    return artifactoryURL
+}
+
 def getArtifactoryURLForTag = { def targetTag, def targetEnv ->
     def artifactoryURL = null
 
@@ -182,3 +192,4 @@ project.ext.ALL_ENVS = ALL_ENVS
 
 project.ext.generateMnemonics = generateMnemonics
 project.ext.getBuildInfoForArtifact = getBuildInfoForArtifact
+project.ext.getArtifactoryURLFromTag_V2 = getArtifactoryURLFromTag_V2
