@@ -10,11 +10,18 @@ MINOR=$TRUNK_MINOR_VERSION
 INCREMENTAL=$TRUNK_INCREMENTAL_VERSION
 QUALIFIER=$TRUNK_QUALIFIER
 TIMESTAMP=`date '+%Y-%m-%d-%H%M'`
-TAG=easywar-${MAJOR}-${MINOR}-${INCREMENTAL}-${QUALIFIER}-${TIMESTAMP}
+TAG=v${MAJOR}.${MINOR}.${INCREMENTAL}.1
 
 echo "TRACER tag: ${TAG}"
 
 # TODO: confirm argument
 
-git tag $TAG -a -m "this is a test message"
-git push origin $TAG
+git tag $TAG -a -m " \
+date: ${TIMESTAMP} \
+artifact: easywar ${MAJOR}-${MINOR}-${INCREMENTAL}-${QUALIFIER} \
+QA_URL: http://example.qa.com \
+UAT_URL: http://example.uat.com \
+name: drunken-hoover \
+"
+
+# git push origin $TAG
