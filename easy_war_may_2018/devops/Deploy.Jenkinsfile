@@ -4,17 +4,17 @@ def targetEnv
 
 stage "input params"
 node {
-targetTag = input(
-                message: 'tag?',
+def userInput = input(
+                message: 'enter info',
                 parameters: [
-                    stringParam(defaultValue: 'none', description: 'tag', name: "targetTag")
-                ]) 
-
-targetEnv = input(
-                message: 'env?',
-                parameters: [
+                    stringParam(defaultValue: 'none', description: 'tag', name: "targetTag"),
                     stringParam(defaultValue: 'none', description: 'env', name: "targetEnv")
                 ]) 
+
+targetTag = userInput['targetTag']
+targetEnv = userInput['targetEnv']
+
+println "TRACER tag: ${targetTag} ENV: ${targetEnv}"
 }
 
 stage "checkout"
