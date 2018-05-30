@@ -14,7 +14,7 @@ def ROOT = "easywar_may_2018"
 
 stage "find Artifactory URL"
 node {
-    println "TRACER Artifactory URL here. workspace: " + ${WORKSPACE}
+    println "TRACER Artifactory URL here. workspace: ${WORKSPACE}"
     sh "bash ${WORKSPACE}/devops/test.sh HELLO_FROM_PIPELINE"
 }
 
