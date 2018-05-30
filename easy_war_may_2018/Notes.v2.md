@@ -8,6 +8,11 @@
 
 ### Items
 
+* need to use a hash and not use the latest in Artifactory ?
+* handle a deploy job that is a pipeline
+    * can we read Git repo ?
+    * can we execute a script ?
+    * what is going on with the real stuff
 * consider adding the git commit hash to the CSV file
 * verify user input ?
 * add short hash to tag ?
