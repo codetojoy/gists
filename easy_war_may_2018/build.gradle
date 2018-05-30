@@ -129,9 +129,7 @@ task createTag(dependsOn: 'setupMnemonic') {
 task createTag2(dependsOn: 'setupMnemonic') {
     doLast {
         println "TRACER TARGET_GIT_HASH : " + project.TARGET_GIT_HASH
-        println "TRACER TARGET_ENV : " + project.TARGET_ENV
         assert project.TARGET_GIT_HASH
-        assert project.TARGET_ENV
 
         def formatter = new java.text.SimpleDateFormat("yyyy-MMM-dd-HHmm")
         def timestamp = formatter.format(new Date()) 
@@ -146,7 +144,7 @@ task createTag2(dependsOn: 'setupMnemonic') {
 
         project.ext.ALL_ENVS.each { env ->
             // def artifactoryURL = project.ext.getLatestURL()
-            def artifactoryURL = getArtifactoryURLByGitHash(project.TARGET_ENV, project.TARGET_GIT_HASH)
+            def artifactoryURL = getArtifactoryURLByGitHash(env, project.TARGET_GIT_HASH)
 
             def buildInfoJSON = project.ext.getBuildInfoForArtifact(artifactoryURL)
             println "TRACER latest ${env} artifact commit hash: " + buildInfoJSON["commit"]
