@@ -15,6 +15,7 @@ node {
     println "TRACER Artifactory URL here"
 }
 
+stage "mock Deploy"
 node {
     println "TRACER deploy here"
 }
