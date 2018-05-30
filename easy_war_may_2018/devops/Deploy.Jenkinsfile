@@ -10,7 +10,7 @@ node {
     checkout scm
 }
 
-def ROOT = "easywar_may_2018"
+def ROOT = "easy_war_may_2018"
 
 stage "find Artifactory URL"
 node {
