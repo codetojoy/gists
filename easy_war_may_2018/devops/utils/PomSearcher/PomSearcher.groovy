@@ -48,8 +48,8 @@ def getBuildInfoForArtifact = { def artifactURL ->
     return buildInfo
 }
 
-def findArtifactForCommitHash = { targetCommitHash ->
-    def queryResult = callBashScript "./query.sh q1.aql"
+def findArtifactForCommitHash = { targetCommitHash, scriptDir  ->
+    def queryResult = callBashScript "${scriptDir}/query.sh ${scriptDir}/q1.aql"
     def queryJson = new JsonSlurper().parseText(queryResult)
     queryJson["results"].each { result ->
         def repo = result["repo"]
@@ -72,9 +72,10 @@ def findArtifactForCommitHash = { targetCommitHash ->
 // main ------------
 
 try {
-    if (! args || args.length < 1) { println "usage: groovy PomSearcher.groovy commitHash" }
+    if (! args || args.length < 2) { println "usage: groovy PomSearcher.groovy commitHash scriptDir" }
     def targetCommitHash = args[0] 
-    findArtifactForCommitHash(targetCommitHash)
+    def scriptDir = args[1]
+    findArtifactForCommitHash(targetCommitHash, scriptDir)
     println "Ready."
 } catch (Exception ex) {
     System.err.println "TRACER caught exception: " + ex.message
