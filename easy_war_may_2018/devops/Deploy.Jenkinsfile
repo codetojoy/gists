@@ -30,7 +30,7 @@ def ARTIFACTORY_URL_FILE = "${WORKSPACE}/${ROOT}/devops/artifactory.out.log"
 stage "find Artifactory URL"
 node {
     println "TRACER Artifactory URL here. workspace: ${WORKSPACE}"
-    sh "bash ${WORKSPACE}/${ROOT}/devops/extract.url.from.tag.sh ${targetTag} ${targetEnv} ${ARTIFACTORY_URL_FILE" 
+    sh "bash ${WORKSPACE}/${ROOT}/devops/extract.url.from.tag.sh ${targetTag} ${targetEnv} ${ARTIFACTORY_URL_FILE}" 
     println "TRACER Artifactory URL. complete"
 }
 
