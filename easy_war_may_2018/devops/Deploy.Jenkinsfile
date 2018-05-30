@@ -10,9 +10,12 @@ node {
     checkout scm
 }
 
+def ROOT = "easywar_may_2018"
+
 stage "find Artifactory URL"
 node {
     println "TRACER Artifactory URL here"
+    sh "./${ROOT}/devops/test.sh HELLO FROM PIPELINE"
 }
 
 stage "mock Deploy"

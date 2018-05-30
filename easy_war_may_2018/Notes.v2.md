@@ -6,6 +6,10 @@
 * what are GitHub Releases ? Is there an API ?
     * one concern is having servers connecting to source-code repo? 
 
+### Jobs
+
+* UAT_Deploy_v3_EasyToo on 30-MAY ... Deploy pipeline 
+
 ### Items
 
 * need to use a hash and not use the latest in Artifactory ?
