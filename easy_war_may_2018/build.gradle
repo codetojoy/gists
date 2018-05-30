@@ -170,8 +170,6 @@ task createTag2(dependsOn: 'setupMnemonic') {
         def isDebug = false
 
         if (! isDebug) {
-            // commit mapping file with presumptive tag
-            // project.ext.callBashScript "${projectDir}/devops/git.commit.tag.artifact.maps.sh ${projectDir}" 
             // perform tagging
 
             project.ext.callBashScript "${projectDir}/devops/create.tag.sh ${tag} ${tagInfoFile.absolutePath}"
