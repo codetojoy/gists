@@ -37,6 +37,8 @@ node {
 
 stage "mock Deploy"
 node {
-    println "TRACER deploy here"
+    ARTIFACTORY_URL_FILE = "${WORKSPACE}/${ROOT}/devops/artifactory.out.log"
+    println "TRACER mock deploy begin"
+    sh "bash ${WORKSPACE}/${ROOT}/devops/mock.deploy.sh ${targetTag} ${targetEnv} ${ARTIFACTORY_URL_FILE}" 
+    println "TRACER mock deploy. complete"
 }
-
