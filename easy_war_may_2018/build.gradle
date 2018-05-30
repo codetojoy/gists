@@ -126,6 +126,59 @@ task createTag(dependsOn: 'setupMnemonic') {
     }
 }
 
+task createTag2(dependsOn: 'setupMnemonic') {
+    doLast {
+        println "TRACER TARGET_GIT_HASH : " + project.TARGET_GIT_HASH
+        println "TRACER TARGET_ENV : " + project.TARGET_ENV
+        assert project.TARGET_GIT_HASH
+        assert project.TARGET_ENV
+
+        def formatter = new java.text.SimpleDateFormat("yyyy-MMM-dd-HHmm")
+        def timestamp = formatter.format(new Date()) 
+        def mnemonics = project.ext.generateMnemonics()
+        def tag = "easywar-${project.version}-${timestamp}-${mnemonics}"
+        println "TRACER tag: ${tag}"
+
+        def tagInfoJson = [:]
+        tagInfoJson["name"] = mnemonics
+        tagInfoJson["timestamp"] = timestamp
+        tagInfoJson["version"] = version
+
+        project.ext.ALL_ENVS.each { env ->
+            // def artifactoryURL = project.ext.getLatestURL()
+            def artifactoryURL = getArtifactoryURLByGitHash(project.TARGET_ENV, project.TARGET_GIT_HASH)
+
+            def buildInfoJSON = project.ext.getBuildInfoForArtifact(artifactoryURL)
+            println "TRACER latest ${env} artifact commit hash: " + buildInfoJSON["commit"]
+            println ""
+
+            tagInfoJson["${env}.artifact.url"] = artifactoryURL
+
+            // write to mapping file
+
+            def mapFile = getTagArtifactMapForEnv(env)
+            mapFile.append(/"${timestamp}","${tag}","${artifactoryURL}"/ + "\n")
+        }
+
+        def tagInfoFile = new File("${projectDir}/devops/tag.info.txt")
+        if (tagInfoFile.exists()) { tagInfoFile.delete() }
+        tagInfoFile.withWriter { f -> 
+            def json = new groovy.json.JsonBuilder(tagInfoJson)
+            f.write("\n" + json.toPrettyString() + "\n") 
+        }
+
+        def isDebug = false
+
+        if (! isDebug) {
+            // commit mapping file with presumptive tag
+            // project.ext.callBashScript "${projectDir}/devops/git.commit.tag.artifact.maps.sh ${projectDir}" 
+            // perform tagging
+
+            project.ext.callBashScript "${projectDir}/devops/create.tag.sh ${tag} ${tagInfoFile.absolutePath}"
+        }
+    }
+}
+
 // ---------------------------------------------
 // Deploying
 
@@ -153,6 +206,18 @@ task mockDeploy2() {
         def artifactoryURL = project.ext.getArtifactoryURLFromTag_V2(targetTag, project.ext.targetEnv) 
         println "TRACER mock 2 tag: ${targetTag}"
         println "TRACER mock 2 url: ${artifactoryURL}"
+    }
+}
+
+task devTest() {
+    doLast {
+        println "TRACER devTest"
+
+        println "TRACER TARGET_GIT_HASH : " + project.TARGET_GIT_HASH
+        println "TRACER TARGET_ENV : " + project.TARGET_ENV
+        
+        def url = getArtifactoryURLByGitHash(project.TARGET_ENV, project.TARGET_GIT_HASH)
+        println "TRACER url ${url}"
     }
 }
 

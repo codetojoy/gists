@@ -10,6 +10,8 @@ buildscript {
     }
 }
 
+def ARTIFACTORY_SERVER = "http://localhost:8081/artifactory"
+
 def DEV = "DEV"
 def QA = "QA"
 def UAT = "UAT"
@@ -112,6 +114,7 @@ def getLatestURL = { ->
     return result
 }
 
+
 // TODO: this should be done via an Exec task, but do it imperatively for now
 def callBashScript = { command ->
     def sysout = new StringBuilder()
@@ -170,13 +173,47 @@ def generateMnemonics = {
 }
 
 def getBuildInfoForArtifact = { def artifactURL ->
+    def buildInfo = null
+
     def pomURL = artifactURL.replaceAll("war", "pom")
     def pomXML = httpGet(pomURL)
     def xml = new XmlSlurper().parseText(pomXML)
-    def buildInfoJSONString = xml.properties."foo-gitCommitInfo".text()
-    def buildInfoJSON = new JsonSlurper().parseText(buildInfoJSONString)
+    def jsonStr = xml.properties."foo-gitCommitInfo".text()
 
-    return buildInfoJSON
+    if (jsonStr ==~ /\{"commit":.*/) {
+        buildInfo = new JsonSlurper().parseText(jsonStr)
+    }
+
+    return buildInfo
+}
+
+def findArtifactForCommitHash = { targetCommitHash ->
+    def results = []
+
+    def queryResult = callBashScript "${projectDir}/devops/query.sh ${projectDir}/devops/q1.aql"
+    def queryJson = new JsonSlurper().parseText(queryResult)
+    queryJson["results"].each { result ->
+        def repo = result["repo"]
+        def path = result["path"]
+        def name = result["name"]
+        def artifactURL = "${ARTIFACTORY_SERVER}/${repo}/${path}/${name}"
+        def buildInfo = getBuildInfoForArtifact(artifactURL)
+        if (buildInfo) {
+            def thisCommitHash = buildInfo["commit"]
+            if (thisCommitHash ==~ "${targetCommitHash}.*") {
+                results << artifactURL
+            }
+        }
+    }
+
+    return results
+}
+
+def getArtifactoryURLByGitHash = { def env, def hash ->
+    def results = findArtifactForCommitHash(hash)
+    // def url = results.find { it == ".*${env}.*" }
+    def url = results[0]
+    return url
 }
 
 // --------------------------
@@ -193,3 +230,5 @@ project.ext.ALL_ENVS = ALL_ENVS
 project.ext.generateMnemonics = generateMnemonics
 project.ext.getBuildInfoForArtifact = getBuildInfoForArtifact
 project.ext.getArtifactoryURLFromTag_V2 = getArtifactoryURLFromTag_V2
+
+project.ext.getArtifactoryURLByGitHash = getArtifactoryURLByGitHash
