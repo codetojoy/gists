@@ -14,8 +14,8 @@ def ROOT = "easywar_may_2018"
 
 stage "find Artifactory URL"
 node {
-    println "TRACER Artifactory URL here. workspace: ${WORKSPACE}"
-    sh "bash ${WORKSPACE}/devops/test.sh HELLO_FROM_PIPELINE"
+    println "TRACER Artifactory URL here. workspace: ${WORKSPACE}/${JOB_NAME}"
+    sh "bash ${WORKSPACE}/${JOB_NAME}/gists/${ROOT}/devops/test.sh HELLO_FROM_PIPELINE"
 }
 
 stage "mock Deploy"
