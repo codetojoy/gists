@@ -8,7 +8,7 @@
 
 * see new `devops/Deploy.Jenkinsile`
 * Jenkins job requires input for (a) tag (b) ENV
-* `devops/extract.url.from.tag.sh` gets the Artifactory URL (writes to file)
+* `devops/extract.url.from.tag.sh` gets the Artifactory URL 
 * `devops/mock.deploy.sh` downloads the WAR file via Artifactory URL 
 
 ### TODO
