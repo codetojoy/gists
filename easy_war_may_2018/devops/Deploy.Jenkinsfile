@@ -33,6 +33,11 @@ node {
     println "TRACER Artifactory URL here. workspace: ${WORKSPACE}"
     sh "bash ${WORKSPACE}/${ROOT}/devops/extract.url.from.tag.sh ${targetTag} ${targetEnv} ${ARTIFACTORY_URL_FILE}" 
     println "TRACER Artifactory URL. complete"
+
+    script {
+        def result = sh(returnStdout: true, script: "devops/test.sh MY_SCRIPT_TEST")
+        println "TRACER 31-MAY test: " + result 
+    }
 }
 
 stage "mock Deploy"
