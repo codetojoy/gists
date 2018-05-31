@@ -149,7 +149,7 @@ task createTag2(dependsOn: 'setupMnemonic') {
 
         project.ext.ALL_ENVS.each { env ->
             def artifactoryURL = getArtifactoryURLByGitHash(env, gitCommit)
-            if (! artfactorylURL) {
+            if (! artifactoryURL) {
                 throw new IllegalStateException("****** could not find Artifactory URL for hash: ${gitCommit} *****")
             }
 
