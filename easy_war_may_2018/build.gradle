@@ -145,7 +145,7 @@ task createTag2(dependsOn: 'setupMnemonic') {
         project.ext.ALL_ENVS.each { env ->
             // def artifactoryURL = project.ext.getLatestURL()
             def artifactoryURL = getArtifactoryURLByGitHash(env, project.TARGET_GIT_HASH)
-
+            throw new IllegalStateException("****** could not find Artifactory URL for hash: ${project.TARGET_GIT_HASH} ******") 
             def buildInfoJSON = project.ext.getBuildInfoForArtifact(artifactoryURL)
             println "TRACER latest ${env} artifact commit hash: " + buildInfoJSON["commit"]
             println ""
