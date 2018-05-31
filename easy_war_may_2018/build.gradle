@@ -1,6 +1,4 @@
 
-// build tickle
-
 apply plugin: 'war'
 apply plugin: 'maven-publish'
 
