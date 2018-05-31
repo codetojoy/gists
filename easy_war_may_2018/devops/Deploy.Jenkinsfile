@@ -35,7 +35,7 @@ node {
     println "TRACER Artifactory URL. complete"
 
     script {
-        def result = sh(returnStdout: true, script: "devops/test.sh MY_SCRIPT_TEST")
+        def result = sh(returnStdout: true, script: "${WORKSPACE}/${ROOT}/devops/test.sh MY_SCRIPT_TEST")
         println "TRACER 31-MAY test: " + result 
     }
 }
