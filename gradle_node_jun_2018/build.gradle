@@ -1,0 +1,21 @@
+
+plugins {
+    id "com.moowork.node" version "1.2.0"
+}
+
+project.ext.RESULT_FILE = "${projectDir}/names.log"
+new File(project.ext.RESULT_FILE).delete()
+
+task getDockerNames(type: NodeTask, dependsOn: 'npmInstall') {
+    script = file('index.js')
+
+    execOverrides {
+        it.standardOutput = new FileOutputStream(project.ext.RESULT_FILE)
+    }
+}
+
+task generateDockerNames(dependsOn: 'getDockerNames') {
+    doLast {
+        println "TRACER dockerNames : " + new File(RESULT_FILE).getText()
+    }
+}
