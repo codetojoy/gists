@@ -137,12 +137,12 @@ task createTag2(dependsOn: 'setupMnemonic') {
 
         def formatter = new java.text.SimpleDateFormat("yyyy-MMM-dd-HHmm")
         def timestamp = formatter.format(new Date()) 
-        def mnemonics = project.ext.generateMnemonics()
-        def tag = "easywar-${project.version}-${timestamp}-${mnemonics}"
+        def mnemonic = project.ext.generateMnemonics()
+        def tag = "easywar-${project.version}-${timestamp}-${mnemonic}"
         println "TRACER tag: ${tag}"
 
         def tagInfoJson = [:]
-        tagInfoJson["name"] = mnemonics
+        tagInfoJson["name"] = mnemonic
         tagInfoJson["timestamp"] = timestamp    // not really necessary
         tagInfoJson["version"] = version
         tagInfoJson["commit"] = gitCommit       // not really necessary
@@ -173,6 +173,11 @@ task createTag2(dependsOn: 'setupMnemonic') {
             // perform tagging
 
             project.ext.callBashScript "${projectDir}/devops/create.tag.sh ${tag} ${tagInfoFile.absolutePath} ${gitCommit}"
+
+            // write to Tags.csv
+
+            def csvFile = new File("${projectDir}/docs/Tags.csv")
+            csvFile.append(/"${tag}","${mnemonic}"/ + "\n")
         }
     }
 }

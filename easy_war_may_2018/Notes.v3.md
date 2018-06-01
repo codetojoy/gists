@@ -14,6 +14,6 @@
 ### TODO
 
 * improve the Node setup 
-* handle the Git commit race-condition
+* X - handle the Git commit race-condition
 * remove duplication of `sh` and `aql` in `devops` and `PomSeacher`
-* confirm that CSV files are no longer needed 
+* X - confirm that CSV files are no longer needed 
