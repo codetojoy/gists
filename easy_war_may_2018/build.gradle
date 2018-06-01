@@ -177,7 +177,7 @@ task createTag2(dependsOn: 'setupMnemonic') {
             // write to Tags.csv
 
             def csvFile = new File("${projectDir}/docs/Tags.csv")
-            csvFile.append(/"${tag}","${mnemonic},"${gitCommit}","${timestamp}"/ + "\n")
+            csvFile.append(/"${tag}","${mnemonic}","${gitCommit}","${timestamp}"/ + "\n")
         }
     }
 }
