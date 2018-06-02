@@ -25,8 +25,8 @@ def QA = "QA"
 def UAT = "UAT"
 def ALL_ENVS = [DEV, QA, UAT]
 
-def ARTIFACTORY_QUERY_RUNNER = "${projectDir}/devops/query.sh"
-def ARTIFACTORY_QUERY_FILE = "${projectDir}/devops/q1.aql"
+def ARTIFACTORY_QUERY_RUNNER = "${projectDir}/devops/utils/PomSearcher/query.sh"
+def ARTIFACTORY_QUERY_FILE = "${projectDir}/devops/utils/PomSearcher/q1.aql"
 
 // ---------------------
 

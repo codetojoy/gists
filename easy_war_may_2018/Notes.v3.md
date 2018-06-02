@@ -13,11 +13,11 @@
 
 ### TODO
 
-* write embedded tests
-* write a constant section 
 * can we trigger Jenkins on Github events? as a test
 * consider docker names per build
 * improve the Node setup 
-* remove duplication of `sh` and `aql` in `devops` and `PomSeacher`
+* X - remove duplication of `sh` and `aql` in `devops` and `PomSeacher`
+* X - write embedded tests
+* X - write a constant section 
 * X - handle the Git commit race-condition
 * X - confirm that CSV files are no longer needed 
