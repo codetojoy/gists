@@ -25,6 +25,9 @@ def QA = "QA"
 def UAT = "UAT"
 def ALL_ENVS = [DEV, QA, UAT]
 
+def ARTIFACTORY_QUERY_RUNNER = "${projectDir}/devops/query.sh"
+def ARTIFACTORY_QUERY_FILE = "${projectDir}/devops/q1.aql"
+
 // ---------------------
 
 def extractOneIfMatching = { s, regex ->
@@ -100,14 +103,22 @@ def callBashScript = { command ->
 println "TRACER testing callBashScript"
 assert 5150 == callBashScript("echo 5150") as int 
 
-def getArtifactoryURLFromTag = { def targetTag, def targetEnv ->
-    def viewResult = callBashScript "${projectDir}/devops/view.tag.sh ${targetTag}"
-    def tagInfo = viewResult.replaceAll(targetTag, "")
-    def tagInfoJson = new JsonSlurper().parseText(tagInfo)
+def getArtifactoryURLFromJson = { def json, def targetEnv ->
+    def tagInfoJson = new JsonSlurper().parseText(json)
     def artifactoryURL = tagInfoJson["${targetEnv}.artifact.url"]
     assert artifactoryURL 
 
     return artifactoryURL
+}
+
+println "TRACER testing getArtifactoryURLFromJson"
+assert "http://cbc.ca" == getArtifactoryURLFromJson('{"DEV.artifact.url": "http://cbc.ca"}', "DEV")
+
+def getArtifactoryURLFromTag = { def targetTag, def targetEnv ->
+    def viewResult = callBashScript "${projectDir}/devops/view.tag.sh ${targetTag}"
+    def tagInfo = viewResult.replaceAll(targetTag, "")
+
+    return getArtifactoryURLFromJson(tagInfo, targetEnv)
 }
 
 def generateMnemonics = {
@@ -115,11 +126,9 @@ def generateMnemonics = {
     return result.replaceAll(/_/, /-/).trim()
 }
 
-def getBuildInfoForArtifact = { def artifactURL ->
+def getBuildInfoFromPomXML = { def pomXML ->
     def buildInfo = null
 
-    def pomURL = artifactURL.replaceAll("war", "pom")
-    def pomXML = httpGet(pomURL)
     def xml = new XmlSlurper().parseText(pomXML)
     def jsonStr = xml.properties."foo-gitCommitInfo".text()
 
@@ -130,10 +139,24 @@ def getBuildInfoForArtifact = { def artifactURL ->
     return buildInfo
 }
 
+println "TRACER testing getBuildInfoFromXml"
+def testPomXML = '<root><properties><foo-gitCommitInfo>{"commit":"5150"}</foo-gitCommitInfo></properties></root>'
+assert 5150 == getBuildInfoFromPomXML(testPomXML)."commit" as int
+testPomXML = '<root><properties></properties></root>'
+assert null == getBuildInfoFromPomXML(testPomXML)
+
+def getBuildInfoForArtifact = { def artifactURL ->
+    def pomURL = artifactURL.replaceAll("war", "pom")
+    def pomXML = httpGet(pomURL)
+    def buildInfo = getBuildInfoFromPomXML(pomXML)
+
+    return buildInfo
+}
+
 def findArtifactForCommitHash = { targetCommitHash ->
     def results = []
 
-    def queryResult = callBashScript "${projectDir}/devops/query.sh ${projectDir}/devops/q1.aql"
+    def queryResult = callBashScript "${ARTIFACTORY_QUERY_RUNNER} ${ARTIFACTORY_QUERY_FILE}"
     def queryJson = new JsonSlurper().parseText(queryResult)
     queryJson["results"].each { result ->
         def repo = result["repo"]

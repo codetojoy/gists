@@ -134,7 +134,7 @@ task createTag2(dependsOn: 'setupMnemonic') {
     doLast {
         println "TRACER GIT_COMMIT : " + project.GIT_COMMIT
         assert project.GIT_COMMIT
-        assert project.GIT_COMMIT.size() > 7
+        assert project.GIT_COMMIT.size() >= 7
         def gitCommit = project.GIT_COMMIT
 
         def formatter = new java.text.SimpleDateFormat("yyyy-MMM-dd-HHmm")
@@ -169,7 +169,7 @@ task createTag2(dependsOn: 'setupMnemonic') {
             f.write("\n" + json.toPrettyString() + "\n") 
         }
 
-        def isDebug = true
+        def isDebug = false
 
         if (! isDebug) {
             // perform tagging
