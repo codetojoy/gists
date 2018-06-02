@@ -189,6 +189,7 @@ task createTag2(dependsOn: 'setupMnemonic') {
 // ---------------------------------------------
 // Deploying
 
+/*
 task mockDeploy() {
     doLast {
         println "TRACER MOCK DEPLOY"
@@ -202,6 +203,7 @@ task mockDeploy() {
         println "TRACER url: ${artifactoryURL}"
     }
 }
+*/
 
 task mockDeploy2() {
     doLast {
@@ -210,7 +212,7 @@ task mockDeploy2() {
         println "TRACER TARGET_ENV : " + project.ext.targetEnv
         def targetTag = project.MY_GIT_TAG
 
-        def artifactoryURL = project.ext.getArtifactoryURLFromTag_V2(targetTag, project.ext.targetEnv) 
+        def artifactoryURL = project.ext.getArtifactoryURLFromTag(targetTag, project.ext.targetEnv) 
         println "TRACER mock 2 tag: ${targetTag}"
         println "TRACER mock 2 url: ${artifactoryURL}"
     }

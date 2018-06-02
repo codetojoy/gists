@@ -27,16 +27,6 @@ def ALL_ENVS = [DEV, QA, UAT]
 
 // ---------------------
 
-ALL_ENVS.each { env ->
-    // assert new File("${projectDir}/devops/${env}.tag.artifact.map.csv").exists()
-}
-
-def getTagArtifactMapForEnv = { env ->
-    def mapFile = new File("${projectDir}/devops/${env}.tag.artifact.map.csv")
-    assert mapFile.exists()
-    return mapFile
-}
-
 def extractOneIfMatching = { s, regex ->
     def result = null
     def matcher = (s =~ regex)
@@ -46,6 +36,7 @@ def extractOneIfMatching = { s, regex ->
     return result
 }
 
+println "TRACER testing extractOneIfMatching"
 assert extractOneIfMatching("abc_5150_ijk", /.*_\d+_.*/)
 assert ! extractOneIfMatching("abc_ijk", /.*_\d+_.*/)
 
@@ -106,7 +97,10 @@ def callBashScript = { command ->
     return sysout.toString()
 }
 
-def getArtifactoryURLFromTag_V2  = { def targetTag, def targetEnv ->
+println "TRACER testing callBashScript"
+assert 5150 == callBashScript("echo 5150") as int 
+
+def getArtifactoryURLFromTag = { def targetTag, def targetEnv ->
     def viewResult = callBashScript "${projectDir}/devops/view.tag.sh ${targetTag}"
     def tagInfo = viewResult.replaceAll(targetTag, "")
     def tagInfoJson = new JsonSlurper().parseText(tagInfo)
@@ -171,11 +165,10 @@ def getArtifactoryURLByGitHash = { def env, def hash ->
 project.ext.callBashScript = callBashScript
 project.ext.getGitCommitInfo = getGitCommitInfo
 
-project.ext.getTagArtifactMapForEnv = getTagArtifactMapForEnv 
 project.ext.ALL_ENVS = ALL_ENVS
 
 project.ext.generateMnemonics = generateMnemonics
 project.ext.getBuildInfoForArtifact = getBuildInfoForArtifact
-project.ext.getArtifactoryURLFromTag_V2 = getArtifactoryURLFromTag_V2
+project.ext.getArtifactoryURLFromTag = getArtifactoryURLFromTag
 
 project.ext.getArtifactoryURLByGitHash = getArtifactoryURLByGitHash
