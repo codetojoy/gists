@@ -79,6 +79,7 @@ task setupMnemonic(description: 'npm install for devops/utils/Mnemonic') {
     }
 }
 
+/*
 task createTag(dependsOn: 'setupMnemonic') {
     doLast {
         def formatter = new java.text.SimpleDateFormat("yyyy-MMM-dd-HHmm")
@@ -127,6 +128,7 @@ task createTag(dependsOn: 'setupMnemonic') {
         }
     }
 }
+*/
 
 task createTag2(dependsOn: 'setupMnemonic') {
     doLast {
@@ -167,7 +169,7 @@ task createTag2(dependsOn: 'setupMnemonic') {
             f.write("\n" + json.toPrettyString() + "\n") 
         }
 
-        def isDebug = false
+        def isDebug = true
 
         if (! isDebug) {
             // perform tagging
@@ -178,6 +180,8 @@ task createTag2(dependsOn: 'setupMnemonic') {
 
             def csvFile = new File("${projectDir}/docs/Tags.csv")
             csvFile.append(/"${tag}","${mnemonic}","${gitCommit}","${timestamp}"/ + "\n")
+        } else {
+            println "TRACER skipping tag creation. debug: ${isDebug}"
         }
     }
 }

@@ -6,9 +6,17 @@ buildscript {
 
     dependencies {
         classpath 'org.apache.httpcomponents:httpclient:4.5.5'
-        classpath 'com.xlson.groovycsv:groovycsv:1.0'
     }
 }
+
+import org.apache.http.client.methods.*
+import org.apache.http.impl.client.*
+import org.apache.http.entity.*
+
+import groovy.util.XmlSlurper
+import groovy.json.JsonSlurper
+
+// ---------------------
 
 def ARTIFACTORY_SERVER = "http://localhost:8081/artifactory"
 
@@ -16,6 +24,8 @@ def DEV = "DEV"
 def QA = "QA"
 def UAT = "UAT"
 def ALL_ENVS = [DEV, QA, UAT]
+
+// ---------------------
 
 ALL_ENVS.each { env ->
     // assert new File("${projectDir}/devops/${env}.tag.artifact.map.csv").exists()
@@ -35,6 +45,9 @@ def extractOneIfMatching = { s, regex ->
     }
     return result
 }
+
+assert extractOneIfMatching("abc_5150_ijk", /.*_\d+_.*/)
+assert ! extractOneIfMatching("abc_ijk", /.*_\d+_.*/)
 
 def getGitCommitInfo = { ->
     def infoMap = [:]
@@ -69,14 +82,6 @@ def getGitCommitInfo = { ->
 // ---------------------------------------------
 // Git & Artifactory 
 
-import org.apache.http.client.methods.*
-import org.apache.http.impl.client.*
-import org.apache.http.entity.*
-import com.xlson.groovycsv.CsvParser
-
-import groovy.util.XmlSlurper
-import groovy.json.JsonSlurper
-
 def httpGet = { def url ->
     def request = new HttpGet(url)
     def client = HttpClientBuilder.create().build()
@@ -86,34 +91,6 @@ def httpGet = { def url ->
     def result = bufferedReader.getText()
     return result
 }
-
-def getBuildInfo = { def METADATA_URL ->
-    def buildInfo = ""
-
-    def metadataText = httpGet(METADATA_URL)
-    def buildInfoRegex = /.*<value>(.*)<\/value>.*/
-
-    metadataText.eachLine { line ->
-        def matcher = (line =~ buildInfoRegex)
-
-        if (matcher.matches()) {
-            buildInfo = matcher[0][1]
-        }
-    }
-
-    return buildInfo
-}
-
-def getLatestURL = { ->
-    def REPO_URL = "${project.ext.REPOSITORY_URL}/net/codetojoy/easytoo_may"
-    def METADATA_URL = "${REPO_URL}/${project.version}/maven-metadata.xml"
-    def ARTIFACT_URL_FORMAT = "${REPO_URL}/${project.version}/easytoo_may-%s.war"
-    def buildInfo = getBuildInfo(METADATA_URL)
-
-    def result = String.format(ARTIFACT_URL_FORMAT, buildInfo)
-    return result
-}
-
 
 // TODO: this should be done via an Exec task, but do it imperatively for now
 def callBashScript = { command ->
@@ -135,34 +112,6 @@ def getArtifactoryURLFromTag_V2  = { def targetTag, def targetEnv ->
     def tagInfoJson = new JsonSlurper().parseText(tagInfo)
     def artifactoryURL = tagInfoJson["${targetEnv}.artifact.url"]
     assert artifactoryURL 
-
-    return artifactoryURL
-}
-
-def getArtifactoryURLForTag = { def targetTag, def targetEnv ->
-    def artifactoryURL = null
-
-    def INDEX_DATE = 0
-    def INDEX_TAG = 1
-    def INDEX_ARTIFACTORY_URL = 2
-
-    def mapFile = getTagArtifactMapForEnv(targetEnv)
-    def text = mapFile.getText()
-    def data = CsvParser.parseCsv(text)
-    def isFound = false
-
-    data.each { def line ->
-        if (! isFound) {
-            def thisTag = line.getAt(INDEX_TAG)
-
-            if (thisTag == targetTag) {
-                artifactoryURL = line.getAt(INDEX_ARTIFACTORY_URL)
-                isFound = true
-            }
-        }
-    }
-
-    assert isFound
 
     return artifactoryURL
 }
@@ -221,10 +170,8 @@ def getArtifactoryURLByGitHash = { def env, def hash ->
 
 project.ext.callBashScript = callBashScript
 project.ext.getGitCommitInfo = getGitCommitInfo
-project.ext.getLatestURL = getLatestURL
 
 project.ext.getTagArtifactMapForEnv = getTagArtifactMapForEnv 
-project.ext.getArtifactoryURLForTag = getArtifactoryURLForTag
 project.ext.ALL_ENVS = ALL_ENVS
 
 project.ext.generateMnemonics = generateMnemonics
