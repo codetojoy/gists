@@ -1,5 +1,5 @@
 
-// build tickle 03-JUN-2018 
+// build tickle 03-JUN-2018  and again just for show
 
 apply plugin: 'war'
 apply plugin: 'maven-publish'
