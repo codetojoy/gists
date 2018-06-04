@@ -15,3 +15,5 @@
 ### Random, June 2018 
 
 * Q: what if we change Jenkins to call `gradle build publish` ?
+    * it didn't publish the POM
+    * not sure if it is a configuation issue in the Artifactory Plugin ?
