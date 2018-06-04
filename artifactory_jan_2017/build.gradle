@@ -2,7 +2,7 @@
 // build tickle 03-JUN-2018  and again just for show
 
 apply plugin: 'war'
-apply plugin: 'maven-publish'
+// apply plugin: 'maven-publish'
 
 apply from: "${rootDir}/gradle/version.gradle"
 apply from: "${rootDir}/gradle/info.gradle"
@@ -54,6 +54,7 @@ newBuildInfoFile.withWriter { def writer ->
 
 // ---------------------------------------------
 
+/*
 publishing {
     publications {
         codetojoyEasyWeb(MavenPublication) {
@@ -80,4 +81,4 @@ publishing {
         }
     }
 }
-
+*/
