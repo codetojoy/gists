@@ -1,0 +1,27 @@
+
+def didCompileJavaExecute = false
+
+allprojects {
+    apply plugin: 'java-library'
+
+    repositories {
+        jcenter()
+    }
+
+    /*
+    def didCompileJavaExecute = false
+
+    compileJava.doFirst {
+        didCompileJavaExecute = false
+    }
+    */
+
+    compileJava.doLast {
+        println "TRACER compileJava executed"
+        didCompileJavaExecute = true
+    }
+
+    tasks.matching { it.name ==~ "publish.*" }.all {
+        onlyIf { didCompileJavaExecute }
+    }
+}
