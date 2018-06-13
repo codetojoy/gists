@@ -2,6 +2,22 @@
 def targetTag
 def targetEnv
 
+stage "quick gist"
+node {
+def map = [:]
+map.put("us-east-1", ["vol-66c16ec2", "vol-654ce2c1", "vol-01234567"])
+map.put("us-east-2", ["vol-12345678", "vol-87654321", "vol-abcdefgh"])
+
+def target = 'vol-abcdefgh'
+
+map.values()*.removeAll{ 'vol-abcdefgh' == it }
+
+println "TRACER : " + map
+
+}
+
+/*
+
 stage "input params"
 node {
 def userInput = input(
@@ -49,3 +65,4 @@ node {
     }
     println "TRACER mock deploy. complete"
 }
+*/
