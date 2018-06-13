@@ -10,9 +10,7 @@ map.put("us-east-2", ["vol-12345678", "vol-87654321", "vol-abcdefgh"])
 
 def target = 'vol-abcdefgh'
 
-// map.values()*.removeAll{ 'vol-abcdefgh' == it }
-
-def map2 = map.collectEntries { k, v -> [k, v.findAll { it != target } ] }
+def map2 = map.collectEntries { k, v -> [k, v - target] } 
 
 println "TRACER : " + map2
 
