@@ -7,6 +7,7 @@
 * the logs should read as follows:
 
 ```
+catalina.out:TRACER custom override for JdkVersion! Accepting Java 1.8.x
 catalina.out:TRACER hello from FooService.initialize()
 catalina.out:TRACER hello from BarService.initialize() begin
 catalina.out:TRACER Spring spoof start ...
