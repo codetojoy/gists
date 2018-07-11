@@ -1,0 +1,14 @@
+
+apply plugin: 'war'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.springframework:spring-core:2.5.6.SEC01'
+    runtime 'org.springframework:spring-beans:2.5.6.SEC01'
+    runtime 'org.springframework:spring-context:2.5.6.SEC01'
+    runtime 'org.springframework:spring-web:2.5.6.SEC01'
+    compile 'org.springframework:spring-tx:2.5.6.SEC01'
+}
