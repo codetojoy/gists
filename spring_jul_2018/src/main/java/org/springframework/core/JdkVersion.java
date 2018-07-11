@@ -62,9 +62,9 @@ public abstract class JdkVersion {
 		javaVersion = System.getProperty("java.version");
 		// version String should look like "1.4.2_10"
 		if (javaVersion.indexOf("1.8.") != -1) {
-            System.out.println("TRACER custom override for JdkVersion! Accepting Java 1.8.x");
+			System.out.println("TRACER custom override for JdkVersion! Accepting Java 1.8.x");
 			majorJavaVersion = JAVA_17;
-        }
+		}
 		else if (javaVersion.indexOf("1.7.") != -1) {
 			majorJavaVersion = JAVA_17;
 		}
