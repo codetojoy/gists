@@ -23,7 +23,7 @@ new:
 |Date|#|Venue|Cat Herder|Type|Speaker 1|Topic 1|Speaker 2|Topic 2|Sponsors|A/V|Type Context|
 
 * if `Type` is blank: it's a normal meetup and `Type Context` is blank
-* if `Type` is `L`: it's lighting and `Type Context` has speakers
+* if `Type` is `L`: it's lightning and `Type Context` has speakers
 * if `Type` is `P`: it's a panel and `Type Context` has panelists
 
 ### Other notes
