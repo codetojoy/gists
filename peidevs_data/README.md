@@ -28,6 +28,6 @@ new:
 
 ### Other notes
 
-* example is [here](https://github.com/codetojoy/gists/blob/master/peidevs_data/MeetUps_v2.csv) 
+* example is [here](MeetUps_v2.csv) 
 * for brevity, there are now keys for [venues](https://github.com/codetojoy/gists/blob/master/peidevs_data/Venue_v2.csv) and [meeting types](https://github.com/codetojoy/gists/blob/master/peidevs_data/Type_v2.csv)
 
