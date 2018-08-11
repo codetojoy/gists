@@ -18,8 +18,8 @@ old:
 
 new:
 
-|New          |     |          |    |         |       |         |       |        |           |            |
-|-------------|-----|----------|----|---------|-------|---------|-------|--------|-----------|------------|
+|New | |     |          |    |         |       |         |       |        |   |            |
+|----|-|-----|----------|----|---------|-------|---------|-------|--------|---|------------|
 |Date|#|Venue|Cat Herder|Type|Speaker 1|Topic 1|Speaker 2|Topic 2|Sponsors|A/V|Type Context|
 
 * if `Type` is blank: it's a normal meetup and `Type Context` is blank
