@@ -1,0 +1,18 @@
+#!/Users/measter/tools/jdk-11.jdk/Contents/Home/bin/java --source 10 
+
+import java.util.LinkedList; 
+import java.nio.file.*;
+import java.util.stream.*;
+
+public class Example_JDK_11 {
+    public static void main(String[] args) throws Exception {
+        try (Stream<String> stream = Files.lines(Paths.get(args[0]))) {
+
+            stream.collect(Collectors.toCollection(LinkedList::new)) 
+                   .descendingIterator()
+                   .forEachRemaining(System.out::println);
+
+        }
+    }
+}
+
