@@ -1,0 +1,18 @@
+
+apply plugin: 'java'
+
+repositories {
+    jcenter()
+}
+
+// see https://stackoverflow.com/a/43574427/12704
+// 
+// Java 9, 10 would use --add-modules javax.xml.bind
+// Java 11 does not have those modules 
+
+dependencies {
+    compile 'javax.xml.bind:jaxb-api:2.2.3'
+    runtime 'com.sun.xml.bind:jaxb-core:2.2.3'
+    compile 'com.sun.xml.bind:jaxb-impl:2.2.3'
+    compile 'javax.activation:activation:1.1.1'
+}
