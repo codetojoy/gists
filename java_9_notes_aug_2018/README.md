@@ -14,7 +14,7 @@
     * Java EE, CORBA modules are shipped with the JDK, but must be explicitly added.
 * Apps can be partitioned using the same system: use a modulepath instead of a classpath.
     * Benefits: smaller runtime, better encapsulation, better performance (in the future) 
-    * NOTE: apps can stay on the classpath! Modularity is not mandatory for apps.
+    * NOTE: apps can stay on the classpath! Modularity is **not** mandatory for apps.
 * Reflection
     * Still allowed, but must be explicitly granted. 
     * For internal JDK methods, there is a warning about `illegal access` and that the code will eventually break when enforced "for real".
@@ -27,6 +27,7 @@
 
 ### Resources
 
+* Sample Hibernate [app](https://github.com/codetojoy/gists/tree/master/java_11_jaxb_aug_2018) for experimentation
 * [Why Jigsaw/JPMS](https://stackoverflow.com/questions/11844829/why-project-jigsaw-jpms)
     * Jigsaw is the module system introduced in Java 9 
 * [Benefits of Jigsaw for Small Apps](https://stackoverflow.com/questions/45655210/benefits-of-jpms-project-jigsaw-for-small-applications-libraries)
