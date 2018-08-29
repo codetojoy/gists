@@ -32,3 +32,4 @@
 * [Benefits of Jigsaw for Small Apps](https://stackoverflow.com/questions/45655210/benefits-of-jpms-project-jigsaw-for-small-applications-libraries)
 * massive [list of resources](https://github.com/codetojoy/talk_maritimedevcon_java_9_modules)
     * presentation slides [here](https://docs.google.com/presentation/d/1d2qwIx5tg_GWUa2Amz4fiqaHU4DTY22nvsTMVlrz1eY/edit#slide=id.p)
+* relatively new video on [Java 9 modules](https://www.youtube.com/watch?v=eTcjU5JlEpI)
