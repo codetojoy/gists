@@ -1,0 +1,23 @@
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'com.acme.Runner'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile  'org.hibernate:hibernate-core:4.3.6.Final'
+    compile 'org.slf4j:slf4j-simple:1.7.7'
+
+    runtime 'org.hibernate:hibernate-core:4.3.6.Final'
+    runtime 'org.hibernate:hibernate-entitymanager:4.3.10.Final'
+    runtime 'org.slf4j:slf4j-simple:1.7.7'
+    runtime 'org.javassist:javassist:3.15.0-GA'
+
+    runtime fileTree(dir: '/Users/measter/tools/hsqldb-2.3.4/hsqldb/lib', include: 'hsqldb.jar')
+
+    testCompile 'junit:junit:4.12'
+}
