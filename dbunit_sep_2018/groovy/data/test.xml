@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <US_STATES US_STATE_ID="5150" US_STATE_CD="ZA" US_STATE_NM="fooZooA" />
+    <US_STATES US_STATE_ID="5151" US_STATE_CD="ZB" US_STATE_NM="fooZooB" />
+    <US_STATES US_STATE_ID="5152" US_STATE_CD="ZC" US_STATE_NM="fooZooC" />
+    <US_STATES US_STATE_ID="5153" US_STATE_CD="ZD" US_STATE_NM="fooZooD" />
+</dataset>
