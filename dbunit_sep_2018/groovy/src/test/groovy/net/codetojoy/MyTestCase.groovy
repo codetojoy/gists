@@ -9,6 +9,8 @@ import org.dbunit.operation.*
 import static org.dbunit.PropertiesBasedJdbcDatabaseTester.* 
 
 class MyTestCase extends DBTestCase {
+    def testName = MyTestCase.class.getSimpleName()
+
     MyTestCase() {
         super()
         System.setProperty( DBUNIT_DRIVER_CLASS, "org.h2.Driver" )
@@ -18,7 +20,9 @@ class MyTestCase extends DBTestCase {
     }
 
     protected IDataSet getDataSet() throws Exception {
-        return new FlatXmlDataSetBuilder().build(new FileInputStream("data/test.xml"));
+        def xmlStr = new XmlGenerator().generate("data/${testName}.groovy") 
+        def stream = new ByteArrayInputStream(xmlStr.getBytes("UTF-8")) 
+        return new FlatXmlDataSetBuilder().build(stream)
     }
 
     protected DatabaseOperation getSetUpOperation() throws Exception {
