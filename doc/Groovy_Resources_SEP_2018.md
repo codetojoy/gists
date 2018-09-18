@@ -20,3 +20,4 @@
 
 * Groovy accepts most Java syntax, so there is a spectrum of "Groovy-ness"
 * [this answer](https://stackoverflow.com/a/12260635/12704) illustrates this in miniature, but it is true in the large as well 
+* essentially a mix of Java and Ruby
