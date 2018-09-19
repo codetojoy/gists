@@ -1,0 +1,46 @@
+
+# clipboard
+
+alias showcb='echo CB is $CB'
+alias showcb1='echo CB1 is $CB1'
+alias showcb2='echo CB2 is $CB2'
+alias showcb3='echo CB3 is $CB3'
+alias showcb4='echo CB4 is $CB4'
+alias showcb5='echo CB5 is $CB5'
+alias showcb6='echo CB6 is $CB6'
+alias showcb7='echo CB7 is $CB7'
+
+alias cbs='showcb ; showcb1 ; showcb2 ; showcb3 ; showcb4 ; showcb5 ; showcb6 ; showcb7 '
+alias clear_cbs='unset CB CB1 CB2 CB3 CB4 CB5 CB6 CB7'
+
+alias cb='export CB=$PWD ; cbs'
+alias cb1='export CB1=$PWD ; cbs'
+alias cb2='export CB2=$PWD ; cbs'
+alias cb3='export CB3=$PWD ; cbs'
+alias cb4='export CB4=$PWD ; cbs'
+alias cb5='export CB5=$PWD ; cbs'
+alias cb6='export CB6=$PWD ; cbs'
+alias cb7='export CB7=$PWD ; cbs'
+
+alias gcb='cd $CB ; cbs'
+alias gcb1='cd $CB1 ; cbs'
+alias gcb2='cd $CB2 ; cbs'
+alias gcb3='cd $CB3 ; cbs'
+alias gcb4='cd $CB4 ; cbs'
+alias gcb5='cd $CB5 ; cbs'
+alias gcb6='cd $CB6 ; cbs'
+alias gcb7='cd $CB7 ; cbs'
+
+alias more='less '
+
+alias i=' ls -lrt ; pwd '
+
+alias 2u='cd ../.. ; i '
+alias 3u='cd ../../.. ; i '
+alias 4u='cd ../../../.. ; i '
+alias 5u='cd ../../../../.. ; i '
+alias 6u='cd ../../../../../.. ; i '
+alias 7u='cd ../../../../../../.. ; i '
+
+alias clear_cbs='unset CB CB1 CB2 CB3 CB4 CB5 CB6 CB7'
+
