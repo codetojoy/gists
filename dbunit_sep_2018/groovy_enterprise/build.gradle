@@ -1,0 +1,18 @@
+
+apply plugin: 'groovy'
+apply plugin: 'application'
+
+mainClassName = 'net.codetojoy.App'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    runtime 'com.h2database:h2:1.4.191'
+    compile 'org.codehaus.groovy:groovy-all:2.5.2'
+
+    testCompile 'org.dbunit:dbunit:2.5.4'
+    testCompile 'org.codehaus.groovy:groovy-xml:2.5.2'
+}
+
