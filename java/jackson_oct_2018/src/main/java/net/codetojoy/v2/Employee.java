@@ -9,8 +9,12 @@ public class Employee {
     private Integer id;
     private List<String> contacts;
     private List<Employee> reports;
+    private List<Field> fields;
 
     // ----------- getter / setter
+
+    public List<Field> getFields() { return fields; }
+    public void setFields(List<Field> fields) { this.fields = fields; }
 
     public List<String> getContacts() { return contacts; }
     public void setContacts(List<String> contacts) { this.contacts = contacts; }
