@@ -11,6 +11,19 @@ public class Field {
     private String value_fr;
     private List<Field> subFields;
 
+    public static final String LOCALE_EN = "en";
+    public static final String LOCALE_FR = "fr";
+
+    public String getValue(String locale) {
+        String result = getValue();
+
+        if (LOCALE_FR.equalsIgnoreCase(locale)) {
+           result = getValueFr(); 
+        }
+
+        return result;
+    }
+
     // ----------- getter / setter
 
     public List<Field> getSubFields() { return subFields; }

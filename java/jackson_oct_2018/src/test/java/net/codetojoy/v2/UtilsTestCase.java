@@ -53,6 +53,32 @@ public class UtilsTestCase {
     }
 
     @Test
+    public void testFieldGetValue_Locale_EN() throws Exception {
+        String jsonStr = buildEmployeeB();
+
+        Employee employee = new Utils().buildEmployee(jsonStr);
+        Field f1 = employee.getFields().get(0);
+
+        // test 
+        String result = f1.getValue(Field.LOCALE_EN);
+
+        assertEquals("v1", result);
+    }
+
+    @Test
+    public void testFieldGetValue_Locale_FR() throws Exception {
+        String jsonStr = buildEmployeeB();
+
+        Employee employee = new Utils().buildEmployee(jsonStr);
+        Field f1 = employee.getFields().get(0);
+
+        // test 
+        String result = f1.getValue(Field.LOCALE_FR);
+
+        assertEquals("v1_fr", result);
+    }
+
+    @Test
     public void testBuildEmployee_caseB_String() throws Exception {
         String jsonStr = buildEmployeeB();
 
