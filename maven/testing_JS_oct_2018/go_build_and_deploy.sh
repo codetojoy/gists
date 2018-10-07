@@ -4,7 +4,7 @@ PROJECT_DIR=$1
 PROJECT_PREFIX=foo
 TOMCAT_HOME=/Users/measter/tools/tomcat_8_5_32_5151
 
-mvn clean package
+mvn clean test package
 
 wget http://localhost:5151 -o tmp.log -O tmp.html
 
