@@ -4,5 +4,6 @@ function demoFoo() {
 }
 
 function myReverse(str) {
-    return [...str].reverse().join('');
+    return str.split("").reverse().join("");
+    // return [...str].reverse().join('');
 }
