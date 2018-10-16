@@ -9,12 +9,12 @@
 </head>
 
 <%@ page import="java.util.Date" %>
+<%@ page import="net.codetojoy.Utils" %>
 
 <body>
 
-<p>
-timestamp : <%=new Date() %>
-</p>
+<p> timestamp : <%= new Date() %> </p>
+<p> is '123' Numeric : <%= new Utils().isNumeric("123") %> </p>
 
 <hr/>
 
