@@ -38,7 +38,7 @@
                     <outputDirectory>src/main/webapp</outputDirectory>
                     <resources>
                         <resource>
-                            <directory>meta_resources</directory>
+                            <directory>src/main/resources-filtered</directory>
                             <includes>
                                 <include>versionInfo.jsp</include>
                             </includes>
