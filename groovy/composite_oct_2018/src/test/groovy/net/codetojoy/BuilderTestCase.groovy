@@ -10,11 +10,6 @@ class BuilderTestCase {
     def partitioner = new Partitioner()
 
     @Test
-    void testCanary() {
-        assertEquals(4, 2+2)
-    }
-
-    @Test
     void testTransformAndCollectAnswers() {
         def rows = new Rows().getRows()
 
@@ -25,10 +20,38 @@ class BuilderTestCase {
     }
 
     @Test
+    void testStitchHierarchy() {
+        def rows = new Rows().getRows()
+        def questions = builder.transformAndCollectAnswers(rows)
+        def groups = partitioner.partitionByGroup(questions)
+
+        // test
+        def results = builder.stitchHierarchy(groups)
+
+        assert 3 == results.size()
+
+        assert 100 == results.get(0).id
+        assert 200 == results.get(1).id
+        assert 300 == results.get(2).id
+
+        assert 0 == results.get(0).getSubQuestions().size()
+        assert 1 == results.get(1).getSubQuestions().size()
+        assert 1 == results.get(2).getSubQuestions().size()
+
+        assert 201 == results.get(1).getSubQuestions().get(0).id
+        assert 301 == results.get(2).getSubQuestions().get(0).id
+
+        assert 0 == results.get(1).getSubQuestions().get(0).getSubQuestions().size()
+        assert 1 == results.get(2).getSubQuestions().get(0).getSubQuestions().size()
+
+        assert 302 == results.get(2).getSubQuestions().get(0).getSubQuestions().get(0).id
+    }
+
+    @Test
     void testStitchHierarchyForGroup() {
         def rows = new Rows().getRows()
         def questions = builder.transformAndCollectAnswers(rows)
-        def groups = partitioner.partitionQuestionsByGroup(questions)
+        def groups = partitioner.partitionByGroup(questions)
         assert 3 == groups.size()
         def group = groups.get(2)
 

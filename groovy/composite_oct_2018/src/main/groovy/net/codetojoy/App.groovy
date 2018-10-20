@@ -7,7 +7,7 @@ class App {
     def go(def rows) {
         def questions = builder.transformAndCollectAnswers(rows)
 
-        def groups = partitioner.partitionQuestionsByGroup(questions)
+        def groups = partitioner.partitionByGroup(questions)
 
         groups.each { group ->
             println "TRACER NEW GROUP"

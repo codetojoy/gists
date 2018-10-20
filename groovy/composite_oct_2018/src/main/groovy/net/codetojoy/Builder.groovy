@@ -9,7 +9,7 @@ class Builder {
 
     List<Question> build2(def rows) {
         List<Question> intermediateQuestions = builder.transformAndCollectAnswers(rows)
-        List<List<Question>> groups = partitioner.partitionQuestionsByGroup(intermediateQuestions)
+        List<List<Question>> groups = partitioner.partitionByGroup(intermediateQuestions)
         List<Question> questions = stitchHierarchy(groups)
 
         return questions
