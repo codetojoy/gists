@@ -34,6 +34,18 @@ public class TimerTestCase {
     }
 
     @Test
+    public void testIsPastThreshold_Shorter() {
+        Timer timer = new Timer();
+        long delayInMillis = 75L;
+        ping.doWait(delayInMillis);
+
+        // test
+        boolean result = timer.isPastThreshold();
+
+        assertFalse(result);
+    }
+
+    @Test
     public void testGetElapsed() {
         Timer timer = new Timer();
 
