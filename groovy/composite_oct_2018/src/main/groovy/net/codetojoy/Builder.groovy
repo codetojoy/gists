@@ -5,36 +5,48 @@ class Builder {
     def currentQuestion
     def parentQuestion
 
-    List<Question> safeAdd(List<Question> questions, Question question) {
-        if (questions == null) {
-            questions = new ArrayList<>();
-        }
-        questions.add(question);
-        return questions;
-    }
+    def partitioner = new Partitioner()
 
-    /*
-    List<List<Map>> partitionByGroup(List<Row> rows) {
-        List<List<Map>> groups = new ArrayList<ArrayList<Map>>();
+    List<Question> transformAndCollectAnswers(List<Row> rows) {
+        List<Question> questions = []
 
-        int currentGroup = -1;
-        List<Question> currentQuestions = new ArrayList<>()
+        for (Row row : rows) {
+            int group = row.getGroup()
+            int tier = row.getTier()
+            int level = row.getLevel()
+            Question question = partitioner.findQuestion(questions, group, tier, level)
 
-        def iterator = rows.iterator()
-
-        while (iterator.hasNext()) {
-            def row = iterator.next()
-            def thisGroup = Integer.parseInt(row[Rows.GROUP]))
-
-            if (thisGroup == group) {
-                currentQuestions.add(row)
+            if (question == null) {
+                question = parseQuestion(row)
+                questions.add(question)
             } else {
+                Answer answer = parseAnswer(row)
+                if (answer != null) {
+                    question.answers.add(answer)
+                }
             }
         }
 
-        return groups;
+        return questions
     }
-    */
+
+    List<Question> buildGroups(List<List<Row>> groups) {
+        List<Question> questions = []
+
+        for (List<Row> group : groups) {
+            questions.add(buildGroup(group))
+        }
+
+        return questions
+    }
+
+    List<Question> buildGroup(List<Row> group) {
+        List<Row> tier1Rows = new Partitioner().findRowsByTier(group, 1)
+        // List<Question> questions = buildTier1(tier1Rows)
+
+
+
+    }
 
     List<Question> build(List<Row> rows) {
         List<Question> questions = []
@@ -63,7 +75,11 @@ class Builder {
         return questions
     }
 
-    Question parseQuestion(Row row, def hasAnswer) {
+    Question parseQuestion(Row row) {
+        return parseQuestion(row, row.hasAnswer())
+    }
+
+    Question parseQuestion(Row row, boolean hasAnswer) {
         Question question = new Question()
 
         question.setId(row.getQuestionId())

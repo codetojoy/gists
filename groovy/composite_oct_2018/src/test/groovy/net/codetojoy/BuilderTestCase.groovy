@@ -14,6 +14,20 @@ class BuilderTestCase {
     }
 
     @Test
+    void testTransformAndCollectAnswers() {
+        def rows = new Rows().getRows()
+
+        // test
+        def results = builder.transformAndCollectAnswers(rows)
+
+        assert 6 == results.size()
+        // assert 100 == results.get(0).id
+        // assert results.get(0).answers.isEmpty()
+        // assert results.get(0).subQuestions.isEmpty()
+    }
+
+    /*
+    @Test
     void testBuild_NewGroupNoAnswer() {
         // Q1
         rows << new Row("100", "1", "1", "1", "Q1", "what?", "", "", "")
@@ -56,4 +70,5 @@ class BuilderTestCase {
         assert 501 == results.get(0).answers.get(1).id
         assert results.get(0).subQuestions.isEmpty()
     }
+    */
 }

@@ -25,4 +25,14 @@ class PartitionerTestCase {
         assert 5 == results.get(1).size()
         assert 6 == results.get(2).size()
     }
+
+    @Test
+    void testFindRowsByTier() {
+        def rows = new Rows().getRows()
+
+        // test
+        List<Row> results = partitioner.findRowsByTier(rows, 1)
+
+        assert 8 == results.size()
+    }
 }
