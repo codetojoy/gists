@@ -7,6 +7,7 @@ import static org.junit.Assert.*
 class BuilderTestCase {
     def rows = []
     def builder = new Builder()
+    def partitioner = new Partitioner()
 
     @Test
     void testCanary() {
@@ -21,54 +22,26 @@ class BuilderTestCase {
         def results = builder.transformAndCollectAnswers(rows)
 
         assert 6 == results.size()
-        // assert 100 == results.get(0).id
-        // assert results.get(0).answers.isEmpty()
-        // assert results.get(0).subQuestions.isEmpty()
-    }
-
-    /*
-    @Test
-    void testBuild_NewGroupNoAnswer() {
-        // Q1
-        rows << new Row("100", "1", "1", "1", "Q1", "what?", "", "", "")
-
-        // test
-        def results = builder.build(rows)
-
-        assert 1 == results.size()
-        assert 100 == results.get(0).id
-        assert results.get(0).answers.isEmpty()
-        assert results.get(0).subQuestions.isEmpty()
     }
 
     @Test
-    void testBuild_NewGroupWithAnswer() {
-        // Q1
-        rows << new Row("100", "1", "1", "1", "Q1", "what?", "500", "Yes", "1")
+    void testStitchHierarchyForGroup() {
+        def rows = new Rows().getRows()
+        def questions = builder.transformAndCollectAnswers(rows)
+        def groups = partitioner.partitionQuestionsByGroup(questions)
+        assert 3 == groups.size()
+        def group = groups.get(2)
 
         // test
-        def results = builder.build(rows)
+        def results = builder.stitchHierarchyForGroup(group)
 
         assert 1 == results.size()
-        assert 100 == results.get(0).id
-        assert 500 == results.get(0).answers.get(0).id
-        assert results.get(0).subQuestions.isEmpty()
+        def q = results.get(0)
+        assert 300 == q.id
+        assert 1 == q.getSubQuestions().size()
+        def subQ = q.getSubQuestions().get(0)
+        assert 301 == subQ.id
+        assert 1 == subQ.getSubQuestions().size()
+        assert 302 == subQ.getSubQuestions().get(0).id
     }
-
-    @Test
-    void testBuild_NewGroupWithAnswers() {
-        // Q1
-        rows << new Row("100", "1", "1", "1", "Q1", "what?", "500", "Yes", "1")
-        rows << new Row("100", "1", "1", "1", "Q1", "what?", "501", "No", "0")
-
-        // test
-        def results = builder.build(rows)
-
-        assert 1 == results.size()
-        assert 100 == results.get(0).id
-        assert 500 == results.get(0).answers.get(0).id
-        assert 501 == results.get(0).answers.get(1).id
-        assert results.get(0).subQuestions.isEmpty()
-    }
-    */
 }

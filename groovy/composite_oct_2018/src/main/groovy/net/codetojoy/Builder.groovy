@@ -30,9 +30,9 @@ class Builder {
         List<Question> results = []
 
         for (Question question : questions) {
-            int group = row.getGroup()
-            int tier = row.getTier()
-            int level = row.getLevel()
+            int group = question.getGroup()
+            int tier = question.getTier()
+            int level = question.getLevel()
 
             if (tier == 1) {
                 results.add(question)
