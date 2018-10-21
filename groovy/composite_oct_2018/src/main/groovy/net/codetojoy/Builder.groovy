@@ -69,10 +69,6 @@ class Builder {
     }
 
     Question parseQuestion(Row row) {
-        return parseQuestion(row, row.hasAnswer())
-    }
-
-    Question parseQuestion(Row row, boolean hasAnswer) {
         Question question = new Question()
 
         question.setId(row.getQuestionId())
@@ -83,7 +79,7 @@ class Builder {
         question.setPrefix(row.getPrefix())
         question.setText(row.getQuestionText())
 
-        if (hasAnswer) {
+        if (row.hasAnswer()) {
             Answer answer = parseAnswer(row)
             question.answers << answer
         }
