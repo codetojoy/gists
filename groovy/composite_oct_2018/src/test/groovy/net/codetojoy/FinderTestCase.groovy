@@ -46,14 +46,4 @@ class FinderTestCase {
 
         assert 'Q1A' == result.getPrefix()
     }
-
-    @Test
-    void testFindRowsByTier() {
-        def rows = new Rows().getRows()
-
-        // test
-        List<Row> results = finder.findRowsByTier(rows, 1)
-
-        assert 8 == results.size()
-    }
 }

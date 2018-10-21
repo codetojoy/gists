@@ -35,12 +35,4 @@ public class Finder {
 
         return question;
     }
-
-    public List<Row> findRowsByTier(List<Row> rows, int tier) {
-        List<Row> results = rows.stream()
-                                .filter{ row -> row.getTier() == tier }
-                                .collect(Collectors.toList());
-
-        return results;
-    }
 }
