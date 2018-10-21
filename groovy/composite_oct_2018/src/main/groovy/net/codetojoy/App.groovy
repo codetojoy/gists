@@ -1,11 +1,11 @@
 package net.codetojoy
 
 class App {
-    def builder = new Builder()
+    def questionBuilder = new QuestionBuilder()
     def partitioner = new Partitioner()
 
     def go(def rows) {
-        def questions = builder.build(rows)
+        def questions = questionBuilder.build(rows)
         questions.each { q -> println q.toString() }
     }
 

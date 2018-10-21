@@ -4,9 +4,9 @@ package net.codetojoy
 import org.junit.*
 import static org.junit.Assert.*
 
-class BuilderTestCase {
+class QuestionBuilderTestCase {
     def rows = []
-    def builder = new Builder()
+    def questionBuilder = new QuestionBuilder()
     def partitioner = new Partitioner()
 
     @Test
@@ -14,7 +14,7 @@ class BuilderTestCase {
         def rows = new Rows().getRows()
 
         // test
-        def results = builder.transformAndCollectAnswers(rows)
+        def results = questionBuilder.transformAndCollectAnswers(rows)
 
         assert 6 == results.size()
     }
@@ -22,11 +22,11 @@ class BuilderTestCase {
     @Test
     void testStitchHierarchy() {
         def rows = new Rows().getRows()
-        def questions = builder.transformAndCollectAnswers(rows)
+        def questions = questionBuilder.transformAndCollectAnswers(rows)
         def groups = partitioner.partitionByGroup(questions)
 
         // test
-        def results = builder.stitchHierarchy(groups)
+        def results = questionBuilder.stitchHierarchy(groups)
 
         assert 3 == results.size()
 
@@ -50,13 +50,13 @@ class BuilderTestCase {
     @Test
     void testStitchHierarchyForGroup() {
         def rows = new Rows().getRows()
-        def questions = builder.transformAndCollectAnswers(rows)
+        def questions = questionBuilder.transformAndCollectAnswers(rows)
         def groups = partitioner.partitionByGroup(questions)
         assert 3 == groups.size()
         def group = groups.get(2)
 
         // test
-        def results = builder.stitchHierarchyForGroup(group)
+        def results = questionBuilder.stitchHierarchyForGroup(group)
 
         assert 1 == results.size()
         def q = results.get(0)

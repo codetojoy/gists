@@ -1,7 +1,7 @@
 
 package net.codetojoy
 
-class Builder {
+class QuestionBuilder {
     Partitioner partitioner = new Partitioner()
 
     List<Question> build(List<Row> rows) {
