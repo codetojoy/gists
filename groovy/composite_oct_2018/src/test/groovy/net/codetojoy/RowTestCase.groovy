@@ -2,15 +2,8 @@
 package net.codetojoy
 
 import org.junit.*
-import static org.junit.Assert.*
 
-class RowsTestCase {
-    @Test
-    void testCanary() {
-        assertEquals(4, 2+2)
-    }
-
-    // TODO: move this
+class RowTestCase {
     @Test
     void testBuildRow() {
         // test
