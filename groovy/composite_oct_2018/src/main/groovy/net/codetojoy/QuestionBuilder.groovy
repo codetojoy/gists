@@ -2,11 +2,10 @@
 package net.codetojoy
 
 class QuestionBuilder {
-    Partitioner partitioner = new Partitioner()
 
     List<Question> build(List<Row> rows) {
         List<Question> intermediateQuestions = transformAndCollectAnswers(rows)
-        List<List<Question>> groups = partitioner.partitionByGroup(intermediateQuestions)
+        List<List<Question>> groups = new Partitioner().partitionByGroup(intermediateQuestions)
         List<Question> questions = stitchHierarchy(groups)
 
         return questions
@@ -34,7 +33,7 @@ class QuestionBuilder {
             if (tier == 1) {
                 results.add(question)
             } else {
-                Question parentQuestion = partitioner.findParentQuestion(results, group, tier, level)
+                Question parentQuestion = new Finder().findParentQuestion(results, group, tier, level)
                 parentQuestion.getSubQuestions().add(question)
             }
         }
@@ -56,7 +55,7 @@ class QuestionBuilder {
         int group = row.getGroup()
         int tier = row.getTier()
         int level = row.getLevel()
-        Question question = partitioner.findQuestion(questions, group, tier, level)
+        Question question = new Finder().findQuestion(questions, group, tier, level)
 
         if (question == null) {
             question = parseQuestion(row)
