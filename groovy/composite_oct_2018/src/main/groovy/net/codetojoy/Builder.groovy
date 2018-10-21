@@ -7,8 +7,8 @@ class Builder {
 
     def partitioner = new Partitioner()
 
-    List<Question> build2(def rows) {
-        List<Question> intermediateQuestions = builder.transformAndCollectAnswers(rows)
+    List<Question> build(List<Row> rows) {
+        List<Question> intermediateQuestions = transformAndCollectAnswers(rows)
         List<List<Question>> groups = partitioner.partitionByGroup(intermediateQuestions)
         List<Question> questions = stitchHierarchy(groups)
 
@@ -67,50 +67,6 @@ class Builder {
 
         return questions
     }
-
-    /*
-    List<Question> buildGroups(List<List<Row>> groups) {
-        List<Question> questions = []
-
-        for (List<Row> group : groups) {
-            questions.add(buildGroup(group))
-        }
-
-        return questions
-    }
-
-    List<Question> buildGroup(List<Row> group) {
-        List<Row> tier1Rows = new Partitioner().findRowsByTier(group, 1)
-        // List<Question> questions = buildTier1(tier1Rows)
-    }
-
-    List<Question> build(List<Row> rows) {
-        List<Question> questions = []
-
-        def state = new State()
-
-        def iterator = rows.iterator()
-
-        while (iterator.hasNext()) {
-            Row row = iterator.next()
-
-            def thisState = state.getState(row)
-
-            if (thisState == State.NEW_GROUP_NO_ANSWER) {
-                currentQuestion = parseQuestion(row, false)
-                questions << currentQuestion
-            } else if (thisState == State.NEW_GROUP_WITH_ANSWER) {
-                currentQuestion = parseQuestion(row, true)
-                questions << currentQuestion
-            } else if (thisState == State.ANSWER) {
-                Answer answer = parseAnswer(row)
-                currentQuestion.answers << answer
-            }
-        }
-
-        return questions
-    }
-    */
 
     Question parseQuestion(Row row) {
         return parseQuestion(row, row.hasAnswer())

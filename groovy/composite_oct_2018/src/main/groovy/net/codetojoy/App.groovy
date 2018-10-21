@@ -5,16 +5,8 @@ class App {
     def partitioner = new Partitioner()
 
     def go(def rows) {
-        def questions = builder.transformAndCollectAnswers(rows)
-
-        def groups = partitioner.partitionByGroup(questions)
-
-        groups.each { group ->
-            println "TRACER NEW GROUP"
-            group.each { q ->
-                 println q.toString()
-            }
-        }
+        def questions = builder.build(rows)
+        questions.each { q -> println q.toString() }
     }
 
     static void main(def args) {
