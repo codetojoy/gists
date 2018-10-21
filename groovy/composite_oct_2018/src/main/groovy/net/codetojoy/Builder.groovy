@@ -2,10 +2,7 @@
 package net.codetojoy
 
 class Builder {
-    def currentQuestion
-    def parentQuestion
-
-    def partitioner = new Partitioner()
+    Partitioner partitioner = new Partitioner()
 
     List<Question> build(List<Row> rows) {
         List<Question> intermediateQuestions = transformAndCollectAnswers(rows)
@@ -49,26 +46,32 @@ class Builder {
         List<Question> questions = []
 
         for (Row row : rows) {
-            int group = row.getGroup()
-            int tier = row.getTier()
-            int level = row.getLevel()
-            Question question = partitioner.findQuestion(questions, group, tier, level)
+            questions = transformAndCollectAnswers(questions, row)
+        }
 
-            if (question == null) {
-                question = parseQuestion(row)
-                questions.add(question)
-            } else {
-                Answer answer = parseAnswer(row)
-                if (answer != null) {
-                    question.answers.add(answer)
-                }
+        return questions
+    }
+
+    protected List<Question> transformAndCollectAnswers(List<Question> questions, Row row) {
+        int group = row.getGroup()
+        int tier = row.getTier()
+        int level = row.getLevel()
+        Question question = partitioner.findQuestion(questions, group, tier, level)
+
+        if (question == null) {
+            question = parseQuestion(row)
+            questions.add(question)
+        } else {
+            Answer answer = parseAnswer(row)
+            if (answer != null) {
+                question.answers.add(answer)
             }
         }
 
         return questions
     }
 
-    Question parseQuestion(Row row) {
+    protected Question parseQuestion(Row row) {
         Question question = new Question()
 
         question.setId(row.getQuestionId())
@@ -87,7 +90,7 @@ class Builder {
         return question
     }
 
-    Answer parseAnswer(Row row) {
+    protected Answer parseAnswer(Row row) {
         Answer answer = new Answer()
 
         answer.setId(row.getAnswerId())
