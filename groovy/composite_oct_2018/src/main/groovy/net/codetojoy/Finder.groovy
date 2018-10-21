@@ -6,16 +6,13 @@ import java.util.stream.Collectors;
 public class Finder {
 
     public Question findQuestion(List<Question> questions, int group, int tier, int level) {
-        Question result = null;
-
-        for (Question question : questions) {
-            if (question.getGroup() == group &&
-                question.getTier() == tier &&
-                question.getLevel() == level) {
-                result = question;
-                break;
-            }
-        }
+        Question result = questions.stream()
+                                   .filter{ q -> q.getGroup() == group &&
+                                                 q.getTier() == tier &&
+                                                 q.getLevel() == level
+                                          }
+                                   .findFirst()
+                                   .orElse(null);
 
         return result;
     }
