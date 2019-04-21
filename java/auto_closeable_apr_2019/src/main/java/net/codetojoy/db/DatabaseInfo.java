@@ -22,6 +22,8 @@ public class DatabaseInfo implements AutoCloseable {
 
     @Override 
     public void close() {
+        System.out.println("TRACER DatabaseInfo.close()");
+
         try { 
             if (resultSet != null) { resultSet.close(); }
         } catch (Exception ex) {
