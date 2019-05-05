@@ -1,0 +1,33 @@
+
+plugins {
+    id 'jacoco'
+}
+
+apply plugin: 'java'
+
+repositories {
+    jcenter()
+}
+
+jacoco {
+    toolVersion = "0.8.3"
+    reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination file("${buildDir}/jacocoHtml")
+    }
+}
+
+// this appears to be mandatory
+// but note that the command-line is silent compared to JUnit 4
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: '5.4.0'
+}
