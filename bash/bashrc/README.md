@@ -32,7 +32,7 @@ CB6 is
 CB7 is
 ```
 
-### 'Goto' to a clipboard
+### 'Goto' to a folder contained in a clipboard variable
 
 ```
 $ cd /random/dir
