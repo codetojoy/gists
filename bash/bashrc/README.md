@@ -48,3 +48,10 @@ CB7 is
 $ pwd
 /Users/measter/tmp
 ```
+
+### Reference a folder via clipboard variable
+
+```
+$ cd /random/dir
+$ cp $CB1/file.txt .
+```
