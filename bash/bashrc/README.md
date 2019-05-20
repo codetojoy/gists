@@ -55,3 +55,18 @@ $ pwd
 $ cd /random/dir
 $ cp $CB1/file.txt .
 ```
+
+### Misc (aside from clipboard vars)
+
+* to go "up" 4 directories: `4u`
+
+```
+$ pwd
+/Users/measter/abc/def/ijk/xyz
+$ 4u
+total 504
+drwxr-xr-x+   5 measter  staff     170 22 Jun  2015 Public
+drwx------+   3 measter  staff     102 20 Nov  2016 Documents
+drwx------@  59 measter  staff    2006  9 Mar  2017 Library
+drwx------    5 measter  staff     170 26 Mar  2017 Applications
+```
