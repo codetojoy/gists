@@ -1,0 +1,23 @@
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'net.codetojoy.App'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+}
+
+project.ext.stagingDir = 'staging'
+
+installDist.doFirst {
+    ant.delete(dir: project.ext.stagingDir)
+}
+
+installDist {
+    into project.ext.stagingDir
+}
