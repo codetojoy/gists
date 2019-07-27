@@ -1,7 +1,7 @@
 
 YT - https://www.youtube.com/watch?v=BeEUemtdoJQ
 
-* test note
+* test note v2
 
 * Research: stakeholders discuss
     * identify the project goal
