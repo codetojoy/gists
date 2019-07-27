@@ -1,6 +1,8 @@
 
 YT - https://www.youtube.com/watch?v=BeEUemtdoJQ
 
+* test note
+
 * Research: stakeholders discuss
     * identify the project goal
 * Brainstorm
