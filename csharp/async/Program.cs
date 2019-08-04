@@ -16,8 +16,9 @@ namespace async
         }
         void Go()
         {    
-            Task<int> lengthTask = GetPageLengthAsync("http://peidevs.github.io");    
-            Console.WriteLine(lengthTask.Result);
+            string url = "https://peidevs.github.io";
+            Task<int> lengthTask = GetPageLengthAsync(url);
+            Console.WriteLine($"page length for {url} is {lengthTask.Result}");
         }
 
         static void Main(string[] args)
