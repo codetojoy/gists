@@ -7,6 +7,6 @@
 ### Usage
 
 ```
-groovy Converter.groovy data/input.csv > data/output.csv
+groovy Converter.groovy data/input.csv > data/output.md
 ```
 
