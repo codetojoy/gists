@@ -59,12 +59,12 @@ def parseText = { def text ->
 
         if (! isHeaderGenerated) {
             def outputHeader = generateHeader(row, rowMap, numColumns)
-            println outputHeader             
+            print outputHeader             
             isHeaderGenerated = true 
         }
 
         def outputRow = generateRow(row, numColumns)
-        println outputRow 
+        print outputRow 
     } 
 }
 
