@@ -1,0 +1,11 @@
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'net.codetojoy.client.Runner'
+
+run {
+    args "after"
+}
+
+
