@@ -2,6 +2,8 @@
 ### Usage
 
 * edit build.gradle so that args is `before` or `after` (for mock)
+    - `before` will have a long pause because of the sleep
+    - `after` is fast
 * `gradle run`
 
 ### Notes
