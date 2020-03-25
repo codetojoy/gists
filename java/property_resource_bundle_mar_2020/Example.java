@@ -5,7 +5,9 @@ import java.io.*;
 public class Example {
     PropertyResourceBundle buildBundle() throws Exception {
         StringBuilder buffer = new StringBuilder();
-        buffer.append("net.codetojoy.test=5150");
+        buffer.append("net.codetojoy.foo=4140\n");
+        buffer.append("net.codetojoy.test=5150\n");
+        buffer.append("net.codetojoy.bar=6160\n");
         String bundleStr = buffer.toString();
         InputStream targetStream = new ByteArrayInputStream(bundleStr.getBytes());
         PropertyResourceBundle bundle = new PropertyResourceBundle(targetStream);
