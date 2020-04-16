@@ -1,4 +1,9 @@
 
+### Summary
+
+* This is not a serious venture!
+* With the demand for COBOL during the pandemic, I thought it would be interesting to "kick the tires" a bit. (I took one semester of COBOL, centuries ago).
+
 ### Notes
 
 * using [1], download image from docker: `docker pull gregcoleman/docker-cobol`
