@@ -5,7 +5,7 @@
             *> setup the procedure division (like 'main' function)
             PROCEDURE DIVISION.
               *> print a string
-              DISPLAY 'WILLKOMMEN'.
+              DISPLAY 'COBOL LIVES!'.
             *> end our program
             STOP RUN.
 
