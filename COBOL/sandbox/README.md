@@ -9,5 +9,5 @@
 
 ### Resources
 
-[1] - https://hub.docker.com/r/gregcoleman/docker-cobol/
-[2] - https://medium.com/@yvanscher/7-cobol-examples-with-explanations-ae1784b4d576
+* [1] - https://hub.docker.com/r/gregcoleman/docker-cobol/
+* [2] - https://medium.com/@yvanscher/7-cobol-examples-with-explanations-ae1784b4d576
