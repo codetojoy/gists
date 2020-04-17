@@ -8,7 +8,7 @@ These resources are geared towards:
 * _Becoming_ an architect
     - i.e. switching roles from a senior dev to architect
 
-Some major figures are Martin Fowler, Neal Ford, Nathaniel Schutta, and Mark Richards. They are all brilliant and excellent presenters. Though they are "thought-leaders" so sometimes they have ideas that a rather cutting edge. e.g. Martin Fowler was talking about micro-services in 2014.
+Some major figures are Martin Fowler, Neal Ford, Nathaniel Schutta, and Mark Richards. They are all brilliant and excellent presenters. Though they are "thought-leaders" so sometimes they have ideas that a rather cutting edge. e.g. Martin Fowler was talking about micro-services in 2014. See [1], [2], [3] below.
 
 I've put some video links below. I don't have any specific book recommendations, but Mark Richards mentions some books at [5]. He also has a large set of lessons at [4]. 
 
