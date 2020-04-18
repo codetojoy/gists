@@ -1,10 +1,10 @@
 #!/bin/bash 
 
-cobc -o shuffle shuffle.cbl
+cobc -o knuth-shuffle knuth-shuffle.cbl
 
 if [ $? -ne "0" ]
 then
-    echo "TRACER: error [shuffle.cbl] "
+    echo "TRACER: error [knuth-shuffle.cbl] "
     exit -1
 fi
 
