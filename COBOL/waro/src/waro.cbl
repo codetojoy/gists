@@ -4,6 +4,8 @@
          WORKING-STORAGE SECTION.
          01 GREETING PIC A(10) VALUE 'WARO COBOL'.
          01 I PIC 9(2).
+         01 X PIC 9(2).
+         01 Y PIC 9(2).
          78 NUM-CARDS-HAND VALUE 4.
          78 NUM-CARDS-DECK VALUE 16.
          01 PLAYER1-REC.
@@ -28,12 +30,29 @@
          PERFORM INIT-DECK VARYING I FROM 1 BY 1 UNTIL I>NUM-CARDS-DECK.
          CALL 'knuth-shuffle' USING DECK-REC.
          CALL 'log-deck' USING DECK-REC.
+         PERFORM ASSIGN-CARD 
+           VARYING I FROM 1 BY 1 UNTIL I > NUM-CARDS-DECK.
          CALL 'log-player' USING PLAYER1-REC.
          CALL 'log-player' USING PLAYER2-REC.
          CALL 'log-player' USING PLAYER3-REC.
          CALL 'log-kitty' USING KITTY-REC.
          DISPLAY "TRACER Ready."
        STOP RUN.
+  
+       ASSIGN-CARD.
+         DIVIDE NUM-CARDS-HAND INTO I GIVING X REMAINDER Y.
+         ADD 1 TO Y.
+         IF I >= 1 AND I <= 4
+           MOVE DECK-CARDS (I) TO CARDS (Y)
+         ELSE IF I >= 5 AND I <= 8
+           MOVE DECK-CARDS (I) TO PLAYER1-HAND (Y)
+         ELSE IF I >= 9 AND I <= 12
+           MOVE DECK-CARDS (I) TO PLAYER2-HAND (Y)
+         ELSE IF I >= 12 AND I <= 16
+           MOVE DECK-CARDS (I) TO PLAYER3-HAND (Y)
+         ELSE
+           DISPLAY "TRACER SEVERE ERROR I: " I
+         END-IF.
 
        INIT-DECK.
          MOVE I TO DECK-CARDS (I).
