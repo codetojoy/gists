@@ -13,18 +13,11 @@
 ### Run example 1
 
 * at prompt in image: `cd /data`
-* at prompt in image: `./run_first.sh`
-
-### Run example 2
-
-* at prompt in image: `cd /data`
-* at prompt in image: `./run_main.sh`
+* at prompt in image: `./run_waro.sh`
 
 ### Re-starting Docker
 
-* `docker start cobol-instance`
-* `docker exec -it cobol-instance bash`
-
+* to re-enter image after exiting: `re-enter.sh`
 
 ### Resources
 
