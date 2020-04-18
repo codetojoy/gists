@@ -1,0 +1,39 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. WARO.
+       DATA DIVISION.
+         WORKING-STORAGE SECTION.
+         01 GREETING PIC A(10) VALUE 'WARO COBOL'.
+         01 I PIC 9(2).
+         78 NUM-CARDS-HAND VALUE 4.
+         78 NUM-CARDS-DECK VALUE 16.
+         01 PLAYER1-REC.
+            02 PLAYER1-NAME PIC X(6) VALUE '  Bach'.      
+            02 PLAYER1-POINTS PIC 9(2).
+            02 PLAYER1-HAND PIC 9(2) OCCURS NUM-CARDS-HAND TIMES.
+         01 PLAYER2-REC.
+            02 PLAYER2-NAME PIC X(6) VALUE 'Chopin'.      
+            02 PLAYER2-POINTS PIC 9(2).
+            02 PLAYER2-HAND PIC 9(2) OCCURS NUM-CARDS-HAND TIMES.
+         01 PLAYER3-REC.
+            02 PLAYER3-NAME PIC X(6) VALUE 'Mozart'.      
+            02 PLAYER3-POINTS PIC 9(2).
+            02 PLAYER3-HAND PIC 9(2) OCCURS NUM-CARDS-HAND TIMES.
+         01 KITTY-REC.
+            02 CARDS PIC 9(2) OCCURS NUM-CARDS-HAND TIMES.
+         01 DECK-REC.
+            02 DECK-CARDS PIC 9(2) OCCURS NUM-CARDS-DECK TIMES.
+       PROCEDURE DIVISION.
+       BEGIN.
+         DISPLAY "TRACER : " GREETING.
+         PERFORM INIT-DECK VARYING I FROM 1 BY 1 UNTIL I>NUM-CARDS-DECK.
+         CALL 'knuth-shuffle' USING DECK-REC.
+         CALL 'log-deck' USING DECK-REC.
+         CALL 'log-player' USING PLAYER1-REC.
+         CALL 'log-player' USING PLAYER2-REC.
+         CALL 'log-player' USING PLAYER3-REC.
+         CALL 'log-kitty' USING KITTY-REC.
+         DISPLAY "TRACER Ready."
+       STOP RUN.
+
+       INIT-DECK.
+         MOVE I TO DECK-CARDS (I).
