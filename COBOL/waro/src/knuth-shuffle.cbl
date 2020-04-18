@@ -1,5 +1,6 @@
        IDENTIFICATION DIVISION.
        PROGRAM-ID. knuth-shuffle.
+       * https://www.rosettacode.org/wiki/Knuth_shuffle
  
        DATA DIVISION.
        LOCAL-STORAGE SECTION.
