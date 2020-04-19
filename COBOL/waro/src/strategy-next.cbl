@@ -1,15 +1,12 @@
        IDENTIFICATION DIVISION.
-       PROGRAM-ID. player-turn.
+       PROGRAM-ID. strategy-next.
  
        DATA DIVISION.
        LOCAL-STORAGE SECTION.
           01 I PIC 9(2).
 
        LINKAGE SECTION.
-       78 NUM-CARDS        VALUE 4.
-       78 STRATEGY-NEXT    VALUE 1.
-       78 STRATEGY-MAX     VALUE 2.
-       78 STRATEGY-NEAREST VALUE 3.
+       78 NUM-CARDS               VALUE 4.
        01 PRIZE-CARD PIC 9(2).
        01 PLAYER-REC.
          02 PLAYER-NAME PIC X(6).      
@@ -20,14 +17,13 @@
 
        PROCEDURE DIVISION USING PRIZE-CARD, PLAYER-REC.
           MOVE 0 TO PLAYER-BID.
-          PERFORM PICK-CARD VARYING I FROM 1 BY 1 UNTIL I > NUM-CARDS.
+          PERFORM SELECT-NEXT VARYING I FROM 1 BY 1 UNTIL I > NUM-CARDS.
 
           GOBACK
           .
 
-       PICK-CARD.
-         IF PLAYER-STRATEGY = STRATEGY-NEXT
-           CALL "strategy-next" USING PRIZE-CARD, PLAYER-REC.
-         ELSE IF PLAYER-STRATEGY = STRATEGY-MAX
-           CALL "strategy-max" USING PRIZE-CARD, PLAYER-REC.
+       SELECT-NEXT.
+         IF PLAYER-BID = 0 AND PLAYER-HAND (I) > 0
+           MOVE PLAYER-HAND (I) TO PLAYER-BID
+           MOVE 0 TO PLAYER-HAND (I) 
          END-IF.

@@ -10,6 +10,8 @@ cobc -o log-player log-player.cbl
 cobc -o log-kitty log-kitty.cbl
 cobc -o log-deck log-deck.cbl
 cobc -o player-turn player-turn.cbl 
+cobc -o strategy-next strategy-next.cbl 
+cobc -o strategy-max strategy-max.cbl 
 
 # main
 cobc -x -o waro waro.cbl
