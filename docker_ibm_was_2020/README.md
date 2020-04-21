@@ -29,7 +29,7 @@
 
 ### Notes
 
-[1] - Docker Desktop [here](https://www.docker.com/products/docker-desktop)
-[2] - IBM Dockerfile [here](https://hub.docker.com/r/ibmcom/websphere-traditional)
-[3] - Admin console [here]( https://localhost:9043/ibm/console/login.do?action=secure)
-[4] - Sandbox JSP [here](https://localhost:9443/sandbox/)
+* [1] - Docker Desktop [here](https://www.docker.com/products/docker-desktop)
+* [2] - IBM Dockerfile [here](https://hub.docker.com/r/ibmcom/websphere-traditional)
+* [3] - Admin console [here]( https://localhost:9043/ibm/console/login.do?action=secure)
+* [4] - Sandbox JSP [here](https://localhost:9443/sandbox/)
