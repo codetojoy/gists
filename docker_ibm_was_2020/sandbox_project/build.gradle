@@ -1,5 +1,15 @@
 
+apply plugin: 'groovy'
 apply plugin: 'war'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation 'org.codehaus.groovy:groovy-all:2.4.17'
+    runtime 'mysql:mysql-connector-java:5.1.47'
+}
 
 war.baseName "sandbox"
 
