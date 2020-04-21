@@ -1,0 +1,26 @@
+
+apply plugin: 'war'
+
+war.baseName "sandbox"
+
+project(':earwrapper') {
+    apply plugin: 'ear'
+
+    project.version = rootProject.version
+    project.buildDir = rootProject.buildDir
+ 
+    ear {
+        baseName = 'sandbox'
+        libDirName = ''
+
+        deploymentDescriptor {
+            version = "7"
+            displayName = "Sandbox"
+            webModule("sandbox.war", "/sandbox")
+        }
+    }
+
+    dependencies {
+        deploy project(path:':', configuration: 'archives')
+    }
+}
