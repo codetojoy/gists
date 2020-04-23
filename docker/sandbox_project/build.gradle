@@ -7,7 +7,10 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.apache.httpcomponents:httpclient:4.5.2'
+
     implementation 'org.codehaus.groovy:groovy-all:2.4.17'
+
     runtime 'mysql:mysql-connector-java:5.1.47'
 }
 
