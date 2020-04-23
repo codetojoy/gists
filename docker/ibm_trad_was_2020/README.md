@@ -26,6 +26,7 @@
 ### Misc
 
 * after `./run_first_time.sh` is used, use `stop.sh` and `start.sh`
+* in container, WAS is installed here `/opt/IBM/WebSphere/AppServer`
 
 ### Notes
 
