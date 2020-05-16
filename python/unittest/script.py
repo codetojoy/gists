@@ -1,5 +1,6 @@
 
 import os
+import re
 
 def my_func(x, y):
     return x+y
@@ -10,6 +11,19 @@ class MyClass:
 
     def check_file(self, file):
         return os.path.isfile(file) 
+
+    def read_matching_lines(self, path, regex):
+        print('TRACER cp 1')
+        count = 0
+        with open(path, 'r') as my_file:
+            print('TRACER cp 2')
+            for line in my_file:
+                print('TRACER cp 3')
+                print('TRACER line: {}'.format(line))
+                found = re.findall(regex, line)
+                if found:
+                    count += 1
+        return count
 
 class Foo:
     def go(self, bar):

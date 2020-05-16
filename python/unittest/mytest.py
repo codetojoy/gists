@@ -1,11 +1,10 @@
+import io
 import unittest
 from unittest.mock import MagicMock
-from unittest.mock import patch
+from unittest.mock import patch, mock_open
 
 from script import my_func
-from script import MyClass 
-from script import Foo 
-from script import Bar 
+from script import MyClass, Foo, Bar 
 
 class TestStringMethods(unittest.TestCase):
 
@@ -35,7 +34,20 @@ class TestStringMethods(unittest.TestCase):
         result = my_c.check_file(file)
 
         self.assertFalse(result)
-        self.assertTrue(mock_isfile.called) 
+        mock_isfile.assert_called_with(file)
+
+    # https://stackoverflow.com/a/24325868/12704
+    def test_myclass_read_matching_lines(self): 
+        path = '/bogus'
+        regex = r'foobar'
+        my_c = MyClass()
+
+        fake_file = io.StringIO('my foobar\nquick brown fox\nfoobar 3\n')
+        with patch('builtins.open', return_value=fake_file, create=True):
+            # test
+            result = my_c.read_matching_lines(path, regex)
+
+        self.assertEqual(2, result)
 
     def test_foo_go(self):
         foo = Foo()
