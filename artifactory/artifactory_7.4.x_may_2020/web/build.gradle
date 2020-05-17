@@ -1,0 +1,86 @@
+
+apply plugin: 'war'
+apply plugin: 'maven-publish'
+
+ext {
+    ARTIFACTORY_URL="http://localhost:8082/artifactory"
+    DEV_REPO_URL="${ARTIFACTORY_URL}/gradle-dev"
+    REPOSITORY_URL="${DEV_REPO_URL}"
+}
+
+apply from: "${rootDir}/gradle/version.gradle"
+apply from: "${rootDir}/gradle/info.gradle"
+
+repositories {
+    maven {
+        name "remoteArtifactory"
+        url project.ext.REPOSITORY_URL
+
+        credentials {
+            username = artifactoryUsername
+            password = artifactoryPassword
+        }
+    }
+
+    jcenter()
+}
+
+dependencies {
+    compile "net.codetojoy:web-component:${project.version}"
+}
+
+war {
+    baseName = 'easyweb'
+
+    from(buildDir) {
+        include 'build-info.properties'
+        into('WEB-INF/classes')
+    }
+}
+
+group 'net.codetojoy'
+project.ext.thisArtifactId = "easyweb"
+
+// do during config phase:
+ant.mkdir(dir: "${projectDir}/src/main/java/net/codetojoy/web")
+def newBuildInfoFile = new File("${projectDir}/src/main/java/net/codetojoy/web/BuildInfo.java")
+def templateBuildInfoFile = new File("${projectDir}/resources/TemplateBuildInfo.java")
+newBuildInfoFile.withWriter { def writer ->
+    templateBuildInfoFile.eachLine { def line ->
+        def newLine = line.replace("__PACKAGE","net.codetojoy.web")
+                          .replace("__ARTIFACT",project.ext.thisArtifactId)
+                          .replace("__VERSION",project.version)
+                          .replace("__BUILD_TIMESTAMP",buildTimeStamp)
+        writer.write(newLine + "\n");
+    }
+}
+
+// ---------------------------------------------
+
+publishing {
+    publications {
+        codetojoyEasyWeb(MavenPublication) {
+            from components.web
+            artifactId project.ext.thisArtifactId
+
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('properties')
+                    .appendNode('buildTimeStamp', buildTimeStamp)
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name 'remoteArtifactory'
+            url project.ext.REPOSITORY_URL
+
+            credentials {
+                username = project.ext.artifactoryUsername
+                password = project.ext.artifactoryPassword
+            }
+        }
+    }
+}
+
