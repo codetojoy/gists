@@ -59,5 +59,17 @@ class TestStringMethods(unittest.TestCase):
 
         self.assertEqual(result, 'mock value')
 
+    @patch('shutil.copyfile')
+    def test_myclass_copy_file(self, mock_copyfile):
+        a = '/some/path/to/somefile'
+        b = '/some/path/to/somefile'
+        my_c = MyClass()
+
+        with mock_copyfile:
+            # test
+            result = my_c.copy_file(a, b)
+
+        mock_copyfile.assert_called_with(a, b)
+
 if __name__ == '__main__':
     unittest.main()

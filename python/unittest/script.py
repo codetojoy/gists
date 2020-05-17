@@ -1,6 +1,7 @@
 
 import os
 import re
+import shutil
 
 def my_func(x, y):
     return x+y
@@ -11,6 +12,9 @@ class MyClass:
 
     def check_file(self, file):
         return os.path.isfile(file) 
+
+    def copy_file(self, a, b):
+        shutil.copyfile(a, b)
 
     def read_matching_lines(self, path, regex):
         print('TRACER cp 1')
