@@ -1,0 +1,93 @@
+
+apply plugin: 'java'
+apply plugin: 'distribution'
+apply plugin: 'maven-publish'
+
+ext {
+    ARTIFACTORY_URL="http://localhost:8082/artifactory"
+    DEV_REPO_URL="${ARTIFACTORY_URL}/gradle-dev"
+    REPOSITORY_URL="${DEV_REPO_URL}"
+}
+
+allprojects {
+    apply from: "${rootDir}/gradle/version.gradle"
+    apply from: "${rootDir}/gradle/info.gradle"
+}
+
+repositories {
+    maven {
+        name "remoteArtifactory"
+        url project.ext.REPOSITORY_URL
+
+        credentials {
+            username = project.ext.artifactoryUsername
+            password = project.ext.artifactoryPassword
+        }
+    }
+
+    jcenter()
+}
+
+dependencies {
+    implementation 'org.apache.commons:commons-lang3:3.5'
+    testImplementation 'junit:junit:4.12'
+}
+
+archivesBaseName = 'utils'
+project.ext.thisArtifactId  = 'utils'
+group = 'net.codetojoy'
+
+// see ~/gradle/version.gradle
+version = project.version
+
+compileJava.doFirst {
+    def newBuildInfoFile = new File("${projectDir}/src/main/java/net/codetojoy/utils/BuildInfo.java")
+    def templateBuildInfoFile = new File("${projectDir}/resources/TemplateBuildInfo.java")
+    newBuildInfoFile.withWriter { def writer ->
+        templateBuildInfoFile.eachLine { def line ->
+            def newLine = line.replace("__PACKAGE","net.codetojoy.utils")
+                              .replace("__ARTIFACT",thisArtifactId)
+                              .replace("__VERSION",project.version)
+                              .replace("__BUILD_TIMESTAMP",buildTimeStamp)
+            writer.write(newLine + "\n");
+        }
+    }
+}
+
+// -----------------------------------------
+
+distributions {
+    main {
+        baseName = archivesBaseName
+
+        contents {
+            from "${project.buildDir}/${project.distsDirName}"
+        }
+    }
+}
+
+publishing {
+    publications {
+        codetojoy(MavenPublication) {
+            from components.java 
+            artifactId project.ext.thisArtifactId
+
+            pom.withXml {
+                asNode().appendNode('properties')
+                        .appendNode('buildTimestamp',buildTimeStamp)
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name "remoteArtifactory"
+            url project.ext.REPOSITORY_URL
+
+            credentials {
+                username = project.ext.artifactoryUsername
+                password = project.ext.artifactoryPassword
+            }
+        }
+    }
+}
