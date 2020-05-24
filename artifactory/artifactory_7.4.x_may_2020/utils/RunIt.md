@@ -2,7 +2,6 @@
 ### Useful commands - May 2020 
 
 * this works for Artifactory 7.4.x
-* `../setvars.sh` will set crucial env vars
 * `gradle repoInfo` prints repository info
 * `gradle artifactInfo` prints artifact info
 * `cat build/publications/codetojoy/pom-default.xml` shows POM file
