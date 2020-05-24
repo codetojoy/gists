@@ -3,8 +3,8 @@ package net.codetojoy.component;
 
 public class BuildInfo {
     private static final String artifact = "web-component";
-    private static final String version = "0.9.8-SNAPSHOT";
-    private static final String buildTimestamp = "2020-May-17 16:33:21 PM";
+    private static final String version = "1.0.0-SNAPSHOT";
+    private static final String buildTimestamp = "2020-May-24 17:58:57 PM";
 
     public String toString() {
         StringBuilder buffer = new StringBuilder();
