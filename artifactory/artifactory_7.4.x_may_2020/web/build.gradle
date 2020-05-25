@@ -117,7 +117,7 @@ artifactory {
             password = project.ext.artifactoryPassword
         }
         defaults {
-            publications('mavenJava')
+            publications('codetojoyEasyWeb')
             publishArtifacts = true
             properties = ['qa.level': 'basic', 'dev.team' : 'core']
             publishPom = true // Publish generated POM files to Artifactory (true by default)

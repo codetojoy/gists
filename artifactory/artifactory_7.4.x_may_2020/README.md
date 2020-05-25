@@ -5,6 +5,8 @@ This are organized as distinct projects, not a multi-project build in Gradle.
 
 This is because we want to use Artifactory for dependencies. 
 
+MAY 2020: the `web` project now has support to publish a build to Artifactory.
+
 ### Utils
 
 * . ./setvars.sh in root
