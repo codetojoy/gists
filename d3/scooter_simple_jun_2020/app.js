@@ -83,8 +83,6 @@ function add() {
   update();
 }
 
-update();
-
 document.getElementById("play-button").addEventListener("click", play);
 document.getElementById("shuffle-button").addEventListener("click", shuffle);
 document.getElementById("add-button").addEventListener("click", add);
