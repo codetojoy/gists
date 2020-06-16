@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sandbox</title>
+    <style>
+      html {
+        font-family: sans-serif;
+      }
+
+      ul {
+        list-style: none;
+        margin: 3rem auto;
+        padding: 1rem;
+      }
+
+      li {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+        margin: 1rem 0;
+        padding: 0.5rem;
+      }
+
+      .added {
+        background-color: greenyellow;
+      }
+
+      .redundant {
+        background-color: lightcoral;
+      }
+
+      .updated {
+        background-color: orange;
+      }
+    </style>
+    <script src="https://d3js.org/d3.v5.min.js" defer></script>
+    <script src="https://d3js.org/d3-scale.v3.min.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body onload="loadData()">
+    <h2>Scooter D3.js</h2>
+    <form onsubmit="event.preventDefault()">
+      <label>New:</label><input type="text" id="new-attendee"></input>
+      <button id="add-button">Add</button>
+    </form>
+    <br/>
+    <button id="shuffle-button">Shuffle</button>
+    <button id="play-button">Play!</button>
+    <hr/>
+    <ul></ul>
+  </body>
+</html>
