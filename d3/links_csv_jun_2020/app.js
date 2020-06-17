@@ -19,9 +19,11 @@ function linkCircle( sel, d ) {
 function populateLinks() {                                         
     console.log(`TRACER ${new Date().toLocaleString()}`);
 
-    const xOffset = 150, yOffset = 50;
-    var x = 10;
-    var y = 100;
+    // TODO: ugh ... there must be a better way 
+    const numRows = 7;
+
+    var scX = d3.scaleLinear().domain( [0, numRows-1] ).range( [110, 910] );    
+    var scY = d3.scaleLinear().domain( [0, numRows-1] ).range( [200, 400] );
 
     d3.csv( "links.csv" )                            
         .then( function( data ) {                              
@@ -30,11 +32,8 @@ function populateLinks() {
               .data(data)
               .enter()
               .append("g")
-              .attr("transform", function (d,i) {
-                  x = x + xOffset;
-                  y = y + yOffset;
-                  return "translate(" + x + "," + y + ")"; 
-              })
+              .attr("transform", 
+                   (d,i) => "translate(" + scX(i) + "," + scY(i) + ")" )
               .call(linkCircle);
         } );
 }
