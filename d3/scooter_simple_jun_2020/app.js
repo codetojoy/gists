@@ -12,23 +12,8 @@ const meetupData = {
       console.log('%d: %s', i, value);
     }
   },
-  // https://stackoverflow.com/a/2450976/12704
   shuffle() {
-      const array = this.attendees;
-      var currentIndex = array.length;
-
-      // While there remain elements to shuffle...
-      while (0 !== currentIndex) {
-
-        // Pick a remaining element...
-        const randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-
-        // And swap it with the current element.
-        const temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-      }
+    d3.shuffle(this.attendees);
   }
 };
 
