@@ -19,14 +19,16 @@ function linkCircle( sel, d ) {
 function populateLinks() {                                         
     console.log(`TRACER ${new Date().toLocaleString()}`);
 
-    // TODO: ugh ... there must be a better way 
-    const numRows = 7;
-
-    var scX = d3.scaleLinear().domain( [0, numRows-1] ).range( [110, 910] );    
-    var scY = d3.scaleLinear().domain( [0, numRows-1] ).range( [200, 400] );
-
     d3.csv( "links.csv" )                            
         .then( function( data ) {                              
+
+            var scX = d3.scaleLinear()
+                        .domain( d3.extent(data, (d,i) => i) )
+                        .range( [110, 910] );    
+            var scY = d3.scaleLinear()
+                        .domain( d3.extent(data, (d,i) => i) )
+                        .range( [200, 400] );
+
             d3.select("svg")
               .selectAll("g")
               .data(data)
