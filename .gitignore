@@ -4,3 +4,4 @@ dist
 **/build
 .gradle
 **/target
+**/__pycache__
