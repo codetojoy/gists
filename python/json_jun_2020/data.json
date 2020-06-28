@@ -1,0 +1,6 @@
+{
+"num_cards": 20,
+"players": [
+    {"name": "chopin"},{"name": "mozart"}
+]
+}
