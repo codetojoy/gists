@@ -1,3 +1,6 @@
+
+## item 1
+
 I was going to mention you didn't have a `requirements.txt`, but you appear to be using Pipenv. Wahoo!
 
 As a convenience for those who don't have Pipenv, you can do the following:
@@ -14,7 +17,13 @@ pip install -f requirements.txt
 
 Or, you could leave those dinosaurs in the dust.
 
+### item 1
+
+* when I ran the first command, the resulting `requirements.txt` is empty 
+
 ---
+
+## item 2
 
 https://github.com/codetojoy/WarO_Python/blob/master/README.pipenv.md
 
@@ -28,11 +37,15 @@ And once you are in `pipenv shell`, the pytest you run will be the one installed
 
 ---
 
+## item 3
+
 https://github.com/codetojoy/WarO_Python/blob/master/README.docker.md
 
 Any reason `docker pull python:3.8.3` needs to be part of the instructions? I thought the docker command in `run_docker.sh` will pull it down if its not already local. And if not, any reason why the `docker pull` can be in `docker_run.sh`?
 
 ---
+
+## item 4
 
 https://github.com/codetojoy/WarO_Python/blob/master/README.docker.interactive.md
 
@@ -73,6 +86,8 @@ Basically, running `docker run waro` will run a container and immediately execut
 If need be, you can mount extra config files into the container to run other war-o strategies.
 
 ---
+
+## item 5
 
 You are not closing your config file. But remembering to close files is for suckers. Use a "with" which will autoclose, even if an exception is encountered.
 
