@@ -85,6 +85,28 @@ Basically, running `docker run waro` will run a container and immediately execut
 
 If need be, you can mount extra config files into the container to run other war-o strategies.
 
+### item 4
+
+I tried this, but using a "console strategy" leads to I/O problems (?)...
+These are solved in `run.sh` so presumably the instructions above could 
+use that as well. 
+
+```Dockerfile
+FROM python:3.6
+
+RUN pip install pytest
+
+ENV PYTHONPATH /app/waro
+
+ADD waro /app/waro
+ADD tests /app/tests
+ADD config.interactive.json /app/config.json
+
+WORKDIR /app
+
+ENTRYPOINT [ "python" ]
+```
+
 ---
 
 ## item 5
