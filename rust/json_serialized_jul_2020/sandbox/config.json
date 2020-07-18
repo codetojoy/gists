@@ -1,0 +1,10 @@
+{
+"num_cards": 24,
+"num_games": 1,
+"players": [
+    {"name": "Min Minnie", "strategy": "min_card"},
+    {"name": "Max Morty", "strategy": "max_card"},
+    {"name": "Hybrid Helen", "strategy": "hybrid"},
+    {"name": "Nearest Ned", "strategy": "nearest_card"}
+]
+}
