@@ -5,3 +5,4 @@ dist
 .gradle
 **/target
 **/__pycache__
+**/Cargo.lock
