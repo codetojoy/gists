@@ -22,8 +22,15 @@ impl Strategy for NextCard {
 
 struct MaxCard {}
 
+impl MaxCard {
+    fn foo(&self) { println!("TRACER sanity-check from max"); }
+}
+
 impl Strategy for MaxCard {
-    fn select(&self, player: &Player) -> u32 { *player.cards.iter().max().unwrap() }
+    fn select(&self, player: &Player) -> u32 {
+        self.foo();
+        *player.cards.iter().max().unwrap()
+    }
 }
 
 struct MinCard {}
