@@ -40,11 +40,13 @@ fn go() {
 }
 
 fn go2() {
+    let strategies: HashMap<String, &dyn Strategy> =
+        [("max_card".to_string(), &MaxCard{} as &Strategy),
+         ("min_card".to_string(), &MinCard{} as &Strategy),
+         ("next_card".to_string(), &NextCard{} as &Strategy),
+        ].iter().cloned().collect();
+
     let player = Player{name: String::from("foo"), cards: vec![2,1,10,6]};
-    let mut strategies: HashMap<String, &dyn Strategy> = HashMap::new();
-    strategies.insert("max_card".to_string(), &MaxCard{});
-    strategies.insert("min_card".to_string(), &MinCard{});
-    strategies.insert("next_card".to_string(), &NextCard{});
     let strings = vec!["max_card", "min_card", "next_card"];
     for s in strings {
         let strategy = strategies.get(s).unwrap();
