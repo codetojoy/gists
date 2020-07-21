@@ -1,4 +1,6 @@
 
+use std::collections::HashMap;
+
 trait Strategy {
     fn select(&self, player: &Player) -> u32;
 }
@@ -37,7 +39,23 @@ fn go() {
     my_apply(&player, NextCard{});
 }
 
+fn go2() {
+    let player = Player{name: String::from("foo"), cards: vec![2,1,10,6]};
+    let mut strategies: HashMap<String, &dyn Strategy> = HashMap::new();
+    strategies.insert("max_card".to_string(), &MaxCard{});
+    strategies.insert("min_card".to_string(), &MinCard{});
+    strategies.insert("next_card".to_string(), &NextCard{});
+    let strings = vec!["max_card", "min_card", "next_card"];
+    for s in strings {
+        let strategy = strategies.get(s).unwrap();
+        println!("TRACER result2: {}", strategy.select(&player));
+    }
+}
+
 fn main() {
+    println!("TRACER ---------------- ");
     go();
+    println!("TRACER ---------------- ");
+    go2();
     println!("Ready");
 }
