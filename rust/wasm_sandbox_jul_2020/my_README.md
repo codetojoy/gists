@@ -10,5 +10,3 @@
 ### TODOs
 
 * add button and stepwise 
-* can we write logs from Rust ?
-    - either pure or Java console ?
