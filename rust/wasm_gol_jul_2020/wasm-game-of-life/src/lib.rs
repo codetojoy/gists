@@ -1,11 +1,11 @@
 
 use std::fmt;
-
 mod utils;
 
 use wasm_bindgen::prelude::*;
 
 extern crate web_sys;
+extern crate js_sys;
 
 // A macro to provide `println!(..)`-style syntax for `console.log` logging.
 macro_rules! log {
@@ -26,6 +26,15 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 pub enum Cell {
     Dead = 0,
     Alive = 1,
+}
+
+impl Cell {
+    fn toggle(&mut self) {
+        *self = match *self {
+            Cell::Dead => Cell::Alive,
+            Cell::Alive => Cell::Dead,
+        };
+    }
 }
 
 #[wasm_bindgen]
@@ -72,12 +81,36 @@ impl Universe {
         }
         count
     }
+
+    fn my_coin_flip(&self) -> bool {
+        js_sys::Math::random() < 0.5
+    }
 }
 
 // ------------------------------------------
 // PUBLIC methods, exported to JavaScript.
 #[wasm_bindgen]
 impl Universe {
+    pub fn reset(&mut self) {
+        log!("TRACER resetting universe");
+        for row in 0..self.height {
+            for col in 0..self.width {
+                let idx = self.get_index(row, col);
+                let mut cell = self.cells[idx];
+
+                if self.my_coin_flip() {
+                    cell = Cell::Alive
+                } else {
+                    cell = Cell::Dead
+                }
+            }
+        }
+    }
+
+    pub fn toggle_cell(&mut self, row: u32, column: u32) {
+        let idx = self.get_index(row, column);
+        self.cells[idx].toggle();
+    }
     pub fn set_width(&mut self, width: u32) {
         self.width = width;
         self.cells = (0..width * self.height).map(|_i| Cell::Dead).collect();
@@ -130,7 +163,7 @@ impl Universe {
                 };
 
                 log!("    it becomes {:?}", next_cell);
-                
+
                 next[idx] = next_cell;
             }
         }
