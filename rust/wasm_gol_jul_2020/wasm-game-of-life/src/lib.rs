@@ -7,6 +7,8 @@ use wasm_bindgen::prelude::*;
 extern crate web_sys;
 extern crate js_sys;
 
+use web_sys::console;
+
 // A macro to provide `println!(..)`-style syntax for `console.log` logging.
 macro_rules! log {
     ( $( $t:tt )* ) => {
@@ -144,6 +146,7 @@ impl Universe {
     }
 
     pub fn tick(&mut self) {
+        let _timer = Timer::new("TRACER Universe::tick elapsed");
 
         let is_cell_verbose = false;
         let is_tick_count_verbose = false;
@@ -251,6 +254,23 @@ impl Universe {
         self.to_string()
     }
     */
+}
+
+pub struct Timer<'a> {
+    name: &'a str,
+}
+
+impl<'a> Timer<'a> {
+    pub fn new(name: &'a str) -> Timer<'a> {
+        console::time_with_label(name);
+        Timer { name }
+    }
+}
+
+impl<'a> Drop for Timer<'a> {
+    fn drop(&mut self) {
+        console::time_end_with_label(self.name);
+    }
 }
 
 /*
