@@ -58,6 +58,16 @@ playPauseButton.addEventListener("click", event => {
   }
 });
 
+// -------------------- num ticks per update / exercise
+
+const numTicksSlider = document.getElementById("num-ticks-range");
+
+numTicksSlider.addEventListener("change", event => {
+  console.log("TRACER num-ticks-handler value: " + numTicksSlider.value);
+  universe.num_ticks(numTicksSlider.value);
+  console.log("TRACER num-ticks-handler OK");
+});
+
 // -------------------- reset button / exercise
 
 const reset = () => {

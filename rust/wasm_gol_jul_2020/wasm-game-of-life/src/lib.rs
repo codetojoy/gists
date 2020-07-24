@@ -42,7 +42,12 @@ pub struct Universe {
     width: u32,
     height: u32,
     cells: Vec<Cell>,
+    num_ticks: u32,
+    tick_count: u32,
 }
+
+const INIT_NUM_TICKS: u32 = 20;
+const MAX_NUM_TICKS: u32 = 200;
 
 // ------------------------------------------
 // private methods, Rust impl
@@ -91,6 +96,11 @@ impl Universe {
 // PUBLIC methods, exported to JavaScript.
 #[wasm_bindgen]
 impl Universe {
+    pub fn num_ticks(&mut self, value: u32) {
+       log!("TRACER num_ticks ... value: {}", value);
+       self.num_ticks = value;
+    }
+
     pub fn reset(&mut self) {
         log!("TRACER resetting universe");
         for row in 0..self.height {
@@ -134,6 +144,23 @@ impl Universe {
     }
 
     pub fn tick(&mut self) {
+
+        let is_cell_verbose = false;
+        let is_tick_count_verbose = false;
+
+        if self.tick_count >= self.num_ticks || self.tick_count >= MAX_NUM_TICKS {
+            if is_tick_count_verbose {
+                log!("TRACER tick THEN value: {}", self.num_ticks);
+            }
+            self.tick_count = 0;
+        } else {
+            if is_tick_count_verbose {
+                log!("TRACER tick ELSE value: {}", self.num_ticks);
+            }
+            self.tick_count += 1;
+            return
+        }
+
         let mut next = self.cells.clone();
 
         for row in 0..self.height {
@@ -142,8 +169,10 @@ impl Universe {
                 let cell = self.cells[idx];
                 let live_neighbors = self.live_neighbor_count(row, col);
 
-                log!( "cell[{}, {}] is initially {:?} and has {} live neighbors",
-                     row, col, cell, live_neighbors );
+                if is_cell_verbose {
+                    log!( "cell[{}, {}] is initially {:?} and has {} live neighbors",
+                         row, col, cell, live_neighbors );
+                }
 
                 let next_cell = match (cell, live_neighbors) {
                     // Rule 1: Any live cell with fewer than two live neighbours
@@ -162,7 +191,9 @@ impl Universe {
                     (otherwise, _) => otherwise,
                 };
 
-                log!("    it becomes {:?}", next_cell);
+                if is_cell_verbose {
+                    log!("    it becomes {:?}", next_cell);
+                }
 
                 next[idx] = next_cell;
             }
@@ -210,6 +241,8 @@ impl Universe {
             width,
             height,
             cells,
+            num_ticks: INIT_NUM_TICKS,
+            tick_count: 0,
         }
     }
 
