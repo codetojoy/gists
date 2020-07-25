@@ -7,8 +7,7 @@
     - in www: npm run start 
     - browse to http://localhost:8080/index.html
 
-### TODOs
+### Extra Resources
 
-* add button and stepwise 
-* can we write logs from Rust ?
-    - either pure or Java console ?
+* https://github.com/lrlna/sketchin/blob/master/zines/rust-wasm.md
+
