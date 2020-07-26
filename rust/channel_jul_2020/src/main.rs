@@ -117,7 +117,7 @@ impl WorkflowProducer {
     fn receive_a_message(&self) -> bool {
         match self.port.try_recv() {
             Ok(ProducerControlMsg::Quit) => {
-                println!("TRACER {:?} Producer quitting", thread::current().id());
+                my_log("Producer quitting");
                 return false
             },
             Err(_) => {
@@ -130,7 +130,7 @@ impl WorkflowProducer {
     fn produce_a_workflow(&self) {
         if self.produced_workflows.get() < self.number_of_workflows {
             let workflow_id = self.produced_workflows.get().clone();
-            println!("TRACER {:?} Producer sending new workflow, id: {}", thread::current().id(), workflow_id);
+            my_log(&format!("Producer sending new workflow, id: {}", workflow_id));
             let workflow = Workflow::new(self.produced_workflows.get(), self.number_of_steps);
             let _ = self.chan.send(ProducerMsg::Incoming(workflow));
             self.produced_workflows.set(self.produced_workflows.get() + 1);
@@ -155,7 +155,7 @@ fn start_executor(chan: Sender<ConsumerMsg>) -> Sender<ExecutorMsg> {
             port: executor_port,
             chan: chan,
         };
-        println!("TRACER {:?} begin executor loop", thread::current().id());
+        my_log("begin executor loop");
         while executor.run() {
             // Running...
         }
@@ -171,7 +171,7 @@ fn start_consumer(chan: Sender<ConsumerControlMsg>,
     let _ = thread::Builder::new().spawn(move || {
         let mut track_steps = HashMap::new();
         let mut done = 0;
-        println!("TRACER {:?} begin consumer loop", thread::current().id());
+        my_log("begin consumer loop");
         for msg in consumer_port.iter() {
             match msg {
                 ConsumerMsg::StepExecuted(workflow_id, index) => {
@@ -211,7 +211,7 @@ fn start_producer(chan: Sender<ProducerMsg>,
             number_of_steps: number_of_steps,
             produced_workflows: Default::default()
         };
-        println!("TRACER {:?} begin producer loop", thread::current().id());
+        my_log("begin producer loop");
         while producer.run() {
             // Running...
         }
@@ -219,8 +219,12 @@ fn start_producer(chan: Sender<ProducerMsg>,
     producer_chan
 }
 
+fn my_log(s: &str) {
+    println!("TRACER {:?} {}", thread::current().id(), s);
+}
+
 fn main() {
-    println!("TRACER MAIN {:?} begin", thread::current().id());
+    my_log("MAIN begin");
     // ouput is generally:
     //      - MAIN
     //      - Producer
@@ -261,11 +265,11 @@ fn main() {
                 let payload = work_port.recv().unwrap();
                 {
                     let ProducerMsg::Incoming(workflow) = &payload;
-                    println!("TRACER MAIN {:?} received message ({:?}) from Producer", thread::current().id(), workflow.id);
+                    my_log(&format!("MAIN received message ({:?}) from Producer", workflow.id));
                 }
                 MainMsg::FromProducer(payload)
             } else if ready == results_port.id() {
-                println!("TRACER MAIN {:?} received done message from Consumer", thread::current().id());
+                my_log("MAIN received message done message from Consumer");
                 let payload = results_port.recv().unwrap();
                 MainMsg::FromConsumer(payload)
             } else {
@@ -292,7 +296,7 @@ fn main() {
         break;
     }
 
-    println!("Ready. {:?}", thread::current().id());
+    my_log("Ready.");
 }
 
 #[test]
