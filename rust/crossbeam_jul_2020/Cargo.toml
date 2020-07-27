@@ -1,0 +1,10 @@
+[package]
+name = "crossbeam_example"
+version = "0.1.0"
+authors = ["Michael Easter<codetojoy@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+crossbeam = "0.7.3"
+crossbeam-channel = "0.4.3"
+crossbeam-utils = "0.7.2"
