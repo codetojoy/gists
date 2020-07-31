@@ -7,7 +7,14 @@ use primes;
 pub mod util;
 use util::t_log;
 
-const MAX_SIZE: usize = 300;
+// TODO: right now, prime factorizations are stored as an simple array, where
+// array[N] = x means that N^x is part of the prime factorization.
+// This is wasteful for memory, as any non-prime N will always be zero. i.e. the
+// array is sparse.
+//
+// For memory, it would be much better to store like so:
+// array[N] = x means that N is the Nth-prime (call it Y), so the factor is Y^x
+const MAX_SIZE: usize = 200;
 const HEURISTIC_LIMIT: u64 = 14;
 
 pub struct Chunk {
@@ -32,7 +39,7 @@ impl FactorialWorker {
     fn get_factorial(&mut self, n: u64) -> [u64;  MAX_SIZE] {
         let mut table = self.mutex_table.lock().unwrap();
         if table.contains_key(&n) {
-            // println!("TRACER cache hit!");
+            // t_log(&format!("cache hit for {}",n));
             *table.get(&n).unwrap()
         } else {
             let result = self.compute_factorial(n);
@@ -80,7 +87,6 @@ impl FactorizationWorker {
        let mut result: [u64; MAX_SIZE] = [0; MAX_SIZE];
        let factors = primes::factors(n);
        for i in factors {
-           // println!("TRACER g_f i {}", i);
            result[i as usize] += 1;
        }
        result
@@ -127,7 +133,6 @@ fn do_stop_early(a_factorial: &[u64; MAX_SIZE], b_factorial: &[u64; MAX_SIZE],
         let a_number = get_number(a_factorial);
         let b_number = get_number(b_factorial);
         let c_number = get_number(c_factorial);
-        // println!("TRACER is_greater_than {} {} {}", a_number, b_number, c_number);
         result = (a_number * b_number) > c_number
     }
     result
@@ -148,6 +153,11 @@ fn get_number(n: &[u64; MAX_SIZE]) -> u64 {
     result
 }
 
+fn get_factorial_with_lock(n: u64, factorial_worker_mutex: &Arc<Mutex<FactorialWorker>>) -> [u64; MAX_SIZE] {
+    let mut factorial_worker = factorial_worker_mutex.lock().unwrap();
+    factorial_worker.get_factorial(n)
+}
+
 pub fn find_factors(chunk: &Chunk, factorial_worker_mutex: &Arc<Mutex<FactorialWorker>>) {
     let c_low = chunk.low;
     let c_high = chunk.high;
@@ -155,12 +165,11 @@ pub fn find_factors(chunk: &Chunk, factorial_worker_mutex: &Arc<Mutex<FactorialW
     let mut count = 1;
 
     for c in c_low..c_high {
+        let c_factorial = get_factorial_with_lock(c, factorial_worker_mutex);
         for a in 1..c {
+            let a_factorial = get_factorial_with_lock(a, factorial_worker_mutex);
             for b in a..c {
-                let mut factorial_worker = factorial_worker_mutex.lock().unwrap();
-                let a_factorial = factorial_worker.get_factorial(a);
-                let b_factorial = factorial_worker.get_factorial(b);
-                let c_factorial = factorial_worker.get_factorial(c);
+                let b_factorial = get_factorial_with_lock(b, factorial_worker_mutex);
                 let do_check = count % check_frequency == 0;
                 if do_check && do_stop_early(&a_factorial, &b_factorial, &c_factorial, c) {
                     // println!("TRACER early eject :: {}! x {}! > {}!", a, b, c);

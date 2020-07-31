@@ -41,8 +41,10 @@ fn get_chunks(chunk_size: u64, max: u64) -> Vec<Chunk> {
     chunks
 }
 
+// NOTE: the mutex coverage is probably too coarse, in terms of granularity
+// TODO: re-design this for better throughput 
 fn main() {
-    const MAX: u64 = 300;
+    const MAX: u64 = 200;
     const CHUNK_SIZE: u64 = 50;
     let chunks: Vec<Chunk> = get_chunks(CHUNK_SIZE, MAX);
     let factorial_worker = Arc::new(Mutex::new(FactorialWorker::new()));
