@@ -1,13 +1,11 @@
 
 use rayon::prelude::*;
-// use std::thread;
-// use std::thread::JoinHandle;
 use std::vec::Vec;
+use std::sync::{Arc, Mutex};
 
 mod factorial;
 
-use factorial::Chunk;
-use factorial::find_factors;
+use factorial::{Chunk, FactorialWorker, find_factors};
 use factorial::util::t_log;
 
 fn get_chunk(index: u64, chunk_size: u64, max: u64) -> Option<(u64, u64)> {
@@ -47,8 +45,9 @@ fn main() {
     const MAX: u64 = 300;
     const CHUNK_SIZE: u64 = 50;
     let chunks: Vec<Chunk> = get_chunks(CHUNK_SIZE, MAX);
+    let factorial_worker = Arc::new(Mutex::new(FactorialWorker::new()));
 
-    chunks.into_par_iter().for_each(|chunk| find_factors(&chunk) );
+    chunks.into_par_iter().for_each(move |chunk| find_factors(&chunk, &factorial_worker) );
 
     t_log("Ready.");
 }

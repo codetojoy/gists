@@ -1,6 +1,6 @@
 
 use std::collections::HashMap;
-use std::sync::Mutex;
+use std::sync::{Arc, Mutex};
 
 use primes;
 
@@ -15,13 +15,14 @@ pub struct Chunk {
     pub high: u64,
 }
 
-struct FactorialWorker {
+pub struct FactorialWorker {
     mutex_table: Mutex<HashMap<u64,[u64; MAX_SIZE]>>,
     mutex_factorization_worker: Mutex<FactorizationWorker>,
 }
 
 impl FactorialWorker {
-    fn new() -> FactorialWorker {
+    pub fn new() -> FactorialWorker {
+        t_log("FactorialWorker constructor");
         FactorialWorker {
             mutex_table: Mutex::new(HashMap::new()),
             mutex_factorization_worker: Mutex::new(FactorizationWorker::new()),
@@ -59,6 +60,7 @@ struct FactorizationWorker {
 
 impl FactorizationWorker {
     fn new() -> FactorizationWorker {
+        t_log("FactorizationWorker constructor");
         FactorizationWorker {
             mutex: Mutex::new(HashMap::new()),
         }
@@ -148,14 +150,15 @@ fn get_number(n: &[u64; MAX_SIZE]) -> u64 {
     result
 }
 
-pub fn find_factors(chunk: &Chunk) {
+pub fn find_factors(chunk: &Chunk, factorial_worker_mutex: &Arc<Mutex<FactorialWorker>>) {
     let c_low = chunk.low;
     let c_high = chunk.high;
     let check_frequency = 10;
     let mut count = 1;
-    let mut factorial_worker = FactorialWorker::new();
 
     for c in c_low..c_high {
+        let mut factorial_worker = factorial_worker_mutex.lock().unwrap();
+
         for a in 1..c {
             for b in a..c {
                 let a_factorial = factorial_worker.get_factorial(a);
