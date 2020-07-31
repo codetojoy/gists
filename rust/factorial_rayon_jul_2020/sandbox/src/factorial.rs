@@ -55,25 +55,23 @@ impl FactorialWorker {
 }
 
 struct FactorizationWorker {
-    mutex: Mutex<HashMap<u64,[u64; MAX_SIZE]>>,
+    table: HashMap<u64,[u64; MAX_SIZE]>,
 }
 
 impl FactorizationWorker {
     fn new() -> FactorizationWorker {
         t_log("FactorizationWorker constructor");
         FactorizationWorker {
-            mutex: Mutex::new(HashMap::new()),
+            table: HashMap::new(),
         }
     }
 
     fn get_factorization(&mut self, n: u64) -> [u64;  MAX_SIZE] {
-        let mut table = self.mutex.lock().unwrap();
-        if table.contains_key(&n) {
-            // println!("TRACER cache hit!");
-            *table.get(&n).unwrap()
+        if self.table.contains_key(&n) {
+            *self.table.get(&n).unwrap()
         } else {
             let result = self.compute_factorization(n);
-            table.insert(n, result);
+            self.table.insert(n, result);
             result
         }
     }
@@ -157,10 +155,9 @@ pub fn find_factors(chunk: &Chunk, factorial_worker_mutex: &Arc<Mutex<FactorialW
     let mut count = 1;
 
     for c in c_low..c_high {
-        let mut factorial_worker = factorial_worker_mutex.lock().unwrap();
-
         for a in 1..c {
             for b in a..c {
+                let mut factorial_worker = factorial_worker_mutex.lock().unwrap();
                 let a_factorial = factorial_worker.get_factorial(a);
                 let b_factorial = factorial_worker.get_factorial(b);
                 let c_factorial = factorial_worker.get_factorial(c);
