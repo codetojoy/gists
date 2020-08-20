@@ -4,6 +4,9 @@ extern crate serde_derive;
 extern crate wasm_bindgen;
 use wasm_bindgen::prelude::*;
 
+extern crate js_sys;
+use js_sys::*;
+
 #[wasm_bindgen]
 extern "C" {
     fn alert(s: &str);
@@ -11,7 +14,7 @@ extern "C" {
     #[wasm_bindgen(js_namespace = console)]
     fn log(s: &str);
 
-    #[wasm_bindgen(module = "../index")]
+    #[wasm_bindgen(module = "../index.js")]
     fn update_message(message: JsValue);
 }
 
@@ -37,10 +40,17 @@ impl Engine {
     }
 
     pub fn generate_message(&self, message_id: i32) {
+        let mut s = String::new();
+        s.push_str("TRACER [");
+        s.push_str(&Date::now().to_string());
+        s.push_str("] hello from Rust");
+        log("TRACER weird");
+        // log(&s.to_owned());
+
         let message = Message {
             engine_id: self.engine_id,
             message_id: message_id,
-            message: "TRACER hello from Rust".to_owned(),
+            message: s.to_owned(),
         };
         update_message(JsValue::from_serde(&message).unwrap());
     }
