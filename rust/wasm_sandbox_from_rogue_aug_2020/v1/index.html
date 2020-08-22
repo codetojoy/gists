@@ -1,0 +1,38 @@
+<html>
+
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <title>Sandbox</title>
+    <link rel="icon" href="data:,">
+    <style>
+        .row {
+            display: flex;
+        }
+
+        .row_cell {
+            flex: 1
+        }
+    </style>
+</head>
+
+<body>
+    <div class="row">
+        <div class="row_cell" style="text-align:center;">
+            <h1>Sandbox</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row_cell" id="messageContainer" style="padding:15px;">
+            <p>engine id: <span id="engine-id">N/A</span> </p>
+            <p>message id: <span id="message-id">N/A</span> </p>
+            <p>message: <span id="message">N/A</span> </p>
+        </div>
+    </div>
+    <div class="row">
+        <button id="go-button">Go</button>
+    </div>
+
+    <script src='./bootstrap.js'></script>
+</body>
+
+</html>
