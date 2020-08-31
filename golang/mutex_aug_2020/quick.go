@@ -49,17 +49,20 @@ func (payload *Payload) update(key string, id int) {
 }
 
 func (payload *Payload) update_RW(key string, id int) {
-    /*
     (*payload.tableLock).RLock()
-    defer (*payload.tableLock).RUnlock()
+
+    fmt.Printf("TRACER id: %d in RLock\n", id)
 
     if _, ok := (*payload.table)[key]; ! ok {
-        time.Sleep(400 * time.Millisecond)
+        mySleep()
+        (*payload.tableLock).RUnlock()
         (*payload.tableLock).Lock()
+        fmt.Printf("TRACER id: %d in full Lock\n", id)
         (*payload.table)[key] = fmt.Sprintf("from %d", id)
         (*payload.tableLock).Unlock()
+    } else {
+        (*payload.tableLock).RUnlock()
     }
-    */
 }
 
 func worker(id int, table *map[string]string, tableLock *sync.RWMutex, myChannel chan Payload) {
@@ -69,9 +72,9 @@ func worker(id int, table *map[string]string, tableLock *sync.RWMutex, myChannel
                 t.Hour(), t.Minute(), t.Second(), t.UnixNano())
     payload := Payload{id: id, message: message, table: table, tableLock: tableLock}
 
-    payload.update("abc", id)
-    payload.update("def", id)
-    payload.update("xyz", id)
+    payload.update_RW("abc", id)
+    payload.update_RW("def", id)
+    payload.update_RW("xyz", id)
 
     myChannel <- payload
 }
