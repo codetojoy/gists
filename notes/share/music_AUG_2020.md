@@ -6,6 +6,12 @@
         - *Music: "Picking fingers" by Stefan Kartenberg*
         - *http://dig.ccmixter.org/files/JeffSpeed68/59513*
         - *CC BY-NC 3.0*
+    - Or this might be easier:
+        - Put the link in a text post to your wall, with a brief description
+        - In the video, put text:
+        - *Music: "Picking fingers" by Stefan Kartenberg*
+        - *for link, see post on Aug 31, 2020*
+        - *CC BY-NC 3.0*
 * To hear other tracks, browse [this link](http://dig.ccmixter.org/film).
     - For even more options, browse [this link](https://creativecommons.org/about/program-areas/arts-culture/arts-culture-resources/legalmusicforvideos/)
 * When you find a track you like, I can figure out the license details.
