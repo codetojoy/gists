@@ -1,4 +1,5 @@
 {
 "numCards": 20,
-"numGames": 1
+"numGames": 1,
+"isVerbose": true
 }

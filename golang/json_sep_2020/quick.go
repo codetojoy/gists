@@ -17,8 +17,8 @@ type Player struct {
 type Config struct {
     NumCards int `json:numCards`
     NumGames int `json:numGames`
-    /*
     IsVerbose bool `json:isVerbose`
+    /*
     players []Player `json:players`
 */
 }
@@ -55,9 +55,7 @@ func main() {
 
     fmt.Printf("numCards: %d\n", config.NumCards)
     fmt.Printf("numGames: %d\n", config.NumGames)
-    /*
     fmt.Printf("isVerbose: %v\n", config.IsVerbose)
-    */
 
     fmt.Println("Ready.")
 }
