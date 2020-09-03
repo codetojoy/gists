@@ -1,5 +1,10 @@
 {
 "num_cards": 20,
 "num_games": 1,
-"is_verbose": true
+"is_verbose": true,
+"players": [
+    {"name": "you", "strategy": "console"},
+    {"name": "bach", "strategy": "next_card"},
+    {"name": "shostakovich", "strategy": "next_card"}
+]
 }

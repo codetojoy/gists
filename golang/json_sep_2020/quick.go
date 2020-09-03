@@ -10,31 +10,16 @@ import (
 )
 
 type Player struct {
-    Name string `json:name`
-    Strategy string `json:strategy`
+    Name string `json:"name"`
+    Strategy string `json:"strategy"`
 }
 
 type Config struct {
     NumCards int `json:"num_cards"`
     NumGames int `json:"num_games"`
     IsVerbose bool `json:"is_verbose"`
-    /*
-    players []Player `json:players`
-*/
+    Players []Player `json:"players"`
 }
-
-/*
-{
-"num_cards": 20,
-"num_games": 1,
-"is_verbose": true,
-"players": [
-    {"name": "you", "strategy": "console"},
-    {"name": "bach", "strategy": "next_card"},
-    {"name": "shostakovich", "strategy": "next_card"}
-]
-}
-*/
 
 func main() {
     // from https://tutorialedge.net/golang/parsing-json-with-golang/
@@ -56,6 +41,11 @@ func main() {
     fmt.Printf("numCards: %d\n", config.NumCards)
     fmt.Printf("numGames: %d\n", config.NumGames)
     fmt.Printf("isVerbose: %v\n", config.IsVerbose)
+
+    for i, _ := range config.Players {
+        player := &config.Players[i]
+        fmt.Printf("player name: %v strategy: %v\n", player.Name, player.Strategy)
+    }
 
     fmt.Println("Ready.")
 }
