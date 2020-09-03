@@ -15,9 +15,9 @@ type Player struct {
 }
 
 type Config struct {
-    NumCards int `json:numCards`
-    NumGames int `json:numGames`
-    IsVerbose bool `json:isVerbose`
+    NumCards int `json:"num_cards"`
+    NumGames int `json:"num_games"`
+    IsVerbose bool `json:"is_verbose"`
     /*
     players []Player `json:players`
 */
