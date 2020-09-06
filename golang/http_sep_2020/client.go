@@ -5,17 +5,40 @@ import (
     "fmt"
     "log"
     "net/http"
-    "os"
+    // "os"
+    "strings"
 )
 
-func main() {
-    const port = 6160
+func callServer(ch chan string, url string) {
+    resp, err := http.Get(url)
+    if err != nil {
+        panic(err)
+    }
+    defer resp.Body.Close()
+
+    fmt.Println("TRACER response status:", resp.Status)
+    result := strings.Builder{}
+
+    // this is weird:
+    scanner := bufio.NewScanner(resp.Body)
+    for i := 0; scanner.Scan() && i < 5; i++ {
+        result.WriteString(scanner.Text())
+    }
+
+    if err := scanner.Err(); err != nil {
+        panic(err)
+    }
+
+    ch <- result.String()
+}
+
+func buildUrl(port int) string {
     baseUrl := fmt.Sprintf("http://localhost:%d", port)
 
     req, err := http.NewRequest("GET", baseUrl, nil)
+
     if err != nil {
-        log.Print(err)
-        os.Exit(1)
+        log.Fatal(err)
     }
 
     q := req.URL.Query()
@@ -25,21 +48,16 @@ func main() {
     q.Add("bar", "def")
     req.URL.RawQuery = q.Encode()
 
-    // resp, err := http.Get(url)
-    resp, err := http.Get(req.URL.String())
-    if err != nil {
-        panic(err)
-    }
-    defer resp.Body.Close()
+    return req.URL.String()
+}
 
-    fmt.Println("Response status:", resp.Status)
+func main() {
+    const port = 6160
+    url := buildUrl(port)
+    myChannel := make(chan string)
 
-    scanner := bufio.NewScanner(resp.Body)
-    for i := 0; scanner.Scan() && i < 5; i++ {
-        fmt.Println(scanner.Text())
-    }
-
-    if err := scanner.Err(); err != nil {
-        panic(err)
-    }
+    go callServer(myChannel, url)
+    fmt.Println("TRACER result:")
+    fmt.Println(<- myChannel)
+    fmt.Println("Ready.")
 }
