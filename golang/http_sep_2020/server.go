@@ -1,12 +1,22 @@
 package main
 
 import (
+    "encoding/json"
     "fmt"
     "log"
     "net/http"
-    "strings"
     "time"
 )
+
+type Result struct {
+    Foos []string `json:"foo"`
+    Bars []string `json:"bar"`
+    Message string `json:"message"`
+}
+
+func NewResult(message string, foos []string, bars []string) Result {
+    return Result{Foos: foos, Bars: bars, Message: message}
+}
 
 // cribbed from https://dev.to/moficodes/build-your-first-rest-api-with-go-2gcj
 
@@ -38,33 +48,18 @@ func handleGet(writer http.ResponseWriter, req *http.Request) {
 
     writer.WriteHeader(http.StatusOK)
     now := getTime()
-    body := strings.Builder{}
+    // body := strings.Builder{}
 
-    // TODO: encode JSON
-    body.WriteString("{"); 
-    body.WriteString(fmt.Sprintf(`["message": TRACER %v GET},`, now))
+    message := fmt.Sprintf("TRACER %v GET", now)
+    result := NewResult(message, fooValues, barValues) 
 
-    body.WriteString(fmt.Sprintf(`{"foo": [`))
-    for i, value := range fooValues {
-        body.WriteString(fmt.Sprintf(`"%v"`, value))
-        if i < len(fooValues) - 1  { 
-            body.WriteString(",")
-        } 
-    }
-    body.WriteString("]},"); 
-
-    body.WriteString(fmt.Sprintf(`{"bar": [`))
-    for i, value := range barValues {
-        body.WriteString(fmt.Sprintf(`"%v"`, value))
-        if i < len(fooValues) - 1  { 
-            body.WriteString(",")
-        } 
+    var jsonData []byte
+    jsonData, err := json.Marshal(result)
+    if err != nil {
+        log.Fatal(err)
     }
 
-    body.WriteString("]}"); 
-
-    body.WriteString("}"); 
-    bodyStr := body.String()
+    bodyStr := string(jsonData)
     fmt.Println(bodyStr)
     writer.Write([]byte(bodyStr))
 }
@@ -74,13 +69,6 @@ func home(w http.ResponseWriter, r *http.Request) {
     switch r.Method {
     case "GET":
         handleGet(w, r)
-/*
-        w.WriteHeader(http.StatusOK)
-        now := getTime()
-        message := fmt.Sprintf(`{"message": TRACER %v GET}`, now)
-        fmt.Println(message)
-        w.Write([]byte(message))
-*/
     case "POST":
         w.WriteHeader(http.StatusCreated)
         w.Write([]byte(`{"message": "TRACER POST"}`))
