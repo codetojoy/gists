@@ -1,0 +1,29 @@
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'net.codetojoy.client.Runner'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.11.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.2'
+	implementation 'org.apache.httpcomponents:httpclient:4.5.10'
+}
+
+sourceCompatibility = 15
+
+run {
+    standardInput = System.in
+}
+
+installDist.doFirst {
+    ant.delete(dir: project.stagingDir)
+}
+
+installDist {
+    into project.stagingDir
+}
