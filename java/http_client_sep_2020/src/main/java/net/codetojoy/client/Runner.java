@@ -15,6 +15,8 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 import java.net.URI;
 import java.util.*;
+import java.util.stream.Collectors;
+// import static java.util.stream.Collectors.toList;
 
 // http://localhost:8080/waro/strategy?prize_card=10&max_card=12&mode=max&cards=4&cards=6&cards=2" 
 
@@ -49,10 +51,11 @@ public class Runner {
                .setParameter("prize_card", "" + PRIZE_CARD)
                .setParameter("max_card", "" + MAX_CARD);
 
-        
-        for (var card : cards) {
-            builder.setParameter("cards", "" + card);
-        }
+        var cardsStrings = cards.stream()
+                                .map(c -> c.toString())
+                                .collect(Collectors.toList());
+        var cardsQueryValue = String.join(",", cardsStrings);
+        builder.setParameter("cards", cardsQueryValue);
 
         URI uri = builder.build();
 
@@ -98,45 +101,3 @@ public class Runner {
         System.out.println("Ready.");
     }
 }
-
-// ------
-
-/*
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-
-        try {
-
-            HttpGet request = new HttpGet("https://httpbin.org/get");
-
-            // add request headers
-            request.addHeader("custom-key", "mkyong");
-            request.addHeader(HttpHeaders.USER_AGENT, "Googlebot");
-
-            CloseableHttpResponse response = httpClient.execute(request);
-
-            try {
-
-                // Get HttpResponse Status
-                System.out.println(response.getProtocolVersion());              // HTTP/1.1
-                System.out.println(response.getStatusLine().getStatusCode());   // 200
-                System.out.println(response.getStatusLine().getReasonPhrase()); // OK
-                System.out.println(response.getStatusLine().toString());        // HTTP/1.1 200 OK
-
-                HttpEntity entity = response.getEntity();
-                if (entity != null) {
-                    // return it as a String
-                    String result = EntityUtils.toString(entity);
-                    System.out.println(result);
-                }
-
-            } finally {
-                response.close();
-            }
-        } finally {
-            httpClient.close();
-        }
-
-    }
-
-}
-*/
