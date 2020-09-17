@@ -1,14 +1,29 @@
  
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.*;
 import java.util.stream.*;
 
+class LogUtil {
+    static String getLogPrefix() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("TRACER ");
+        builder.append(" (" + Thread.currentThread().getId() + ") ");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:ss");  
+        String strDate = formatter.format(new Date());  
+        builder.append(strDate + " ");
+        return builder.toString();
+    }
+}
+
 class Task implements Supplier<String> {
     private static int instanceCount = 0;
+    private int instanceId = 0;
 
     Task() {
         instanceCount++;
+        instanceId = instanceCount;
     }
 
     int getRandom() {
@@ -18,9 +33,11 @@ class Task implements Supplier<String> {
         return result;
     }
 
+    // from https://www.callicoder.com/java-8-completablefuture-tutorial/
+
     @Override
     public String get() {
-        String whoAmI = "TRACER " + instanceCount;
+        String whoAmI = LogUtil.getLogPrefix() + instanceId;
 
         try {
             int delayInSeconds = getRandom();
@@ -41,8 +58,6 @@ public class Quick {
         String result = future.get();
         System.out.println(result);
     }
-
-    // from https://www.callicoder.com/java-8-completablefuture-tutorial/
 
     List<String> goMany(List<Supplier<String>> tasks) throws Exception {
         List<CompletableFuture<String>> futures = new ArrayList<>();
@@ -76,14 +91,15 @@ public class Quick {
             quick.goSingle();
         } else if (which == 2) {
             var tasks = new ArrayList<Supplier<String>>();
-            tasks.add(new Task());
-            tasks.add(new Task());
-            tasks.add(new Task());
+
+            for (var i = 0; i < 5; i++) {
+                tasks.add(new Task());
+            }
 
             var results = quick.goMany(tasks);
 
             for (var result : results) {
-                System.out.println("TRACER result: " + result);
+                System.out.println(LogUtil.getLogPrefix() + " result: " + result);
             }
         }
         System.out.println("Ready.");
