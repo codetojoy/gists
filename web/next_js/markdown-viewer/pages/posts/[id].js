@@ -22,6 +22,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
+  // this finds all of the Markdown files:
   const postData = await getPostData(params.id)
   return {
     props: {
