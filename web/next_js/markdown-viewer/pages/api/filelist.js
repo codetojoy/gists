@@ -13,7 +13,7 @@ export default (req, res) => {
 const postsDirectory = path.join(process.cwd(), 'posts')
 
 function findFiles() {
-    walk(postsDirectory, myHandler)
+    walk_for_markdown(postsDirectory, myHandler)
 }
 
 function myHandler(err, results) {
@@ -25,7 +25,7 @@ function myHandler(err, results) {
     }
 }
 
-function walk(dir, handler) {
+function walk_for_markdown(dir, handler) {
   var results = [];
   fs.readdir(dir, function(err, list) {
     if (err) return handler(err);
@@ -35,14 +35,18 @@ function walk(dir, handler) {
       if (!file) return handler(null, results);
       file = path.resolve(dir, file);
       fs.stat(file, function(err, stat) {
-        console.log(`TRACER walk cp 1 file: ${file}`)
+
         if (stat && stat.isDirectory()) {
-          walk(file, function(err, res) {
+          walk_for_markdown(file, function(err, res) {
             results = results.concat(res);
             next();
           });
         } else {
-          results.push(file);
+          const isMarkdown = /^.*\.md$/.test(file)
+          if (isMarkdown) {
+              console.log(`TRACER walk found file: ${file}`)
+              results.push(file);
+          }
           next();
         }
       });
