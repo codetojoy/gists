@@ -5,6 +5,6 @@ repositories {
 }
 
 dependencies {
-    testCompile 'junit:junit:4.12'
+    testCompile 'junit:junit:4.13.1'
     testCompile group: 'org.mockito', name: 'mockito-core', version: '2.28.2'
 }
