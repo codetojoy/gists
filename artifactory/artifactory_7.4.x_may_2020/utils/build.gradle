@@ -30,7 +30,7 @@ repositories {
 
 dependencies {
     implementation 'org.apache.commons:commons-lang3:3.5'
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.1'
 }
 
 archivesBaseName = 'utils'
