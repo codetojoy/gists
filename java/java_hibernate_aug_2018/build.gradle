@@ -19,5 +19,5 @@ dependencies {
 
     runtime fileTree(dir: '/Users/measter/tools/hsqldb-2.3.4/hsqldb/lib', include: 'hsqldb.jar')
 
-    testCompile 'junit:junit:4.12'
+    testCompile 'junit:junit:4.13.1'
 }

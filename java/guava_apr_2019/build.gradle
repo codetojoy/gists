@@ -11,7 +11,7 @@ repositories {
 dependencies {
     implementation 'com.google.guava:guava:27.1-jre'
 
-    testCompile 'junit:junit:4.12'
+    testCompile 'junit:junit:4.13.1'
 }
 
 project.ext.stagingDir = 'staging'
