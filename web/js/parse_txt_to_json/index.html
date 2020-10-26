@@ -9,7 +9,7 @@ function go() {
     fetch(linksUrl)
       .then(response => response.text())
       .then(text => {
-        let json = JSON.parse(`{"categories": []}`);
+        let obj = {categories: []};
         const allLines = text.split(/\r\n|\n/);
 
         allLines.forEach((line) => {
@@ -17,24 +17,22 @@ function go() {
             if (trimLine !== "") {
               const isCategory = !trimLine.includes(",");
               if (isCategory) {
-                const category = JSON.parse(`{"name": "${trimLine}", "links": []}`);
-                json["categories"].push(category);
+                const name = trimLine;
+                const links = [];
+                obj["categories"].push({name, links}); 
               } else {
                 const tokens = trimLine.split(",");
-                const linkName = tokens[0];
-                const linkUrl = tokens[1];
-                const categories = json["categories"];
+                const name = tokens[0];
+                const link = tokens[1];
+                const categories = obj["categories"];
                 const category = categories[categories.length - 1];
                 const links = category["links"];
-                const link = JSON.parse(
-                  `{"name": "${linkName}", "link": "${linkUrl}"}`
-                );
-                links.push(link);
+                links.push({name, link});
               }
             }
         });
 
-        console.log(`TRACER json ${JSON.stringify(json)}`);
+        console.log(`TRACER json ${JSON.stringify(obj)}`);
       });
 
     console.log(`Ready.`);
