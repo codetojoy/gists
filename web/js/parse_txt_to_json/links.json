@@ -1,0 +1,22 @@
+[
+{"name": "GitHub",
+ "links": [
+     {"name": "codetojoy repos", "url": "https://github.com/codetojoy?tab=repositories"},
+     {"name": "codetojoy gists", "url": "https://github.com/codetojoy?tab=repositories&q=gists&type=&language="},
+     {"name": "peidevs", "url": "https://www.github.com/peidevs"}
+]},
+{"name": "YouTube",
+ "links": [
+     {"name": "fretjam target notes", "url": "http://www.fretjam.com/soloing-over-blues.html"},
+     {"name": "fretboard exercise", "url": "https://www.youtube.com/watch?v=PJddQ6Q0UDo"},
+     {"name": "pizza notes", "url": "https://www.youtube.com/watch?v=dWjhdQdgCm4"},
+     {"name": "Hawaii Five-O", "url": "https://www.youtube.com/watch?v=Ax0udEYjttI"}
+]},
+{"name": "Misc",
+ "links": [
+     {"name": "Emoji", "url": "https://getemoji.com/"},
+     {"name": "WHO", "url": "https://covid19.who.int/"},
+     {"name": "WotD", "url": "https://www.merriam-webster.com/word-of-the-day"}
+]},
+{"name": "Temp", "links": []}
+]

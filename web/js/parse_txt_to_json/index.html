@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<script>
+function go() {
+    const linksUrl = "http://localhost:3000/links.txt";
+
+    fetch(linksUrl)
+      .then(response => response.text())
+      .then(text => {
+        let json = JSON.parse(`{"categories": []}`);
+        const allLines = text.split(/\r\n|\n/);
+
+        allLines.forEach((line) => {
+            const trimLine = line.trim();
+            if (trimLine !== "") {
+              const isCategory = !trimLine.includes(",");
+              if (isCategory) {
+                const category = JSON.parse(`{"name": "${trimLine}", "links": []}`);
+                json["categories"].push(category);
+              } else {
+                const tokens = trimLine.split(",");
+                const linkName = tokens[0];
+                const linkUrl = tokens[1];
+                const categories = json["categories"];
+                const category = categories[categories.length - 1];
+                const links = category["links"];
+                const link = JSON.parse(
+                  `{"name": "${linkName}", "link": "${linkUrl}"}`
+                );
+                links.push(link);
+              }
+            }
+        });
+
+        console.log(`TRACER json ${JSON.stringify(json)}`);
+      });
+
+    console.log(`Ready.`);
+}
+</script>    
+</head>
+<body onload="go()">
+<p>
+Hello from this file.
+</p>
+</body>
+</html>
