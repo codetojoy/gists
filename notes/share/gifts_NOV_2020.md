@@ -10,15 +10,15 @@
 * "Shakespeare" by Bill Bryson 
 * "The Blind Side" by Michael Lewis
 
-### Misc
+### Apparel
 
 * Maritime Madness t-shirt (size L) or winter hat 
 * Greg Koch Beanie [here](https://www.gregkoch.com/store/p57/Gristle_Beanies.html) - I like [this one](./beanie.png) 
 * "The Lick" shirt [here](https://teespring.com/shop/the-lick?pid=369&cid=6513) ... probably size L
+
+### Misc & Local
+
 * calendar. themes: guitar, history, aviation, old-time NHL 
-
-### Local
-
 * I like these places: 
     - Maritime Madness, Sobey's, Tims, Receiver Coffee
     - Running Room, Long & McQuade, Mark's
