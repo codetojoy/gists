@@ -12,10 +12,8 @@
 
 ### Misc
 
-* Greg Koch Beanie [here](https://www.gregkoch.com/store/p57/Gristle_Beanies.html)
-    - I like [this one](./beanie.png) 
-* Lick shirt?
-
+* Greg Koch Beanie [here](https://www.gregkoch.com/store/p57/Gristle_Beanies.html) - I like [this one](./beanie.png) 
+* "The Lick" shirt [here](https://teespring.com/shop/the-lick?pid=369&cid=6513) ... probably size L
 * calendar. themes: guitar, history, aviation, old-time NHL 
 
 ### Local
