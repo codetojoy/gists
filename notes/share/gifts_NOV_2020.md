@@ -19,6 +19,7 @@
 
 ### Misc & Local
 
+* locally-made face masks
 * calendar. themes: guitar, history, aviation, old-time NHL 
 * I like these places: 
     - Maritime Madness, Sobey's, Tims, Receiver Coffee
