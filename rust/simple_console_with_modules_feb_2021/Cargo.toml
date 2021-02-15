@@ -1,0 +1,9 @@
+[package]
+name = "simple_console_with_modules_feb_2021"
+version = "0.1.0"
+authors = ["Michael Easter <codetojoy@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
