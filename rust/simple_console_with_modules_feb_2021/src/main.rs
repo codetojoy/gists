@@ -2,8 +2,18 @@
 use std::io;
 use std::process;
 
+mod config;
+mod player;
+
+use crate::player::player::Player;
+use crate::config::config::get_players;
+
 fn list_players() {
-    println!("TRACER: todo list players here");
+    let player = Player{name: String::from("TEST")};
+    let players = get_players();
+    for player in &players {
+        println!("{:?}",player);
+    }
 }
 
 fn new_game() {
