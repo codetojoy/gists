@@ -10,21 +10,21 @@ use crate::player::player::Player;
 use crate::config::config::get_players;
 use crate::dealer::dealer::deal_hands;
 
-fn list_players() {
-    let players = get_players();
-    for player in &players {
+fn list_players(players: &Vec::<Player>) {
+    for player in players {
         println!("{:?}",player);
     }
 }
 
-fn new_game() {
-    let players = get_players();
+fn new_game(players: &mut Vec::<Player>) {
     deal_hands(players);
-    println!("TRACER ok"); 
+    list_players(players);
 }
 
-fn play_round() {
-    println!("TRACER: todo play round here");
+fn play_round(players: &mut Vec::<Player>) {
+    for player in players {
+        player.play_round();
+    }
 }
 
 fn exit() {
@@ -32,22 +32,24 @@ fn exit() {
     process::exit(0);
 }
 
-fn process_command(mut choice: String) {
+fn process_command(mut choice: String, players: &mut Vec::<Player>) {
     println!("You chose: {}", choice);
 
     let len = choice.len();
     choice.truncate(len - 1);
 
     match &choice.to_lowercase()[..] {
-        "l" => list_players(),
-        "n" => new_game(),
-        "p" => play_round(),
+        "l" => list_players(players),
+        "n" => new_game(players),
+        "p" => play_round(players),
         "q" => exit(),
         _ => println!("unknown command"),
     }
 }
 
 fn main() {
+    let mut players = get_players();
+
     loop {
         println!("\nCommands:");
         println!("List players (l):");
@@ -62,6 +64,6 @@ fn main() {
 
         io::stdin().read_line(&mut choice).expect("Failed to read line");
 
-        process_command(choice);
+        process_command(choice, &mut players);
     }
 }
