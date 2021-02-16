@@ -6,11 +6,11 @@ use crate::player::player::Player;
 pub fn get_players() -> Vec<Player> { 
     let mut players = vec![];
 
-    players.push(Player{name: String::from("Bach")});
-    players.push(Player{name: String::from("Beethoven")});
-    players.push(Player{name: String::from("Mozart")});
-    players.push(Player{name: String::from("Schubert")});
-    players.push(Player{name: String::from("Shostakovich")});
+    players.push(Player{name: String::from("Bach"), hand: Vec::<u8>::new()});
+    players.push(Player{name: String::from("Beethoven"), hand: Vec::<u8>::new()});
+    players.push(Player{name: String::from("Mozart"), hand: Vec::<u8>::new()});
+    players.push(Player{name: String::from("Schubert"), hand: Vec::<u8>::new()});
+    players.push(Player{name: String::from("Shostakovich"), hand: Vec::<u8>::new()});
 
     return players;
 }

@@ -3,13 +3,14 @@ use std::io;
 use std::process;
 
 mod config;
+mod dealer;
 mod player;
 
 use crate::player::player::Player;
 use crate::config::config::get_players;
+use crate::dealer::dealer::deal_hands;
 
 fn list_players() {
-    let player = Player{name: String::from("TEST")};
     let players = get_players();
     for player in &players {
         println!("{:?}",player);
@@ -17,7 +18,9 @@ fn list_players() {
 }
 
 fn new_game() {
-    println!("TRACER: todo new game here");
+    let players = get_players();
+    deal_hands(players);
+    println!("TRACER ok"); 
 }
 
 fn play_round() {
