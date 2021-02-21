@@ -16,3 +16,13 @@ Origin:
         - `cd ..`
         - `dotnet sln add ./tests/tests.csproj`
 
+Coverage:
+---------
+
+* doc [here](https://github.com/coverlet-coverage/coverlet)
+* project [here](https://github.com/coverlet-coverage/coverlet)
+* in `tests`, `dotnet add package coverlet.msbuild` 
+* see `coverage_test.sh`
+* report generator:
+    - [Stack O](https://stackoverflow.com/questions/51911135/how-to-see-a-friendly-report-of-unit-tests-using-net-core-and-coverlet)
+    - [here](https://medium.com/bluekiri/code-coverage-in-vsts-with-xunit-coverlet-and-reportgenerator-be2a64cd9c2f)
