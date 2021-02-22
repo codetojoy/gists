@@ -1,9 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Newtonsoft.Json;
 
 namespace json
 {
+    public class Player
+    {
+        [JsonProperty("name")]
+        public string Name { get; set; }
+        [JsonProperty("strategy_name")]
+        public string StrategyName { get; set; }
+
+        public override string ToString() {
+            return $"name: {Name} strategy: {StrategyName}";
+        }
+    }
     public class Config
     {
         [JsonProperty("num_cards")]
@@ -13,8 +25,16 @@ namespace json
         [JsonProperty("is_verbose")]
         public bool IsVerbose { get; set; }
 
+        [JsonProperty("players")]
+        public List<Player> players { get; set; }
+
         public override string ToString() {
-            return $"# games: {NumGames} # cards: {NumCards} verbose? {IsVerbose}";
+            var s = $"# games: {NumGames} # cards: {NumCards} verbose? {IsVerbose}\n";
+            foreach (Player p in players)
+            {
+                s += $"{p}\n";
+            }
+            return s;
         }
     }
 }
