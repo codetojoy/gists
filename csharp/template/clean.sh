@@ -2,4 +2,4 @@
 
 set -e
 
-rm -rf src obj *.csproj *.sln *.cs
+rm -rf src tests obj *.csproj *.sln *.cs
