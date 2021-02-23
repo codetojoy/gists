@@ -2,9 +2,11 @@
 ### Music
 
 * Signals Music Studio
+    - writing [chord progressions](https://www.youtube.com/watch?v=M8eItITv8QA)
+    - writing in [minor key](https://www.youtube.com/watch?v=j-j4g0ktPGw)
+    - introduction to modes [here](https://www.youtube.com/watch?v=bwaeBUYcO5o)
     - writing with [major scale](https://www.youtube.com/watch?v=gbNLhx2eCXs)
         - the major scale is its own mode, called "Ionian"
-    - introduction to modes [here](https://www.youtube.com/watch?v=bwaeBUYcO5o)
 * Music Theory For Guitar
     - 3 chords are enough [here](https://www.youtube.com/watch?v=dOVJbMipaWY)
     - why "dominant" term is confusing [here](https://www.youtube.com/watch?v=d6oLVpoePuA)
