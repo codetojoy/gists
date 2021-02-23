@@ -20,6 +20,9 @@
     - [7 Levels of Jazz Harmony](https://www.youtube.com/watch?v=lz3WR-F_pnM)
     - why North Americans play [Girl from Ipanema](https://www.youtube.com/watch?v=OFWCbGzxofU) in key of F vs D-flat
     - music theory and white supremacy [here](https://www.youtube.com/watch?v=Kr3quGh7pJA) 
+* I use [this site](https://tonedear.com/ear-training/chord-progressions) for ear training, but it might help understand the relationship between chords
+    - it has an easy mode with simple triads, and then advanced with 7th chords
+    - aside from dominant 7th chord, the rest of the 7th chords aren't really used in country
 
 ### Guitar
 
