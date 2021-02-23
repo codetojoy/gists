@@ -28,6 +28,9 @@
 * best guitar tab site: [Songsterr](https://www.songsterr.com/)
 * Ask Zac [here](https://www.youtube.com/watch?v=Ej4Uee78cpo) 
     - Brad P's guitar tech 
+* J.P. Cormier
+    - I've been watching a ton of his stuff, including live-stream Q&A show 
+    - online concert [here](https://www.youtube.com/watch?v=0MBp9ldr8dM)
 
 ### Misc
 
