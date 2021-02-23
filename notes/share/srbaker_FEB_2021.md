@@ -9,6 +9,7 @@
         - the major scale is its own mode, called "Ionian"
 * Music Theory For Guitar
     - 3 chords are enough [here](https://www.youtube.com/watch?v=dOVJbMipaWY)
+    - intervals explained [here](https://www.youtube.com/watch?v=V7wGIxpW5rM)
     - why "dominant" term is confusing [here](https://www.youtube.com/watch?v=d6oLVpoePuA)
 * Rick Beato
     - [Four Chords](https://www.youtube.com/watch?v=nuGt-ZG39cU)
