@@ -6,7 +6,16 @@ namespace async.multi
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            try
+            {
+                var runner = new Runner();
+                runner.go();
+                Console.WriteLine("Ready.");
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"caught exception: {ex.Message}");
+            }
         }
     }
 }
