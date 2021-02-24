@@ -2,6 +2,7 @@
 ### Music
 
 * Signals Music Studio
+    - writing a Bro-Country song [here](https://www.youtube.com/watch?v=C-1ylXxKNGQ)
     - writing [chord progressions](https://www.youtube.com/watch?v=M8eItITv8QA)
     - writing in [minor key](https://www.youtube.com/watch?v=j-j4g0ktPGw)
     - introduction to modes [here](https://www.youtube.com/watch?v=bwaeBUYcO5o)
