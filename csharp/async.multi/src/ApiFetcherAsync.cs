@@ -5,12 +5,13 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Threading;
 
 using Newtonsoft.Json;
 
 namespace async.multi
 {
-    public class ApiFetcher
+    public class ApiFetcherAsync
     {
         private readonly HttpClient client = new HttpClient();
         private readonly string SCHEME = "http";
@@ -24,7 +25,7 @@ namespace async.multi
         private string PRIZE_CARD_PARAM = "prize_card";
         private string MAX_CARD_PARAM = "max_card";
 
-        public int Fetch()
+        public async Task<int> Fetch()
         {
             int prizeCard = 10;
             var hand = new List<int>();
@@ -32,11 +33,10 @@ namespace async.multi
             hand.Add(3);
             hand.Add(7);
             int maxCard = 12;
-            var tmpCard = FetchSelect(prizeCard, hand, maxCard);
+            var tmpCard = await FetchSelect(prizeCard, hand, maxCard);
             return tmpCard;
         }
-
-        public int FetchSelect(int prizeCard, List<int> hand, int maxCard)
+        public async Task<int> FetchSelect(int prizeCard, List<int> hand, int maxCard)
         {
             var result = -5150;
 
@@ -59,7 +59,8 @@ namespace async.multi
             uriBuilder.Query = queryString.ToString();
             Uri uri = uriBuilder.Uri;
 
-            var response = client.GetAsync(uri.ToString()).Result;
+            SpoofDelay();
+            var response = await client.GetAsync(uri.ToString());
 
             if (response.IsSuccessStatusCode)
             {
@@ -69,7 +70,7 @@ namespace async.multi
                 var serializer = new JsonSerializer();
                 var apiResult = (ApiResult) serializer.Deserialize(textReader, typeof(ApiResult));
                 result = apiResult.Card;
-                Console.WriteLine($"TRACER ApiStrategy msg: {apiResult.Message}");
+                Logger.Log($"ApiStrategy msg: {apiResult.Message}");
             }
             else
             {
@@ -77,6 +78,13 @@ namespace async.multi
             }
 
             return result;
+        }
+
+        void SpoofDelay()
+        {
+            Logger.Log($"spoof delay");
+            var delayInMillis = 5 * 1000;
+            Thread.Sleep(delayInMillis);
         }
     }
 }

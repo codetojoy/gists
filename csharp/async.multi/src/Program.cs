@@ -8,9 +8,10 @@ namespace async.multi
         {
             try
             {
+                Logger.Log("main start");
                 var runner = new Runner();
-                runner.go();
-                Console.WriteLine("Ready.");
+                runner.GoAsync();
+                Logger.Log("Ready.");
             }
             catch (Exception ex)
             {
