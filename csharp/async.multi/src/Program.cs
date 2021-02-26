@@ -5,13 +5,11 @@ namespace async.multi
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
                 Logger.Log("Main: start");
                 var runner = new Runner();
-                runner.MultiGoAsync();
-                Logger.Log("Main: sleeping ...");
-                new Sleeper(5150, 20 * 1000).Go();
+                await runner.MultiGoAsync();
                 Logger.Log("Main: Ready.");
         }
     }
