@@ -12,12 +12,12 @@ Dependency:
 
 * will call `WarO_Strategy_API_Java` as the API server
 
+Steps:
+---------
+
+* in `src` : `dotnet add package Newtonsoft.Json --version 12.0.3`
+
 Origin:
 ---------
 
-* edit `setvars.sh` to set `PROJECT_NAME`
-* edit `*.cs` in `resources` to set the namespace
-* `. ./setvars.sh`
-* `./build.sh`
-* `./run.sh`
-* `./test.sh`
+* see `../template`
