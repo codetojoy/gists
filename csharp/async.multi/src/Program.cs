@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace async.multi
 {
@@ -10,7 +11,15 @@ namespace async.multi
             {
                 Logger.Log("main start");
                 var runner = new Runner();
-                runner.GoAsync();
+
+                // calls WarO_Strategy_API_Java with 4-second delay param
+                var task = runner.SimpleGoAsync();
+
+                Logger.Log("Main: about to wait for task");
+                task.Wait();
+                int card = task.Result;
+                Logger.Log($"Main: card is {card}");
+
                 Logger.Log("Ready.");
             }
             catch (Exception ex)
