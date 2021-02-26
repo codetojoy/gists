@@ -14,9 +14,11 @@ namespace async.multi
     public class ApiFetcherAsync
     {
         private readonly HttpClient client = new HttpClient();
+        private readonly string whoAmI = "AFSync";
 
         public async Task<int> Fetch()
         {
+            Logger.Log($"{whoAmI} Fetch() begin");
             int prizeCard = 10;
             var hand = new List<int>();
             hand.Add(12);
@@ -26,12 +28,13 @@ namespace async.multi
             var tmpCard = await FetchSelect(prizeCard, hand, maxCard);
             return tmpCard;
         }
+
         public async Task<int> FetchSelect(int prizeCard, List<int> hand, int maxCard)
         {
+            Logger.Log($"{whoAmI} FetchSelect() begin");
             var result = -5150;
             var uri = new Utils().BuildURI(prizeCard, hand, maxCard);
 
-            SpoofDelay();
             var response = await client.GetAsync(uri);
 
             if (response.IsSuccessStatusCode)
@@ -42,7 +45,7 @@ namespace async.multi
                 var serializer = new JsonSerializer();
                 var apiResult = (ApiResult) serializer.Deserialize(textReader, typeof(ApiResult));
                 result = apiResult.Card;
-                Logger.Log($"ApiStrategy msg: {apiResult.Message}");
+                Logger.Log($"{whoAmI} msg: {apiResult.Message} card: {result}");
             }
             else
             {
@@ -50,17 +53,6 @@ namespace async.multi
             }
 
             return result;
-        }
-
-        void SpoofDelay()
-        {
-            var isEnabled = true;
-            if (isEnabled)
-            {
-                Logger.Log($"spoof delay");
-                var delayInMillis = 2 * 1000;
-                Thread.Sleep(delayInMillis);
-            }
         }
     }
 }

@@ -5,7 +5,7 @@
 * attempt to understand how to wait on multiple concurrent tasks 
 * 26-FEB-2021
     - simple async call to WarO_Strategy_API_Java (with 4 sec delay) works OK
-    - other async examples are messy 
+        - now in `async.single`
 
 Dependency:
 ---------

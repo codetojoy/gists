@@ -14,19 +14,20 @@ namespace async.multi
             Logger.Log($"result: {card}");
         }
 
-        public async Task<int> SimpleGoAsync()
-        {
-            var apiFetcherAsync = new ApiFetcherAsync();
-            return await apiFetcherAsync.Fetch();
-            /*
-            var card = apiFetcherAsync.Fetch().Result;
-            Logger.Log($"SimpleGoAsync result: {card}");
-            */
-        }
-
         public void MultiGoAsync()
         {
-            var numTasks = 10;
+            /*
+            List<ApiFetcherAsync> fetchers = new List<ApiFetcherAsync>();
+            fetchers.Add(new ApiFetcherAsync());
+            fetchers.Add(new ApiFetcherAsync());
+            fetchers.Add(new ApiFetcherAsync());
+
+            await foreach(ApiFetcherAsync fetcherAsync in fetchers)
+            {
+
+            }
+            */
+            var numTasks = 5;
             var tasks = new List<Task<int>>();
             for (int i = 1; i < numTasks; i++)
             {
@@ -34,7 +35,13 @@ namespace async.multi
                 var task = apiFetcherAsync.Fetch();
                 tasks.Add(task);
             }
+            // Task.WhenAll(tasks.ToArray());
             Task.WhenAll(tasks);
+            foreach (Task<int> task in tasks)
+            {
+                Logger.Log("card result: {task.Result}");
+            }
+            Logger.Log("all tasks done");
         }
 
         public void MultiGoSync()
