@@ -6,7 +6,9 @@
 * 26-FEB-2021
     - simple async call to WarO_Strategy_API_Java (with 4 sec delay) works OK
         - now in `async.single`
-* token test v2
+* 27-FEB-2021
+    - multi version seems OK, though I'm not 100% comfortable
+    - key is understanding `await` and possibly `foreach`
 
 Dependency:
 ---------

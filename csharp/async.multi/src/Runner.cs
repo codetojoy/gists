@@ -16,9 +16,10 @@ namespace async.multi
 
         public async Task MultiGoAsync()
         {
+            const string whoAmI = "Runner.MGA ";
             var numTasks = 5;
             var tasks = new List<Task<int>>();
-            for (int i = 1; i < numTasks; i++)
+            for (int i = 1; i <= numTasks; i++)
             {
                 var apiFetcherAsync = new ApiFetcherAsync();
                 var task = apiFetcherAsync.Fetch();
@@ -26,8 +27,11 @@ namespace async.multi
             }
             await Task.WhenAll(tasks);
 
-            var card1 = tasks[0].Result;
-            Logger.Log($"card result: {card1}");
+            for (int i = 0; i < numTasks; i++)
+            {
+                var card = tasks[i].Result;
+                Logger.Log($"{whoAmI} card[{i}] result: {card}");
+            }
 
             /*
             foreach (Task<int> task in tasks)
@@ -35,7 +39,7 @@ namespace async.multi
                 Logger.Log($"card result: {task}");
             }
             */
-            Logger.Log("all tasks done");
+            Logger.Log($"{whoAmI} all tasks done");
         }
 
         public void MultiGoSync()
