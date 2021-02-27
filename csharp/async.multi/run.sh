@@ -2,6 +2,8 @@
 
 set -e 
 
+. ./setvars.sh
+
 if [ -z "$PROJECT_NAME" ]
 then
     echo "define PROJECT_NAME with setvars.sh"
