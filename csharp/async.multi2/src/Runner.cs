@@ -21,9 +21,18 @@ namespace async.multi2
             var tasks = new List<Task<int>>();
             for (int i = 1; i <= numTasks; i++)
             {
-                var apiFetcherAsync = new ApiFetcherAsync();
-                var task = apiFetcherAsync.Fetch();
-                tasks.Add(task);
+                if (i == 2)
+                {
+                    var simpleFetcher = new SimpleFetcher();
+                    var task = simpleFetcher.Fetch();
+                    tasks.Add(task);
+                }
+                else
+                {
+                    var apiFetcherAsync = new ApiFetcherAsync();
+                    var task = apiFetcherAsync.Fetch();
+                    tasks.Add(task);
+                }
             }
             await Task.WhenAll(tasks);
 

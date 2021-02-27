@@ -1,17 +1,14 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using System.Threading;
 
 using Newtonsoft.Json;
 
 namespace async.multi2
 {
-    public class ApiFetcherAsync
+    public class ApiFetcherAsync : IFetcher
     {
         private readonly HttpClient client = new HttpClient();
         private readonly string whoAmI = "AFSync";
