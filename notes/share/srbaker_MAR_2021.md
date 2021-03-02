@@ -3,6 +3,7 @@
 
 * previous list [here](./srbaker_FEB_2021.md)
 * [short history of Telecaster](https://www.youtube.com/watch?v=_hWH5Eo9W0k)
+    - Keith is friends with Rick Beato
     - this channel has many 'short history' episodes, all great
 * [short history of Ibanez Jem](https://www.youtube.com/watch?v=c0WHcvKzvA0)
     - just in case you'd like to learn more
