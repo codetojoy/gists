@@ -5,7 +5,7 @@ var ReactDOM = require('react-dom');
 var App = React.createClass({
     render: function() {
         return (
-            <p>Hello, World! I can't believe it worked.</p>
+            <p>BOOYAH, World! I can't believe it worked.</p>
         )
     }
 });
