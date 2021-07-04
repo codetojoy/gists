@@ -1,7 +1,7 @@
 import 'package:test/test.dart';
 
-import 'package:gherkin/card.dart';
-import 'package:gherkin/cards.dart';
+import 'package:gherkin_sandbox/card.dart';
+import 'package:gherkin_sandbox/cards.dart';
 
 void main() {
   group('Card', () {

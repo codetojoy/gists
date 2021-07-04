@@ -1,4 +1,4 @@
-name: gherkin
+name: gherkin_sandbox
 description: A simple command-line application.
 version: 1.0.0
 # homepage: https://www.example.com
@@ -12,4 +12,5 @@ environment:
 dev_dependencies:
   pedantic: ^1.10.0
 dependencies: 
+  gherkin: ^2.0.4
   test: ^1.17.9
