@@ -11,5 +11,6 @@ environment:
 
 dev_dependencies:
   pedantic: ^1.10.0
-dependencies: 
+  test: ^1.17.9
   gherkin: ^2.0.4
+dependencies: 

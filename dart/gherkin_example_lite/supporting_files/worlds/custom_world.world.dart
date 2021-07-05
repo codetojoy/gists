@@ -1,6 +1,6 @@
 import 'package:gherkin/gherkin.dart';
 
-import '../../calculator.dart';
+import 'package:gherkin_example_lite/calculator.dart';
 
 class CalculatorWorld extends World {
   final Calculator calculator = Calculator();

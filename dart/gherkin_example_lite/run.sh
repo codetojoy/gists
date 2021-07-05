@@ -2,4 +2,4 @@
 
 set -e 
 
-dart test.dart 
+dart run 
