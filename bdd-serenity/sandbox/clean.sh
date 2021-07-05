@@ -2,5 +2,5 @@
 
 set -e 
 
-rm -rf build target history 
-
+./gradlew clean
+rm -rf target history 

@@ -2,5 +2,4 @@
 
 set -e 
 
-gradle clean test 
-
+./gradlew test 
