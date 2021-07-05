@@ -1,0 +1,32 @@
+repositories {
+    mavenCentral()
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'net.serenity-bdd:serenity-gradle-plugin:2.0.71'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+dependencies {
+    implementation  ('net.serenity-bdd:serenity-core:2.0.71')  {
+        exclude group: 'io.cucumber', module: 'cucumber-core'
+    }
+    implementation 'net.serenity-bdd:serenity-cucumber4:1.0.21'
+    implementation 'io.cucumber:cucumber-java:4.2.0'
+    implementation 'io.cucumber:cucumber-junit:4.2.0'
+    testImplementation 'org.junit.platform:junit-platform-launcher:1.5.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.5.2'
+    testImplementation 'org.junit.vintage:junit-vintage-engine:5.5.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
+    implementation 'org.assertj:assertj-core:3.8.0'
+}
+gradle.startParameter.continueOnFailure = true
+
+test.finalizedBy(aggregate)
