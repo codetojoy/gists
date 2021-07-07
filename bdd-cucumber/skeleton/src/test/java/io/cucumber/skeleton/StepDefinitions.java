@@ -1,6 +1,7 @@
 package io.cucumber.skeleton;
 
 import io.cucumber.java.en.*;
+import static org.junit.Assert.*;
 
 public class StepDefinitions {
     private Belly belly = new Belly();
@@ -16,9 +17,8 @@ public class StepDefinitions {
     }
 
     @Then("my belly should {string}")
-    public void My_Belly_Is(String state) {
-        String eState = belly.getState();
-        System.out.println("TRACER e: " + eState + " a:" + state);
-        // expect(belly.getState(), state);
+    public void My_Belly_Is(String expectedState) {
+        String state = belly.getState();
+        assertEquals(expectedState, state);
     }
 }
