@@ -16,3 +16,8 @@ Feature: Show card result from api
     Given prizeCard: 1 maxCard: 20 cards: "4,6,2"
     When mode "next"
     Then card selection should be 4
+
+  Scenario: basic nearest
+    Given prizeCard: 10 maxCard: 20 cards: "4,3,8,14,20"
+    When mode "nearest"
+    Then card selection should be 8
