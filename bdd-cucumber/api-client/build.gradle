@@ -1,0 +1,19 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'net.codetojoy.Runner'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // domain
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.11.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.2'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.10'
+
+    testImplementation 'io.cucumber:cucumber-java:6.10.4'
+    testImplementation 'io.cucumber:cucumber-junit:6.10.4'
+    testImplementation 'junit:junit:4.3.12'
+}
