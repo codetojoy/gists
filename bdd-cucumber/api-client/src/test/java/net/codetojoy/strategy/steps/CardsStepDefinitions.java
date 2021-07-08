@@ -17,32 +17,35 @@ public class CardsStepDefinitions {
     private String mode = null;
     private List<Integer> cards = null;
     private Strategy apiRemote;
+    private int actual;
 
     private final Integers integers = new Integers();
     private final Lists lists = new Lists();
 
-    @Given("prizeCard: {int} maxCard: {int} cards: {string}")
+    private final static String SCHEME = Constants.SCHEME;
+    private final static String HOST = Constants.HOST;
+    private final static String PATH = Constants.PATH;
+
+    @Given("prizeCard: {int} maxCard: {int} cards: {string} mode: {string}")
     public void givenInitialInput(int prizeCard,
                                   int maxCard,
-                                  String cardsStr) {
+                                  String cardsStr,
+                                  String mode) {
         this.prizeCard = prizeCard;
         this.maxCard = maxCard;
         this.cards = lists.parseList(cardsStr);
+        this.mode = mode;
     }
 
-    @When("mode {string}")
-    public void modeType(String mode) {
-        this.mode = mode;
+    @When("I select card")
+    public void iSelectCard() {
+        var hand = cards.stream().mapToInt(Integer::intValue);
+        var apiRemote = new ApiRemote(SCHEME, HOST, PATH, mode);
+        actual = apiRemote.selectCard(prizeCard, hand, maxCard);
     }
 
     @Then("card selection should be {int}")
     public void cardSelectionShouldBe(int expected) {
-        var hand = cards.stream().mapToInt(Integer::intValue);
-        var scheme = Constants.SCHEME;
-        var host = Constants.HOST;
-        var path = Constants.PATH;
-        var apiRemote = new ApiRemote(scheme, host, path, mode);
-        var actual = apiRemote.selectCard(prizeCard, hand, maxCard);
         assertEquals((int) expected, (int) actual);
     }
 }
