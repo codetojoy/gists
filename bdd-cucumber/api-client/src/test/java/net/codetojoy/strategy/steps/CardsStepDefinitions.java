@@ -40,8 +40,10 @@ public class CardsStepDefinitions {
     @When("I select card")
     public void iSelectCard() {
         var hand = cards.stream().mapToInt(Integer::intValue);
+        // TODO: consider a ping to ensure that the server is running
         var apiRemote = new ApiRemote(SCHEME, HOST, PATH, mode);
         actual = apiRemote.selectCard(prizeCard, hand, maxCard);
+        // System.out.println("TRACER calling API a: " + actual);
     }
 
     @Then("card selection should be {int}")
