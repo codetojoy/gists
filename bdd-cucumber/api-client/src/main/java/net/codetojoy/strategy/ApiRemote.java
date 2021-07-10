@@ -1,22 +1,14 @@
 package net.codetojoy.strategy;
 
 import net.codetojoy.Constants;
+import net.codetojoy.http.Web;
 
-import java.util.List;
 import java.util.stream.*;
 import java.io.IOException;
 import java.net.URI;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpHeaders;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
 
 public final class ApiRemote implements Strategy {
     private final String scheme;
@@ -47,22 +39,10 @@ public final class ApiRemote implements Strategy {
     }
 
     private int apiRemoteSelectCard(int prizeCard, IntStream hand, int maxCard) throws Exception {
-        var card = 0;
         var uri = buildURI(prizeCard, hand, maxCard);
-
-        var request = new HttpGet(uri);
-
-        try (CloseableHttpClient httpClient = HttpClients.createDefault();
-             CloseableHttpResponse response = httpClient.execute(request)) {
-
-            var entity = response.getEntity();
-            if (entity != null) {
-                String resultStr = EntityUtils.toString(entity);
-                System.out.println("TRACER api remote: " + resultStr);
-                var apiResult = buildResult(resultStr);
-                card = apiResult.getCard();
-            }
-        }
+        var result = new Web().get(uri);
+        var apiResult = buildResult(result);
+        var card = apiResult.getCard();
 
         return card;
     }
@@ -77,9 +57,9 @@ public final class ApiRemote implements Strategy {
                .setParameter(Constants.PRIZE_CARD_PARAM, "" + prizeCard)
                .setParameter(Constants.MAX_CARD_PARAM, "" + maxCard);
 
-        List<String> cardsStrings = hand.boxed()
-                                        .map(c -> "" + c)
-                                        .collect(Collectors.toList());
+        var cardsStrings = hand.boxed()
+                               .map(c -> "" + c)
+                               .collect(Collectors.toList());
 
         var cardsQueryValue = String.join(",", cardsStrings);
 
