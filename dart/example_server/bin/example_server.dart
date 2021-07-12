@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:example_server/get_handlers.dart';
+
 Future<void> main(List<String> args) async {
   final GAME_MODE = "game";
   final SERVER_MODE = "server";
@@ -11,16 +13,16 @@ Future<void> main(List<String> args) async {
   } else {
     mode = args[0];
     if (mode != GAME_MODE && mode != SERVER_MODE) {
-        usage();
+      usage();
     }
   }
 
   if (mode == "server") {
-      final server = await createServer();
-      print('Server started: ${server.address} port ${server.port}');
-      await handleRequests(server);
+    final server = await createServer();
+    print('Server started: ${server.address} port ${server.port}');
+    await handleRequests(server);
   } else {
-      print('TODO: game here');
+    print('TODO: game here');
   }
 }
 
@@ -46,11 +48,6 @@ Future<HttpServer> createServer() async {
 }
 
 var myStringStorage = 'Hello from a Dart server';
-void handleGet(HttpRequest request) {
-  request.response
-    ..write(myStringStorage)
-    ..close();
-}
 
 Future<void> handlePost(HttpRequest request) async {
   myStringStorage = await utf8.decoder.bind(request).join();
@@ -60,7 +57,10 @@ Future<void> handlePost(HttpRequest request) async {
 }
 
 Future<void> handleDefault(HttpRequest request) async {
-    // no-op
+  request.response
+    ..statusCode = HttpStatus.methodNotAllowed
+    ..write('Unsupported request: ${request.method}.')
+    ..close();
 }
 
 Future<void> usage() async {
