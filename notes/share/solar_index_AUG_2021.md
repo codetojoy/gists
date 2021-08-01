@@ -1,7 +1,7 @@
 
 ### notes
 
-* [here](./solar_JUN_2021.md) is a list of solar installers, with a search for online reputation
+* [here](./solar_JUN_2021.md) is a list of PEI solar installers, with a search for online reputation
     - I would begin with Sunly
 * [here](./solar_JUL_2021.md) is a brief look at Sunly and Polaron 
 * below are questions to consider asking
