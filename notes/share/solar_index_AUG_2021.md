@@ -14,6 +14,9 @@
     - are these costs in the estimate? (probably not)
 * what is impact on home insurance rates?
 * what is impact on home resale value?
+* (obviously) how much $, per month, is expected for:
+    - solar bill
+    - Maritime Electric bill
 * if we choose a long-term lease, what happens if we sell the house?
 * what happens if Maritime Electric's power goes out?
     - can we run the home on our solar panels?
