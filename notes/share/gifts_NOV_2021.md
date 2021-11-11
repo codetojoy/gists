@@ -10,11 +10,14 @@
 ### Apparel
 
 * for shirt-size, I like them a bit big so L but M is ok
+* Quebec Nordiques shirt [here](https://www.redbubble.com/i/t-shirt/Quebec-Nordiques-by-jungturx/77149538.0S66D.XYZ)
 * CBC shirt [here](https://www.licensedtosell.com/collections/cbc/products/hockey-night-in-canada-mens-t-shirt-with-retro-logo)
 * CBC shirt [here](https://www.blackmapletrading.com/cbc-retro-gem-logo-raglan/)
     - I like the black/gray
 * CBC cap [here](https://redcanoebrands.com/shop/cbc-40s-cap/)
+* Colorado Rockies shirt [here](https://www.redbubble.com/i/t-shirt/Colorado-Rockies-by-jungturx/77149972.0S66D.XYZ)
 * any Upstreet Brewery shirt (I already have "Ruby Social")
+
 
 ### Misc & Local
 
