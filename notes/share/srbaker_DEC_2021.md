@@ -9,13 +9,13 @@
     - I don't know much about them though ...  
 * I found an academic paper and [this repo](https://github.com/marl/GuitarSet) that has guitar recordings in a data set
 
-### Applications
+### Applications of potential interest
 
 * [this site](https://www.oolimo.com/guitarchords/find) is interesting
 * [this site](https://www.all-guitar-chords.com/) is strong sauce, esp. the 1,2,3,4,5 buttons
 * [this site](http://chordfind.com/) is low-rent but interesting
 
-### Theory
+### Theory of potential interest
 
 * aside from open chords, players learn movable shapes. so rather than "play a G chord", we think
 "what is the major chord shape, in G"
