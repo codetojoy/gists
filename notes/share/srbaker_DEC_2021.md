@@ -5,7 +5,7 @@
     - licensing is not obvious
     - mentions [this site](https://www.fachords.com/) which I use all the time (for [this game](https://www.fachords.com/tools/fretboard-trainer/))!
     - same file (?) [here](https://www.kaggle.com/aartiravariya/chordfingerscsv) with web view
-* [this answer] mentions Guitar Pro and PowerTab, which were the first formats that came to mind
+* [this answer](https://stackoverflow.com/a/3220097/12704) mentions Guitar Pro and PowerTab, which were the first formats that came to mind
     - I don't know much about them though ...  
 * I found an academic paper and [this repo](https://github.com/marl/GuitarSet) that has guitar recordings in a data set
 
