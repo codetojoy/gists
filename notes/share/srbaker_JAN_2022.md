@@ -6,7 +6,7 @@ Tuned to the concert pitch of a dog-whistle (35,000 Hz), the Ultrasonic allows t
 
 The spokesperson continued, "Whether it be a rendition of *A Game Goin' On* for dolphins, or a complete play-through of 2012's *No More Pennies* for a dog kennel, we know this guitar will facilitate the artist's needs."
 
-Designed in partnership with Master Baiter Cam MacMaster, the guitar comes with a hard-shell case, and a specially designed capo, "the Capon". "The Capon", named after the castrated rooster, is installed permanently on the Ultrasonic® the body at the penultimate fret, leaving one fret for chord articulation, in accordance with Gunning's singature sound.
+Designed in partnership with Master Baiter Cam MacMaster, the guitar comes with a hard-shell case, and a specially designed capo, "the Capon". "The Capon", named after Gunning's castrated pet rooster, is installed permanently on the Ultrasonic® the body at the penultimate fret, leaving one fret for chord articulation, in accordance with Gunning's singature sound.
 
 With up to 50 units made worldwide, the Limited Edition Dave Gunning Ultrasonic® is a guitar for the ages and a meticulously crafted homage to a fabulous musician and whistle-register artistry.  
 
