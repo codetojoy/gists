@@ -3,8 +3,8 @@
 
 * I - V - vi - IV       : axis
 * vi - IV - I - V
-* I - bVII - bVI - V    : Andalusian
-* I - bVII - bVI - bVII : aoelian vamp 
+* i - bVII - bVI - V    : Andalusian
+* i - bVII - bVI - bVII : aoelian vamp 
 * I - vi - IV - V       : doo-wop
 * I - V - IV - V        : major vamp
 * I - bVII - IV - I     : mixolydian vamp
