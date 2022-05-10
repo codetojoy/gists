@@ -16,7 +16,6 @@
 * `I - V - ii - IV` : closing time 
 * `IV - I - V - vi` 
 * `I - IV - vi - V` : she drives me crazy (FYC)
-* ` ` :  
 
 ### resources
 
