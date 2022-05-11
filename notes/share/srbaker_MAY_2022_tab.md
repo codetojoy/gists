@@ -25,6 +25,7 @@ Bm - x-2-4-4-3-2
 
 ```
 Bb7 - x-1-3-1-3-1
+        i r i r i
 ```
 
 * some chords are just bastards
