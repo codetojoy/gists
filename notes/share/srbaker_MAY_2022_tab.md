@@ -7,8 +7,8 @@ Am - x-12-14-14-13-12
 ```
 
 * arpeggiate/pick each string slowly and separately to see if they ring true
-    - if not, there's something wrong with technique
-    - if OK, then it is probably hand strength
+    - if not, there's something wrong with technique, re: B minor
+    - if OK, then it is probably just hand strength, re: B minor
 
 * if Am is OK, then move down 2 frets and repeat
 
