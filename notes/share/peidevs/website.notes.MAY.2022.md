@@ -9,9 +9,9 @@
 ### Overview page
 
 * Layout looks great
-* I think "Nerd Club" is not very common; it seems jarring for that to have such prominence. Consider this: "The PEI Developers Group (aka. PEI Devs) is simply an informal group of software developers, web designers, and other techies. Some call it, colloquially, *"Nerd Club"*."
+* I think "Nerd Club" is not very common; it seems jarring for that phrase to have such prominence. Consider this: "The PEI Developers Group (aka. PEI Devs) is simply an informal group of software developers, web designers, and other techies. Some call it, colloquially, *"Nerd Club"*."
 * Prefer "hack events" over "hackathons"
-    - we haven't had a hackathon in a long time, and most of us are completely burned out on them 
+    - just FYI, we haven't had a hackathon in a long time, and most of us are completely burned out on them 
 * Prefer "LGBTQ2S+" over "LGBT", as mentioned on call
     - reference [here](https://en.wiktionary.org/wiki/LGBTQ2S%2B)
     - I fully support the community but they need a new name
@@ -38,6 +38,8 @@
     - `Type Context` is participants for events with `Type` of `L` or `P` (Lightning Talks or Panel)
     - `A/V Support` is for those who faciliated the meetup through equipment or $
         - We used to borrow a projector from ScreenScape and wanted to credit them
+* FYI, we have a special events file [here](https://github.com/peidevs/Event_Resources/blob/master/SpecialEvents.csv)
+    - clearly, these have dissipated in recent years
 
 ### Sponsors page
 
