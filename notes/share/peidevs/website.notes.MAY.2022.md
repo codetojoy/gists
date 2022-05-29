@@ -30,14 +30,17 @@
 ### Event history page
 
 * I think the long CSV link looks a little odd?  
-* We might include the [other file](https://github.com/peidevs/Event_Resources/blob/master/MeetUps.md) as well, as it is arguably more searchable.
+* We might include a link to the [other file](https://github.com/peidevs/Event_Resources/blob/master/MeetUps.md) as well, as it is arguably more searchable.
 * Timeline view is fabulous
 * Summary of the schema for the CSV file:
     - `Venue` is defined [here](https://github.com/peidevs/Event_Resources/blob/master/Venue_v2.csv)
     - `Type` is defined [here](https://github.com/peidevs/Event_Resources/blob/master/Type_v2.csv)
-    - `Type Context` is participants for events with `Type` of `L` or `P` (Lightning Talks or Panel)
+        - `L` for Lightning Talks
+        - `P` for Panel discussion
+        - `` for regular meetup
+    - `Type Context` is participants for events with `Type` of `L` or `P`
     - `A/V Support` is for those who faciliated the meetup through equipment or $
-        - We used to borrow a projector from ScreenScape and wanted to credit them
+        - we used to borrow a projector from ScreenScape and wanted to credit them
 * FYI, we have a special events file [here](https://github.com/peidevs/Event_Resources/blob/master/SpecialEvents.csv)
     - clearly, these have dissipated in recent years
 
