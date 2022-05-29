@@ -38,7 +38,7 @@
         - `L` for Lightning Talks
         - `P` for Panel discussion
         - `` for regular meetup
-    - `Type Context` is participants for events with `Type` of `L` or `P`
+    - `Type Context` lists speakers for events with `Type` of `L` or `P`
     - `A/V Support` is for those who faciliated the meetup through equipment or $
         - we used to borrow a projector from ScreenScape and wanted to credit them
 * FYI, we have a special events file [here](https://github.com/peidevs/Event_Resources/blob/master/SpecialEvents.csv)
