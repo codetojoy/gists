@@ -10,9 +10,10 @@
 
 * Layout looks great
 * I think "Nerd Club" is not very common; it seems jarring for that phrase to have such prominence. Consider this: "The PEI Developers Group (aka. PEI Devs) is simply an informal group of software developers, web designers, and other techies. Some call it, colloquially, *"Nerd Club"*."
-* Prefer "hack events" over "hackathons"
-    - just FYI, we haven't had a hackathon in a long time, and most of us are completely burned out on them 
-* Prefer "LGBTQ2S+" over "LGBT", as mentioned on call
+* Prefer *"hack events"* over *"hackathons"*
+    - just FYI, we haven't had a hackathon in a long time, and I suspect there is little appetite, from the elders (and certainly me)
+    - my view is at 3h18m54s [cued up here](https://youtu.be/5DiBSloGRl0?t=11934) though i would replace *6 months* with *10 years*
+* Prefer *"LGBTQ2S+"* over *"LGBT"*, as mentioned on call
     - reference [here](https://en.wiktionary.org/wiki/LGBTQ2S%2B)
     - I fully support the community but they need a new name
 * I think the history section needs to an overhaul, eventually
@@ -46,6 +47,6 @@
 
 ### Sponsors page
 
-* Consider "A big "thank you!" to our current sponsors:" over "The sponsors of PEI Devs are currently:"
+* Consider *"A big "thank you!" to our current sponsors:"* over *"The sponsors of PEI Devs are currently:"*
 
 
