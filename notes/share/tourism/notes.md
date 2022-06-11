@@ -8,7 +8,7 @@ Quick facts:
 * The Island is fairly large: about the size of Delaware. 
 * It's not realistic to tour the Island in one day. The main city is Charlottetown, population 45k.
 
-Peak tourism season is July and especially August. There is a week in August called "Old Home Week" [5] which is roughtly the same as a "state fair" in the USA. There is a major horse/harness race called "The Gold Cup and Saucer". As you'd expect, it can be hard to get accommodations in the peak times. There is a small window for warm water/swimming at the beaches: late July and August. I think people would be looking to book cottages/hotels in March or April (with intent of staying in July/August), maybe earlier. That said, there might be more things open in 2022 because of gas prices, COVID-19, etc. 
+Peak tourism season is July and especially August. There is a week in August called "Old Home Week" [5] which is roughly the same as a "state fair" in the USA. There is a major horse/harness race called "The Gold Cup and Saucer". As you'd expect, it can be hard to get accommodations in the peak times. There is a small window for warm water/swimming at the beaches: late July and August. I think people would be looking to book cottages/hotels in March or April (with intent of staying in July/August), maybe earlier. That said, there might be more things open in 2022 because of gas prices, COVID-19, etc. 
 
 Major attractions: 
 * the beaches (esp. "the north shore" such as Cavendish). The North Shore has dunes (like Cape Cod); the south shore is more rocky. see [2]
