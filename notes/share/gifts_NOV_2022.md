@@ -4,7 +4,7 @@
 * backpack [link here](https://www.amazon.ca/JanSport-JS0A2SDD3CL-Student-Backpack-Letterman/dp/B07192Q1M4/ref=sr_1_6)
     - there is one at Bentley's in Ch'town Mall
 * any Upstreet Brewery shirt (I already have "Ruby Social")
-    - size L s best
+    - size L is best
 * Receiver Shirt [link here](https://www.receivercoffee.com/products/receiver-coffee-logo-charcoal-grey-t-shirt)
     - size L is best
 
