@@ -5,17 +5,17 @@
     - there is one at Bentley's in Ch'town Mall
 * any Upstreet Brewery shirt (I already have "Ruby Social")
     - size L s best
-* Receiver Shirt [here](https://www.receivercoffee.com/products/receiver-coffee-logo-charcoal-grey-t-shirt)
+* Receiver Shirt [link here](https://www.receivercoffee.com/products/receiver-coffee-logo-charcoal-grey-t-shirt)
     - size L is best
 
 ### Books
 
 * "Nudge" by Richard Thaler, Cass Sunstein
-    - [paperback here](https://www.amazon.ca/Nudge-Final-Richard-H-Thaler/dp/014313700X/ref=pd_bxgy_sccl_2/141-7494882-5296300)
+    - [paperback link here](https://www.amazon.ca/Nudge-Final-Richard-H-Thaler/dp/014313700X/ref=pd_bxgy_sccl_2/141-7494882-5296300)
 * "Predictably Irrational ..." by Dr. Dan Ariely
-    - [here](https://www.amazon.ca/Predictably-Irrational-Revised-Expanded-Decisions/dp/0061353248/ref=pd_bxgy_img_sccl_2/141-7494882-5296300)
+    - [link here](https://www.amazon.ca/Predictably-Irrational-Revised-Expanded-Decisions/dp/0061353248/ref=pd_bxgy_img_sccl_2/141-7494882-5296300)
 * "Tipping Point" by Malcolm Gladwell
-    - [paperback here](https://www.amazon.ca/Tipping-Point-Little-Things-Difference/dp/0316346624/ref=tmm_pap_swatch_0)
+    - [paperback link here](https://www.amazon.ca/Tipping-Point-Little-Things-Difference/dp/0316346624/ref=tmm_pap_swatch_0)
 
 ### Misc & Local
 
