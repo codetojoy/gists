@@ -9,6 +9,8 @@
 
 ### Books
 
+* "True Reconciliation...", Jody Wilson-Raybould 
+    - [link here](https://www.amazon.ca/True-Reconciliation-How-Force-Change/dp/0771004389/ref=sr_1_fkmr0_2?keywords=jody+wilson+raybould+book&qid=1668084839&qu=eyJxc2MiOiIxLjQ4IiwicXNhIjoiMS4xNyIsInFzcCI6IjEuMDgifQ%3D%3D&sprefix=jody+wil%2Caps%2C123&sr=8-2-fkmr0)
 * "Nudge" by Richard Thaler, Cass Sunstein
     - [paperback link here](https://www.amazon.ca/Nudge-Final-Richard-H-Thaler/dp/014313700X/ref=pd_bxgy_sccl_2/141-7494882-5296300)
 * "Predictably Irrational ..." by Dr. Dan Ariely
