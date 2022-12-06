@@ -4,6 +4,8 @@
 * backpack [link here](https://www.amazon.ca/JanSport-JS0A2SDD3CL-Student-Backpack-Letterman/dp/B07192Q1M4/ref=sr_1_6)
     - there is one at Bentley's in Ch'town Mall
 * Upstreet ball cap [link here](https://shop.upstreet.ca/collections/upstreet-merch/products/grey-heather-sport-fit-ball-cap)
+* random ball cap [link here](https://www.amazon.ca/Gelante-Baseball-Cotton-Style-Adjustable/dp/B07DY763T6/ref=sr_1_3?crid=PLZFQ85KAI1J&keywords=baseball%2Bcap%2Broland&qid=1670370134&sprefix=baseball%2Bcap%2Broland%2Caps%2C126&sr=8-3&th=1)
+    - I like the light blue as shown in the link
 * Receiver Shirt [link here](https://www.receivercoffee.com/products/receiver-coffee-logo-charcoal-grey-t-shirt)
     - size L is best
 
