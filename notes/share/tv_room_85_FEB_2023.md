@@ -7,6 +7,7 @@
 ### YouTube, CBC Gem
 
 * with Eastlink remote, choose 'HDMI 2'
+* use white remote to turn on the Chromecast
 * you should see a menu of apps etc
 * use white Chromecast remote to navigate
     - select YouTube or CBC Gem as appropriate
