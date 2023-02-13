@@ -23,6 +23,6 @@
 * in Google Home app, there should be a button for:
     - "mirror this device" or some such
 * the TV will show the app
-* go back to the webpage in Chrome and start video
+* on the phone, go back to the webpage in Chrome and start video
     - it can be tricky, but if you go into full screen on phone, the TV should as well 
 
