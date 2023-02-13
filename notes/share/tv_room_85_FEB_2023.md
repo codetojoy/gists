@@ -14,7 +14,7 @@
     - volume buttons are on the side of the remote
     - generally, the Home button is a way to get out of trouble
 
-### Streaming
+### Streaming a website
 
 * use Chrome on Samsung phone to go to a web page
 * swipe for apps on the phone and find "Google Home"
