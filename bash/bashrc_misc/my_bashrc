@@ -1,0 +1,23 @@
+
+set -o vi
+
+PS1="\$ "
+
+# ---------------------
+
+alias p='vim ~/.bashrc'
+alias xp='. ~/.bashrc'
+
+alias i=' ls -lrt ; pwd '
+
+alias 1u='cd .. ; i '
+alias 2u='cd ../.. ; i '
+alias 3u='cd ../../.. ; i '
+alias 4u='cd ../../../.. ; i '
+alias 5u='cd ../../../../.. ; i '
+alias 6u='cd ../../../../../.. ; i '
+alias 7u='cd ../../../../../../.. ; i '
+
+alias gghc='cd ~/src/github/codetojoy ; i'
+
+alias h='history '
