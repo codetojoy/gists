@@ -21,3 +21,8 @@ alias 7u='cd ../../../../../../.. ; i '
 alias gghc='cd ~/src/github/codetojoy ; i'
 
 alias h='history '
+
+alias nt='TODAY=`date +%d.%m.%Y` ; mkdir -p ~/tmp/$TODAY ; cd ~/tmp/$TODAY ; i'
+
+alias dps='docker ps --format "table {{.Image}}\t{{.Status}}\t{{.Names}}"'
+alias dpsa='docker ps -a --format "table {{.Image}}\t{{.Status}}\t{{.Names}}"'
