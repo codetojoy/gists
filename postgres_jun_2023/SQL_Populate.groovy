@@ -22,7 +22,7 @@ insert = " INSERT INTO plan (id, name, status) VALUES (?,?,?); "
 
 10.times { i ->
     def id = 100 + i
-    def name = 'user-' + i
+    def name = 'plan-' + i
     def status = 'active'
     sql.execute(insert, [id, name, status]);
 }
@@ -33,8 +33,8 @@ insert = " INSERT INTO reference (id, name, email) VALUES (?,?,?); "
 
 10.times { i ->
     def id = 200 + i
-    def name = 'user-' + i
-    String email = "user_${i}@codetojoy.net"
+    def name = 'ref-' + i
+    String email = "ref_${i}@codetojoy.net"
     sql.execute(insert, [id, name, email]);
 }
 
@@ -44,8 +44,8 @@ insert = " INSERT INTO customer (id, name, email) VALUES (?,?,?); "
 
 10.times { i ->
     def id = 300 + i
-    def name = 'user-' + i
-    String email = "user_${i}@codetojoy.net"
+    def name = 'customer-' + i
+    String email = "customer_${i}@codetojoy.net"
     sql.execute(insert, [id, name, email]);
 }
 
