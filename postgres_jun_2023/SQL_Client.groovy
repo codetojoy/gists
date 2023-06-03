@@ -46,50 +46,29 @@ ALTER TABLE customer ADD PRIMARY KEY (id);
 // bridge_customer_reference
 
 sql.execute("""
-CREATE TABLE bridge_customer_reference( id bigint NOT NULL,
+CREATE TABLE bridge_customer_reference(
+id SERIAL PRIMARY KEY,
 customer_id bigint NOT NULL,
 reference_id bigint NOT NULL
 );
 
-ALTER TABLE bridge_customer_reference ADD PRIMARY KEY (id);
 ALTER TABLE bridge_customer_reference ADD CONSTRAINT bcr_customer_fk FOREIGN KEY (customer_id) REFERENCES customer (id);
-ALTER TABLE bridge_customer_reference ADD CONSTRAINT bcr_reference_fk FOREIGN KEY (reference_id) REFERENCES reference(id); 
+ALTER TABLE bridge_customer_reference ADD CONSTRAINT bcr_reference_fk FOREIGN KEY (reference_id) REFERENCES reference(id);
 """)
 
 // target
-// bridge_customer_plan
+// bridge_reference_plan
 
 sql.execute("""
-CREATE TABLE bridge_reference_plan( id bigint NOT NULL,
+CREATE TABLE bridge_reference_plan(
+id SERIAL PRIMARY KEY,
 reference_id bigint NOT NULL,
 plan_id bigint NOT NULL
 );
 
-ALTER TABLE bridge_reference_plan ADD PRIMARY KEY (id);
 ALTER TABLE bridge_reference_plan ADD CONSTRAINT bcr_reference_fk FOREIGN KEY (reference_id) REFERENCES reference(id);
-ALTER TABLE bridge_reference_plan ADD CONSTRAINT bcr_plan_fk FOREIGN KEY (plan_id) REFERENCES plan(id); 
+ALTER TABLE bridge_reference_plan ADD CONSTRAINT bcr_plan_fk FOREIGN KEY (plan_id) REFERENCES plan(id);
 """)
-
-/*
-def insert = " INSERT INTO account (account_id, username, status) VALUES (?,?,?); "
-
-1000.times { i ->
-    def id = 5150 + i
-    def name = "user" + i
-    sql.execute(insert, [id, name, 'new']);
-}
-
-sql.execute(insert, [100, 'James_Bond',     'active']);
-sql.execute(insert, [120, 'Jason_Bourne',   'cancel'])
-sql.execute insert, [130, 'Emily_Pollifax', 'cancel']
-sql.execute insert, [170, 'Maxwell_Smart',  'block']
-sql.execute insert, [190, 'Jaime_Sommers',  'active']
-sql.execute insert, [200, 'Blanche_White',  'active']
-
-sql.eachRow("SELECT account_id, username, status FROM account") { row ->
-    println "account_id: ${row.account_id} username: ${row.username} status: ${row.status}"
-}
-*/ 
 
 sql.close()
 

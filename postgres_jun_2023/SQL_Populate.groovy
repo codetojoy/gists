@@ -51,24 +51,22 @@ insert = " INSERT INTO customer (id, name, email) VALUES (?,?,?); "
 
 // bridge_customer_reference
 
-insert = " INSERT INTO bridge_customer_reference (id, customer_id, reference_id) VALUES (?,?,?); "
+insert = " INSERT INTO bridge_customer_reference (customer_id, reference_id) VALUES (?,?); "
 
 10.times { i ->
-    def id = 400 + i
     def customer_id = 300 + i
     def reference_id = 200 + i
-    sql.execute(insert, [id, customer_id, reference_id]);
+    sql.execute(insert, [customer_id, reference_id]);
 }
 
 // bridge_reference_plan
 
-insert = " INSERT INTO bridge_reference_plan (id, reference_id, plan_id) VALUES (?,?,?); "
+insert = " INSERT INTO bridge_reference_plan (reference_id, plan_id) VALUES (?,?); "
 
 10.times { i ->
-    def id = 400 + i
     def reference_id = 200 + i
     def plan_id = 100 + i
-    sql.execute(insert, [id, reference_id, plan_id]);
+    sql.execute(insert, [reference_id, plan_id]);
 }
 
 sql.close()
