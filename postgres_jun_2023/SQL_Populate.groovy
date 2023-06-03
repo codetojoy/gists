@@ -29,14 +29,24 @@ insert = " INSERT INTO plan (id, name, status) VALUES (?,?,?); "
 
 // references (e.g. contacts)
 
-insert = " INSERT INTO reference (id, name, email) VALUES (?,?,?); "
+def buffer = new StringBuilder()
+buffer.append(" INSERT INTO reference (id, name, email) VALUES\n ")
 
-10.times { i ->
+def numRows = 50000
+numRows.times { i ->
     def id = 200 + i
     def name = 'ref-' + i
     String email = "ref_${i}@codetojoy.net"
-    sql.execute(insert, [id, name, email]);
+    buffer.append("(${id},'${name}','${email}')");
+    if (i < numRows-1) {
+        buffer.append(",")
+    }
+    buffer.append("\n")
 }
+buffer.append(";")
+
+insert = buffer.toString()
+sql.execute(insert)
 
 // customers
 

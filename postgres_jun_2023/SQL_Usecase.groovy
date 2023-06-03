@@ -21,12 +21,23 @@ def planId = 150
 sql.execute("DELETE FROM bridge_reference_plan where plan_id = " + planId)
 sql.execute("DELETE FROM plan where id = " + planId)
 
+// new plan
 def insert
 insert = " INSERT INTO plan (id, name, status) VALUES (?,?,?); "
 
 def name = 'target-plan'
 def status = 'active'
 sql.execute(insert, [planId, name, status]);
+
+// associate one customer to all references
+def customerId = 301
+insert = """
+INSERT INTO bridge_customer_reference
+(customer_id, reference_id)
+SELECT ${customerId}, r.id FROM reference r
+"""
+
+sql.execute(insert);
 
 // write to bridge_reference_plan
 // for all customers, get all references and insert for plan
