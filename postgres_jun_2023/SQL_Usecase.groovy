@@ -42,13 +42,29 @@ sql.execute(insert);
 // write to bridge_reference_plan
 // for all customers, get all references and insert for plan
 
-sql.execute("""
+def keys = []
+
+// mode 1
+/*
+keys = sql.executeInsert("""
 INSERT INTO bridge_reference_plan
 (reference_id, plan_id)
 SELECT r.id, ${planId} FROM customer c
 JOIN bridge_customer_reference brc on brc.customer_id = c.id
 JOIN reference r on r.id = brc.reference_id
 """)
+*/
+
+// mode 2
+keys = sql.executeInsert("""
+INSERT INTO bridge_reference_plan
+(reference_id, plan_id)
+SELECT DISTINCT r.id, ${planId} FROM customer c
+JOIN bridge_customer_reference brc on brc.customer_id = c.id
+JOIN reference r on r.id = brc.reference_id
+""")
+
+println "TRACER insert # rows: " + keys.size()
 
 println "TRACER results for plan " + planId
 
