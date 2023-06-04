@@ -1,0 +1,15 @@
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = "net.codetojoy.usecase.Runner"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.postgresql:postgresql:42.6.0'
+}
+
+
