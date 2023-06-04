@@ -4,7 +4,7 @@ package net.codetojoy.usecase;
 public class Runner {
     public static void main(String[] args) {
         try {
-            System.out.println("v2");
+            System.out.println("v 652");
             var usecase = new Usecase();
             usecase.apply();
             System.out.println("Ready.");
