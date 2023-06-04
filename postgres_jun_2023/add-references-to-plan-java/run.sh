@@ -2,4 +2,4 @@
 
 set -e 
 
-gradle run 
+gradle clean cJ run 
