@@ -32,7 +32,7 @@ insert = " INSERT INTO plan (id, name, status) VALUES (?,?,?); "
 def buffer = new StringBuilder()
 buffer.append(" INSERT INTO reference (id, name, email) VALUES\n ")
 
-def numRows = 18
+def numRows = 500 
 numRows.times { i ->
     def id = 200 + i
     def name = 'ref-' + i

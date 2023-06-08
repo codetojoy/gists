@@ -26,7 +26,7 @@ def planId = 150
 sql.eachRow("SELECT COUNT(*) as c FROM bridge_reference_plan") { emitCount("brp", it.c) }
 sql.eachRow("SELECT COUNT(*) as c FROM bridge_reference_plan WHERE plan_id = ${planId}") { emitCount("brp ${planId}", it.c) }
 
-def doSeed = false
+def doSeed = true
 
 if (doSeed) {
     // delete plan
@@ -53,8 +53,8 @@ if (doSeed) {
     sql.execute(insert);
 }
 
-// sql.close();
-// System.exit(0);
+sql.close();
+System.exit(0);
 
 // write to bridge_reference_plan
 // for all customers, get all references and insert for plan
