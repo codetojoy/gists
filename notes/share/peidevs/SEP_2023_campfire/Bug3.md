@@ -10,18 +10,4 @@ if (loginOk) {
 }
 ```
 
-<details>
-<summary>click to reveal</summary>
-<pre>
-    public void doFFMpegComputation() {
-        PrintStream original = System.out;
-
-        System.setOut(null);
-
-        // call library
-        doComputation();
-
-        System.setOut(original);
-    }
-</pre>
-</details>
+* reveal [here](./Bug3b.md)
