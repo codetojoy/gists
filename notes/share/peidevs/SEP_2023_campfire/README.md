@@ -1,7 +1,9 @@
 
-### Release It! 2nd edition
+### Intro
 
-by Michael Nygard [here](https://learning.oreilly.com/library/view/release-it-2nd/9781680504552/)
+* Ron Myers on NDA
+* Ground-rules
+* Release It! 2nd edition by Michael Nygard [here](https://learning.oreilly.com/library/view/release-it-2nd/9781680504552/)
 
 ### Bug 1 
 
