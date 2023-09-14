@@ -1,0 +1,6 @@
+- Dan J's for loop
+- write.c
+- Quake server
+- library in Florida
+- System.out
+

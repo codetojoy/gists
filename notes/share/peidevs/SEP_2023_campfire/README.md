@@ -24,6 +24,30 @@ public class Loop {
 }
 ```
 
+### Bug 2
+
+```
+#include <stdio.h>
+int main() {
+   printf("Hello, World!");
+   return 0;
+}
+```
+
+```
+$ gcc -o write write.c
+$ write
+usage: write user [tty]
+```
+
+<details>
+<summary>click to reveal</summary>
+<pre>
+$ which write
+/usr/bin/write
+</pre>
+</details>
+
 ### Bug 2 
 
 ```
@@ -36,7 +60,7 @@ if (loginOk) {
 ```
 
 <details>
-<summary>click for response</summary>
+<summary>click to reveal</summary>
 <pre>
 if (loginOk) {
     System.out.println("TRACER login is ok");
