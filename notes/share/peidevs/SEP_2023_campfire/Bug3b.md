@@ -14,6 +14,7 @@ if (loginOk) {
 public void doFFMpegComputation() {
     PrintStream original = System.out;
 
+    // we can NEVER use System.out.println !
     System.setOut(null);
 
     // call library
