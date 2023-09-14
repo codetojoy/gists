@@ -22,6 +22,5 @@ if (loginOk) {
         doComputation();
 
         System.setOut(original);
-    }
-</pre>
+    }</pre>
 </details>
