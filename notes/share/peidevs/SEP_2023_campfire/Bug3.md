@@ -12,7 +12,7 @@ if (loginOk) {
 
 <details>
 <summary>click to reveal</summary>
-<pre>
+```
     public void doFFMpegComputation() {
         PrintStream original = System.out;
 
@@ -23,5 +23,5 @@ if (loginOk) {
 
         System.setOut(original);
     }
-</pre>
+```
 </details>
