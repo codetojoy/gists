@@ -29,3 +29,6 @@
 * kill pane: `pre x`
 * command mode: `pre :`
 
+### misc
+* reload source-file: `pre :` then `source-file ~/.tmux.conf` 
+
