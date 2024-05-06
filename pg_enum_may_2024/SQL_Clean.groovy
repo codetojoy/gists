@@ -10,6 +10,7 @@ import org.postgresql.*
 def sql = Sql.newInstance("jdbc:postgresql://127.0.0.1:5432/sandbox", "postgres","swordfish", "org.postgresql.Driver")
 
 sql.execute("DROP TABLE IF EXISTS roster CASCADE")
+sql.execute("DROP TABLE IF EXISTS league CASCADE")
 
 sql.close()
 

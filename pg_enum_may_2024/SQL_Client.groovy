@@ -23,5 +23,13 @@ status VARCHAR(256) NOT NULL
 ALTER TABLE roster ADD PRIMARY KEY (id);
 """)
 
+sql.execute("""
+CREATE TABLE league ( id bigint NOT NULL,
+name VARCHAR(256) NOT NULL,
+status VARCHAR(256) NOT NULL
+);
+ALTER TABLE league ADD PRIMARY KEY (id);
+""")
+
 sql.close()
 

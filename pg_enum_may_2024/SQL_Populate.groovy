@@ -19,7 +19,15 @@ def sql = Sql.newInstance("jdbc:postgresql://${host}:${port}/${database}", user,
 
 def myExecute(def sql, def id, def status) {
     String name = "name-" + id
-    def insert = " INSERT INTO roster (id, name, status) VALUES (?,?,?); "
+
+    def insert
+
+    // roster
+    insert = " INSERT INTO roster (id, name, status) VALUES (?,?,?); "
+    sql.execute(insert, [id, name, status]) 
+
+    // league
+    insert = " INSERT INTO league (id, name, status) VALUES (?,?,?); "
     sql.execute(insert, [id, name, status]) 
 }
 

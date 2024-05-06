@@ -7,7 +7,7 @@
     - start docker
     - go to localhost:80
     - Firefox has credentials
-    - use `mydb` in pgAdmin
+    - use `my_pg` in pgAdmin
     - from terminal, run `./go_setup.sh`
 
 - SQL_Clean.groovy: drops table
