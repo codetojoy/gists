@@ -26,9 +26,11 @@ def myExecute(def sql, def id, def status) {
     insert = " INSERT INTO roster (id, name, status) VALUES (?,?,?); "
     sql.execute(insert, [id, name, status]) 
 
+    String name2 = "name-league-" + id
+    def leagueId = id + 10000
     // league
     insert = " INSERT INTO league (id, name, status) VALUES (?,?,?); "
-    sql.execute(insert, [id, name, status]) 
+    sql.execute(insert, [leagueId, name2, status]) 
 }
 
 def id
