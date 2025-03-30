@@ -11,6 +11,25 @@
     * `name "/net/codetojoy/server-id", value "mozart-1756"`
 * for Bash, requires new version of Bash via HomeBrew
 	* macOS is frozen at 3.2.5 and this example won't work
+* Define script that requires `MY_API_KEY`, `MY_SERVER_ID`
+
+```
+#!/bin/bash
+
+set -e 
+
+if [[ -z "${MY_API_KEY}" ]]; then
+	echo "MY_API_KEY is not set"
+	exit -1
+fi
+
+if [[ -z "${MY_SERVER_ID}" ]]; then
+	echo "MY_SERVER_ID is not set"
+	exit -1
+fi
+
+echo "did work using env vars: OK"
+```
 
 ## Define Novops config file
 
@@ -31,17 +50,14 @@ environments:
           name: /net/codetojoy/server-id
 ```
 
-## load Novops 
+## Run script with Novops 
 
 * step 0: set AWS SSM env vars for access
-* step 1: in Bash, run `source <(novops load)` 
+* step 1: in Bash, `novops run -- ./do_something.sh`
 * example:
 
 ```
 $ . ../docker/localstack/setvars.sh 
-$ source <(novops load)
-$ env | egrep "API|SERVER"
-
-MY_API_KEY=evh-5150
-MY_SERVER_ID=mozart-1756
+$ novops run -- ./do_something_with_env_vars.sh
+$ did work using env vars: OK 
 ```
