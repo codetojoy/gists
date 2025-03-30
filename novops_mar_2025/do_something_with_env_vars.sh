@@ -12,4 +12,6 @@ if [[ -z "${MY_SERVER_ID}" ]]; then
 	exit -1
 fi
 
-echo "did work with env vars: OK"
+echo "TRACER-do-something: MY_API_ID : ${MY_API_ID}"
+echo "TRACER-do-something: MY_SERVER_ID : ${MY_SERVER_ID}"
+echo "TRACER-do-something: OK"

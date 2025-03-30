@@ -34,7 +34,8 @@ echo "did work using env vars: OK"
 ## Define Novops config file
 
 * in working folder, define: `.novops.yml`
-* NOTE: observe that this is safe to put in git:
+	* maps AWS SSM parameter to env var
+* Crucial point: this is safe to put in git!
 
 ```
 environments:
@@ -59,5 +60,8 @@ environments:
 ```
 $ . ../docker/localstack/setvars.sh 
 $ novops run -- ./do_something_with_env_vars.sh
-$ did work using env vars: OK 
+$
+$ TRACER-do-something: using MY_API_KEY : evh-5150
+$ TRACER-do-something: using MY_SERVER_ID : mozart-1756
+$ TRACER-do-something: OK 
 ```
