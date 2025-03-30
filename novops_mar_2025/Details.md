@@ -4,6 +4,11 @@
 * Novops [here](https://novops.dev/)
 * GitHub [here](https://github.com/PierreBeucher/novops)
 
+## Bash
+
+* requires newer version of Bash
+* see [this page](https://www.shell-tips.com/mac/upgrade-bash/#gsc.tab=0) 
+
 ## Prerequisites
 
 * load values into AWS SSM on localdev

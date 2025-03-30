@@ -9,6 +9,8 @@
 * assume these are in AWS SSM on localdev
     * `name "my-api-key", value "evh-5150"`
     * `name "/net/codetojoy/server-id", value "mozart-1756"`
+* for Bash, requires new version of Bash via HomeBrew
+	* macOS is frozen at 3.2.5 and this example won't work
 
 ## Define Novops config file
 
