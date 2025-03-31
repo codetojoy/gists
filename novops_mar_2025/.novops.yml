@@ -1,0 +1,13 @@
+environments:
+  dev:
+    variables:
+    - name: MY_API_KEY
+      value:
+        aws_ssm_parameter:
+          name: my-api-key
+    - name: MY_SERVER_ID
+      value:
+        aws_ssm_parameter:
+          name: /net/codetojoy/server-id
+    
+    
