@@ -54,11 +54,11 @@ environments:
 ## Run script with Novops 
 
 * step 0: set AWS SSM env vars for access
-* step 1: in Bash, `novops run -- ./do_something.sh`
-* example:
+* step 1: in Bash, `novops run -- ./do_something_with_env_vars.sh`
+* example (Bash script is [here](./do_something_with_env_vars.sh):
 
 ```
-$ . ../docker/localstack/setvars.sh 
+$ . ~/set_aws_ssm_creds.sh 
 $ novops run -- ./do_something_with_env_vars.sh
 $
 $ TRACER-do-something: using MY_API_KEY : evh-5150
