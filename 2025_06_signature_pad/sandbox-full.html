@@ -3,14 +3,25 @@
   <head>
     <meta charset="utf-8">
     <title>Sandbox</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
 
-<style>
+  <style>
+    #signature-pad {
+      border: 2px solid #000;
+      width: 400px;
+      height: 200px;
+      touch-action: none;
+    }
+    button {
+      margin-top: 10px;
+    }
+  </style>
+
+<script>
 
 $(document).ready(function() {
 
@@ -217,12 +228,10 @@ openInWindowButton.addEventListener("click", () => {
 
 });
 
-</style>
+</script>
 
 </head>
   <body>
-
-    <body onselectstart="return false">
 
   <div id="signature-pad" class="signature-pad">
     <div id="canvas-wrapper" class="signature-pad--body">
