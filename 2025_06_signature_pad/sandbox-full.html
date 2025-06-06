@@ -8,19 +8,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
 
-
-  <style>
-    #signature-pad {
-      border: 2px solid #000;
-      width: 400px;
-      height: 200px;
-      touch-action: none;
-    }
-    button {
-      margin-top: 10px;
-    }
-  </style>
-
 <script>
 
 $(document).ready(function() {
@@ -28,17 +15,9 @@ $(document).ready(function() {
 const wrapper = document.getElementById("signature-pad");
 const canvasWrapper = document.getElementById("canvas-wrapper");
 const clearButton = wrapper.querySelector("[data-action=clear]");
-const changeBackgroundColorButton = wrapper.querySelector("[data-action=change-background-color]");
-const changeColorButton = wrapper.querySelector("[data-action=change-color]");
-const changeWidthButton = wrapper.querySelector("[data-action=change-width]");
-const undoButton = wrapper.querySelector("[data-action=undo]");
-const redoButton = wrapper.querySelector("[data-action=redo]");
-const savePNGButton = wrapper.querySelector("[data-action=save-png]");
-const saveJPGButton = wrapper.querySelector("[data-action=save-jpg]");
 const saveSVGButton = wrapper.querySelector("[data-action=save-svg]");
 const saveSVGWithBackgroundButton = wrapper.querySelector("[data-action=save-svg-with-background]");
 const openInWindowButton = wrapper.querySelector("[data-action=open-in-window]");
-let undoData = [];
 const canvas = wrapper.querySelector("canvas");
 const signaturePad = new SignaturePad(canvas, {
   // It's Necessary to use an opaque color when saving image as JPEG;
@@ -46,12 +25,6 @@ const signaturePad = new SignaturePad(canvas, {
   backgroundColor: 'rgb(255, 255, 255)'
 });
 
-function randomColor() {
-  const r = Math.round(Math.random() * 255);
-  const g = Math.round(Math.random() * 255);
-  const b = Math.round(Math.random() * 255);
-  return `rgb(${r},${g},${b})`;
-}
 
 // Adjust canvas coordinate space taking into account pixel ratio,
 // to make it look crisp on mobile devices.
@@ -80,8 +53,8 @@ function resizeCanvas() {
 
 // On mobile devices it might make more sense to listen to orientation change,
 // rather than window resize events.
-window.onresize = resizeCanvas;
-resizeCanvas();
+// window.onresize = resizeCanvas;
+// resizeCanvas();
 
 window.addEventListener("keydown", (event) => {
   switch (true) {
@@ -93,21 +66,6 @@ window.addEventListener("keydown", (event) => {
       break;
   }
 });
-
-function download(dataURL, filename) {
-  const blob = dataURLToBlob(dataURL);
-  const url = window.URL.createObjectURL(blob);
-
-  const a = document.createElement("a");
-  a.style = "display: none";
-  a.href = url;
-  a.download = filename;
-
-  document.body.appendChild(a);
-  a.click();
-
-  window.URL.revokeObjectURL(url);
-}
 
 // One could simply use Canvas#toBlob method instead, but it's just to show
 // that it can be done using result of SignaturePad#toDataURL.
@@ -126,70 +84,24 @@ function dataURLToBlob(dataURL) {
   return new Blob([uInt8Array], { type: contentType });
 }
 
-signaturePad.addEventListener("endStroke", () => {
-  // clear undoData when new data is added
-  undoData = [];
-});
-
 clearButton.addEventListener("click", () => {
   signaturePad.clear();
 });
 
-undoButton.addEventListener("click", () => {
-  const data = signaturePad.toData();
+function download(dataURL, filename) {
+  const blob = dataURLToBlob(dataURL);
+  const url = window.URL.createObjectURL(blob);
 
-  if (data && data.length > 0) {
-    // remove the last dot or line
-    const removed = data.pop();
-    undoData.push(removed);
-    signaturePad.fromData(data);
-  }
-});
+  const a = document.createElement("a");
+  a.style = "display: none";
+  a.href = url;
+  a.download = filename;
 
-redoButton.addEventListener("click", () => {
-  if (undoData.length > 0) {
-    const data = signaturePad.toData();
-    data.push(undoData.pop());
-    signaturePad.fromData(data);
-  }
-});
+  document.body.appendChild(a);
+  a.click();
 
-changeBackgroundColorButton.addEventListener("click", () => {
-  signaturePad.backgroundColor = randomColor();
-  const data = signaturePad.toData();
-  signaturePad.clear();
-  signaturePad.fromData(data);
-});
-
-changeColorButton.addEventListener("click", () => {
-  signaturePad.penColor = randomColor();
-});
-
-changeWidthButton.addEventListener("click", () => {
-  const min = Math.round(Math.random() * 100) / 10;
-  const max = Math.round(Math.random() * 100) / 10;
-
-  signaturePad.minWidth = Math.min(min, max);
-  signaturePad.maxWidth = Math.max(min, max);
-});
-
-savePNGButton.addEventListener("click", () => {
-  if (signaturePad.isEmpty()) {
-    alert("Please provide a signature first.");
-  } else {
-    const dataURL = signaturePad.toDataURL();
-    download(dataURL, "signature.png");
-  }
-});
-
-saveJPGButton.addEventListener("click", () => {
-  if (signaturePad.isEmpty()) {
-    alert("Please provide a signature first.");
-  } else {
-    const dataURL = signaturePad.toDataURL("image/jpeg");
-    download(dataURL, "signature.jpg");
-  }
-});
+  window.URL.revokeObjectURL(url);
+}
 
 saveSVGButton.addEventListener("click", () => {
   if (signaturePad.isEmpty()) {
@@ -209,23 +121,6 @@ saveSVGWithBackgroundButton.addEventListener("click", () => {
   }
 });
 
-openInWindowButton.addEventListener("click", () => {
-	var externalWin = window.open('', '', `width=${canvas.width / window.devicePixelRatio},height=${canvas.height / window.devicePixelRatio}`);
-  canvas.style.width = "100%";
-  canvas.style.height = "100%";
-  externalWin.onresize = resizeCanvas;
-  externalWin.document.body.style.margin = '0';
-	externalWin.document.body.appendChild(canvas);
-  canvasWrapper.classList.add("empty");
-  externalWin.onbeforeunload = () => {
-    canvas.style.width = "";
-    canvas.style.height = "";
-    canvasWrapper.classList.remove("empty");
-    canvasWrapper.appendChild(canvas);
-    resizeCanvas();
-  };
-})
-
 });
 
 </script>
@@ -243,25 +138,12 @@ openInWindowButton.addEventListener("click", () => {
       <div class="signature-pad--actions">
         <div class="column">
           <button type="button" class="button clear" data-action="clear">Clear</button>
-          <button type="button" class="button" data-action="undo" title="Ctrl-Z">Undo</button>
-          <button type="button" class="button" data-action="redo" title="Ctrl-Y">Redo</button>
-          <br/>
-          <button type="button" class="button" data-action="change-color">Change color</button>
-          <button type="button" class="button" data-action="change-width">Change width</button>
-          <button type="button" class="button" data-action="change-background-color">Change background color</button>
-
         </div>
         <div class="column">
-          <button type="button" class="button save" data-action="save-png">Save as PNG</button>
-          <button type="button" class="button save" data-action="save-jpg">Save as JPG</button>
           <button type="button" class="button save" data-action="save-svg">Save as SVG</button>
           <button type="button" class="button save" data-action="save-svg-with-background">Save as SVG with
             background</button>
         </div>
-      </div>
-
-      <div>
-        <button type="button" class="button" data-action="open-in-window">Open in Window</button>
       </div>
     </div>
   </div>
