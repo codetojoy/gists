@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Signature Pad Example</title>
+  <style>
+    #signature-pad {
+      border: 2px solid #000;
+      width: 400px;
+      height: 200px;
+      touch-action: none;
+    }
+    button {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Draw Your Signature Below</h2>
+  <canvas id="signature-pad" width="400" height="200"></canvas>
+  <br>
+  <button id="clear">Clear</button>
+  <button id="save">Save as Image</button>
+  <div id="output"></div>
+
+  <!-- Include Signature Pad via CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.5/dist/signature_pad.umd.min.js"></script>
+  <script>
+    const canvas = document.getElementById('signature-pad');
+    const signaturePad = new SignaturePad(canvas);
+
+    // Clear button
+    document.getElementById('clear').addEventListener('click', () => {
+      signaturePad.clear();
+      document.getElementById('output').innerHTML = '';
+    });
+
+    // Save as Image button
+    document.getElementById('save').addEventListener('click', () => {
+      if (signaturePad.isEmpty()) {
+        alert('Please provide a signature first.');
+        return;
+      }
+
+      const dataURL = signaturePad.toDataURL();
+      const img = new Image();
+      img.src = dataURL;
+      img.alt = "Saved Signature";
+      img.style.border = "1px solid #ccc";
+      img.style.marginTop = "10px";
+
+      const output = document.getElementById('output');
+      output.innerHTML = ''; // Clear old image if any
+      output.appendChild(img);
+    });
+  </script>
+</body>
+</html>
+
