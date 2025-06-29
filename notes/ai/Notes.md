@@ -33,6 +33,7 @@
 * Superagency, Reid Hoffman
 * Doomers -> Gloomers -> Bloomers -> Zoomers
 
-### podcast
+### podcast, channels
 
-Possible: Reid Hoffman
+* Fireship
+* Possible: Reid Hoffman
