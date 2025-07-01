@@ -4,6 +4,17 @@
 * OpenAI: ChatGPT
 * Google: Gemini
 * Anthropic: Claude 
+* Meta: Llama
+* China: DeepSeek 
+* Hugging Face
+
+### people
+
+* Andrej Karpathy: Tesla
+
+### journalists
+
+* Zoe Schiffer
 
 ### editors, tools
 
