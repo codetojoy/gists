@@ -104,3 +104,12 @@ FROM pg_stat_user_indexes
     - width avg # of bits (w)
         - rows, width is network traffic
 
+- vid 269
+- query cost model
+- costs
+- seq_page_cost vs cpu_tuple_cost vs cpu_operator_cost
+- formula: 
+    relation-size * seq_page_cost +
+    num_tuples * cpu_tuple_cost + 
+    num_tuples * cpu_operator_cost
+- cost is just an estimate
