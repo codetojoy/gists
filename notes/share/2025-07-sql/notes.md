@@ -62,3 +62,8 @@ SELECT indexrelname,
        idx_scan,idx_tup_read 
 FROM pg_stat_user_indexes 
        WHERE idx_scan > 0;
+
+-- vid 30
+
+`explain (analyze, verbose, costs, timing, buffers) ...` 
+
