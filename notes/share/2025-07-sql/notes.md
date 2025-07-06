@@ -67,3 +67,9 @@ FROM pg_stat_user_indexes
 
 `explain (analyze, verbose, costs, timing, buffers) ...` 
 
+### Bootcamp
+
+- vid 251
+- `select * from pg_indexes where tablename = 'foobar'`
+
+
