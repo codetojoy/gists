@@ -70,6 +70,26 @@ FROM pg_stat_user_indexes
 ### Bootcamp
 
 - vid 251
-- `select * from pg_indexes where tablename = 'foobar'`
+- list index
+- `select * from pg_indexes where tablename = 'orders'`
 
+- vid 252
+- size of indexes
+- `select pg_size_pretty(pg_indexes_size('orders'))`
+
+- vid 253
+- count
+- `select * from pg_stat_all_indexes order by relname`
+
+- vid 263
+- hash index
+- equality `=` operator
+- larger than B-tree
+
+- vid 264
+- BRIN index
+- block range index
+- data block to min/max value
+- smaller than B-tree
+- useful for linear sort order 
 
