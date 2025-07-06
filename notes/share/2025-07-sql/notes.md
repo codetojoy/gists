@@ -93,3 +93,14 @@ FROM pg_stat_user_indexes
 - smaller than B-tree
 - useful for linear sort order 
 
+- vid 266
+- explain
+- execution nodes have cost/time etc
+    - e.g. `Seq Scan on foobar (cost=s..f rows=n width=w)
+    - cost startup..final
+        - cost will increase working from inner to outer
+        - final cost is outer parent
+    - rows estimated N rows 
+    - width avg # of bits (w)
+        - rows, width is network traffic
+
