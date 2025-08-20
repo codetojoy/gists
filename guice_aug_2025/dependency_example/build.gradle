@@ -1,0 +1,58 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'com.example'
+version = '1.0.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Google Guice for dependency injection
+    implementation 'com.google.inject:guice:7.0.0'
+}
+
+application {
+    mainClass = 'net.codetojoy.GuiceModuleDependenciesDemo'
+}
+
+// Task to run the application with verbose logging
+/*
+tasks.register('runWithFinestLogging', JavaExec) {
+    group = 'application'
+    description = 'Run the Guice demo with FINEST logging enabled'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'GuiceLoggingDemo'
+    
+    // JVM arguments for enhanced logging
+    jvmArgs = [
+        '-Djava.util.logging.config.file=logging.properties',
+        '-Dcom.google.inject.internal.util.$Stopwatch.level=FINEST'
+    ]
+}
+*/
+
+// Configure compiler options
+compileJava {
+    options.encoding = 'UTF-8'
+    options.compilerArgs += ['-Xlint:unchecked', '-Xlint:deprecation']
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+    options.compilerArgs += ['-Xlint:unchecked', '-Xlint:deprecation']
+}
+
+// Wrapper task configuration
+wrapper {
+    gradleVersion = '8.4'
+    distributionType = Wrapper.DistributionType.BIN
+}
