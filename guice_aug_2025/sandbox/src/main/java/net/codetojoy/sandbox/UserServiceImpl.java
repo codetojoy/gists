@@ -14,8 +14,12 @@ class UserServiceImpl implements UserService {
     
     @Inject
     public UserServiceImpl(DBService dbService) {
-        logger.info("TRACER ctor");
         this.dbService = dbService;
+
+        if (!dbService.isInitialized()) {
+            throw new IllegalStateException("dbService not initialized !?");
+        }
+
         initialized = true;
     }
 

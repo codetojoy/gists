@@ -13,7 +13,6 @@ class DBServiceImpl implements DBService {
     
     @Inject
     public DBServiceImpl() {
-        logger.info("TRACER ctor");
         initialized = true;
     }
 

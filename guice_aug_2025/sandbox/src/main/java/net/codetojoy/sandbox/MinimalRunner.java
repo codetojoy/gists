@@ -29,6 +29,14 @@ public class MinimalRunner {
         dbService = injector.getInstance(DBService.class);
         userService = injector.getInstance(UserService.class);
 
+        if (!dbService.isInitialized()) {
+            throw new IllegalStateException("dbService not initialized !?");
+        }
+
+        if (!userService.isInitialized()) {
+            throw new IllegalStateException("userService not initialized !?");
+        }
+
         logger.info("TRACER init OK");
     }
 
@@ -47,7 +55,7 @@ public class MinimalRunner {
             runner.init();
             runner.run();
 
-            logger.info("TRACER v.07.53 Ready.");
+            logger.info("TRACER v 0.09.09 Ready.");
         } catch (Exception e) {
             logger.info("TRACER caught exception: " + e.getMessage());
         }
