@@ -8,6 +8,7 @@ import java.util.logging.Level;
 
 public class MinimalRunner {
     private DBService dbService;
+    private UserService userService;
 
     // -------------------------- logging 
     private static final Logger logger = Logger.getLogger(MinimalRunner.class.getName());
@@ -21,9 +22,12 @@ public class MinimalRunner {
         
     private void init() {
         Injector injector = Guice.createInjector(
-            new InfrastructureModule()    
+            new InfrastructureModule(),
+            new BusinessLogicModule()
         );
+
         dbService = injector.getInstance(DBService.class);
+        userService = injector.getInstance(UserService.class);
 
         logger.info("TRACER init OK");
     }
@@ -31,6 +35,7 @@ public class MinimalRunner {
     // -------------------------- main 
 
     private void run() {
+        logger.info("TRACER run: userService says: " + userService.getUser("user-mozart"));
         logger.info("TRACER run: dbService says: " + dbService.query("5150"));
     }
 

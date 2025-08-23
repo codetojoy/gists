@@ -6,20 +6,22 @@ import com.google.inject.Singleton;
 import java.util.logging.Logger;
 
 @Singleton
-class DBServiceImpl implements DBService {
+class UserServiceImpl implements UserService {
     private boolean initialized = false;
+    private final DBService dbService;
 
-    private static final Logger logger = Logger.getLogger(DBServiceImpl.class.getName());
+    private static final Logger logger = Logger.getLogger(UserServiceImpl.class.getName());
     
     @Inject
-    public DBServiceImpl() {
+    public UserServiceImpl(DBService dbService) {
         logger.info("TRACER ctor");
+        this.dbService = dbService;
         initialized = true;
     }
 
     @Override
-    public String query(String id) {
-        return "DB OK [ " + id + " ]";
+    public String getUser(String id) {
+        return "user OK [ " + dbService.query(id) + " ]";
     }
 
     @Override
