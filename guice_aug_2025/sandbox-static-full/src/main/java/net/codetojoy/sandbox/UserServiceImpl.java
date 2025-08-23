@@ -5,8 +5,10 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.logging.Logger;
 
+import static net.codetojoy.sandbox.util.Constants.LOG_FORMAT;
+
 @Singleton
-class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService {
     private boolean initialized = false;
     private final DBService dbService;
 
@@ -25,7 +27,7 @@ class UserServiceImpl implements UserService {
 
     @Override
     public String getUser(String id) {
-        return "{\"who\":\"UserServiceImpl\", \"status\":" + dbService.query(id) + "}";
+        return String.format(LOG_FORMAT, "UserServiceImpl", dbService.query(id));
     }
 
     @Override

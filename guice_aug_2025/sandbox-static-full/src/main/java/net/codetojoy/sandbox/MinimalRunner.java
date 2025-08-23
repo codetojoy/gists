@@ -6,7 +6,7 @@ import com.google.inject.Injector;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
-import static net.codetojoy.sandbox.MyLog.buildLog;
+import static net.codetojoy.sandbox.util.MyLog.buildLog;
 
 public class MinimalRunner {
     private DBService dbService;

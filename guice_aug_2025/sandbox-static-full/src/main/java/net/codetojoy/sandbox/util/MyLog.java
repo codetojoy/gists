@@ -1,5 +1,5 @@
 
-package net.codetojoy.sandbox;
+package net.codetojoy.sandbox.util;
 
 public class MyLog {
     public static String buildLog(String message) {

@@ -1,12 +1,15 @@
 
 package net.codetojoy.sandbox;
 
+import static net.codetojoy.sandbox.util.Constants.LOG_FORMAT;
+
 public class NastyDB {
     private static boolean initialized = false;
 
     public static String query(String id) {
         confirmInit();
-        return "{\"who\":\"NastyDB\", \"status\":\"OK\", \"id\": \"" + id + "\"}";
+        String status = "{\"id\": \"" + id + "\"}";
+        return String.format(LOG_FORMAT, "NastyDB", status); 
     }
 
     public static boolean isInitialized() {

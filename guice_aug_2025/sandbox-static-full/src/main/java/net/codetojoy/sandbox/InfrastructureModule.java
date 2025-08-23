@@ -6,10 +6,10 @@ import com.google.inject.Provides;
 import com.google.inject.name.Named;
 import java.util.logging.Logger;
 
-import static net.codetojoy.sandbox.MyLog.buildLog;
+import static net.codetojoy.sandbox.util.MyLog.buildLog;
 
 // Module A: Foundation/Infrastructure Module
-class InfrastructureModule extends AbstractModule {
+public class InfrastructureModule extends AbstractModule {
     private static final Logger logger = Logger.getLogger(InfrastructureModule.class.getName());
     
     @Override

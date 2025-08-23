@@ -5,8 +5,10 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.logging.Logger;
 
+import static net.codetojoy.sandbox.util.Constants.LOG_FORMAT;
+
 @Singleton
-class DBServiceImpl implements DBService {
+public class DBServiceImpl implements DBService {
     private static NastyDB nastyDB;
 
     private static final Logger logger = Logger.getLogger(DBServiceImpl.class.getName());
@@ -18,7 +20,7 @@ class DBServiceImpl implements DBService {
 
     @Override
     public String query(String id) {
-        return "{\"who\":\"DBServiceImpl\", \"status\":" + nastyDB.query(id) + "}";
+        return String.format(LOG_FORMAT, "DBServiceImpl", nastyDB.query(id));
     }
 
     @Override
