@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 import static net.codetojoy.sandbox.util.MyLog.buildLog;
 
-// Module A: Foundation/Infrastructure Module
+// Infrastructure Module
 public class InfrastructureModule extends AbstractModule {
     private static final Logger logger = Logger.getLogger(InfrastructureModule.class.getName());
     
@@ -21,10 +21,11 @@ public class InfrastructureModule extends AbstractModule {
         logger.info(buildLog("InfrastructureModule: init OK"));
     }
     
-    // Provide named configurations that Module B might need
+    // Provide named configurations that BusinessLogic Module might need
     @Provides
-    @Named("module.a.ready")
+    @Named("module.infra.ready")
     public Boolean provideModuleAReadyFlag(DBService dbService) {
+        logger.info(buildLog("InfrastructureModule: checking for ready"));
         return dbService.isInitialized();
     }
 }

@@ -3,7 +3,13 @@ package net.codetojoy.sandbox;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Key;
+import com.google.inject.name.Names;
+
 import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 
 import static net.codetojoy.sandbox.util.MyLog.buildLog;
@@ -28,6 +34,10 @@ public class Application {
             new BusinessLogicModule()
         );
 
+        // Verify BusinessLogicModule validation
+        String validation = injector.getInstance(Key.get(String.class, Names.named("module.business.validation")));
+        logger.info(buildLog("BusinessLogicModule validation result: " + validation));
+
         dbService = injector.getInstance(DBService.class);
         userService = injector.getInstance(UserService.class);
 
@@ -40,11 +50,44 @@ public class Application {
         }
     }
 
+    // -------------------------- worker threads 
+
+    private String getUser(String id) {
+        String result = userService.getUser(id);
+        logger.info(buildLog("userService: " + result));
+        return result;
+    }
+        
+    private String doQuery(String id) {
+        String result = dbService.query(id);
+        logger.info(buildLog("dbService: " + result));
+        return result;
+    }
+
+    private void doWork() { 
+        logger.info(buildLog("starting worker threads..."));
+        List<CompletableFuture> futures = new ArrayList<>();
+        int numWorkers = 6;
+
+        for (int i = 0; i < numWorkers; i++) {
+            final boolean isEven = (i % 2 == 0);
+            final String dbId = "id-" + i;
+            final String userId = "user-" + i; 
+
+            futures.add(CompletableFuture.supplyAsync(() -> 
+                (isEven) ? doQuery(dbId) : getUser(userId)
+            ));
+        }
+
+        futures.forEach(CompletableFuture::join);
+    }
+
     // -------------------------- main 
 
     private void run() {
-        logger.info(buildLog("userService: " + userService.getUser("user-mozart")));
-        logger.info(buildLog("dbService: " + dbService.query("5150")));
+        doWork();
+        getUser("user-mozart");
+        doQuery("5150");
     }
 
     public static void main(String[] args) {

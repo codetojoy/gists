@@ -21,12 +21,12 @@ public class BusinessLogicModule extends AbstractModule {
     
     // Verify Module A is ready before allowing Module B services
     @Provides
-    @Named("module.b.validation")
-    public String provideModuleBValidation(@Named("module.a.ready") Boolean moduleAReady) {
-        if (!moduleAReady) {
-            throw new IllegalStateException("Module A must be fully initialized before Module B!");
+    @Named("module.business.validation")
+    public String provideModuleBValidation(@Named("module.infra.ready") Boolean infraModuleReady) {
+        if (!infraModuleReady) {
+            throw new IllegalStateException("Infra Module must be fully initialized before BusinessLogic Module!");
         }
-        logger.info(buildLog("BusiessLogicModule validation passed - DatabaseModule is ready"));
+        logger.info(buildLog("BusinessLogicModule validation passed - InfraModule is ready"));
         return "Module B validated against Module A";
     }
 }
