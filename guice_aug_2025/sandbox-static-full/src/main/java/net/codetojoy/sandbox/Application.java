@@ -8,12 +8,12 @@ import java.util.logging.Level;
 
 import static net.codetojoy.sandbox.util.MyLog.buildLog;
 
-public class MinimalRunner {
+public class Application {
     private DBService dbService;
     private UserService userService;
 
     // -------------------------- logging 
-    private static final Logger logger = Logger.getLogger(MinimalRunner.class.getName());
+    private static final Logger logger = Logger.getLogger(Application.class.getName());
 
     private void configureLogging() {
         Logger rootLogger = Logger.getLogger("");
@@ -49,11 +49,11 @@ public class MinimalRunner {
 
     public static void main(String[] args) {
         try {
-            MinimalRunner runner = new MinimalRunner();
+            Application app = new Application();
 
-            runner.configureLogging();
-            runner.init();
-            runner.run();
+            app.configureLogging();
+            app.init();
+            app.run();
 
             logger.info(buildLog("Ready."));
         } catch (Exception e) {
