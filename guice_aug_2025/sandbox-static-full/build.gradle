@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'net.codetojoy'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.google.inject:guice:7.0.0'
+}
+
+application {
+    mainClass = 'net.codetojoy.sandbox.MinimalRunner'
+}
+
+// Wrapper task configuration
+wrapper {
+    gradleVersion = '8.4'
+    distributionType = Wrapper.DistributionType.BIN
+}
