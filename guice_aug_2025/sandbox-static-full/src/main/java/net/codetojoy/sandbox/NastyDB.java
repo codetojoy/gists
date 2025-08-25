@@ -28,7 +28,7 @@ public class NastyDB {
     private static void init() {
         System.out.println("TRACER NastyDB init");
         try {
-            System.out.println("TRACER NastyDB pathogenic dely on init...");
+            System.out.println("TRACER NastyDB pathogenic delay on init...");
             Thread.sleep(5_000);
         } catch (InterruptedException e) {
         }
