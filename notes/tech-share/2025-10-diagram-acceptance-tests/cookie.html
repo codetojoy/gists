@@ -1,0 +1,130 @@
+<html>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTP Authentication Flow</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-width: 800px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+        }
+        .flow {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .request, .response {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .request {
+            border-left: 5px solid #28a745;
+        }
+        .response {
+            border-left: 5px solid #007bff;
+        }
+        .label {
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .http-line {
+            color: #6c757d;
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        .method {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .status {
+            color: #007bff;
+            font-weight: bold;
+        }
+        .header {
+            color: #e83e8c;
+        }
+        .cookie {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        .body {
+            background: #e7f3ff;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+        .arrow {
+            text-align: center;
+            font-size: 24px;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>HTTP Authentication Flow with Session Cookie</h2>
+        
+        <div class="flow">
+            <div class="request">
+                <div class="label">🔐 HTTP Request</div>
+                <div class="http-line"><span class="method">POST</span> /api/auth/login HTTP/1.1</div>
+                <div class="http-line">Host: api.example.com</div>
+                <div class="http-line"><span class="header">Content-Type:</span> application/json</div>
+                <div class="body">
+                    {<br>
+                    &nbsp;&nbsp;"username": "user@example.com",<br>
+                    &nbsp;&nbsp;"password": "********"<br>
+                    }
+                </div>
+            </div>
+            
+            <div class="arrow">↓</div>
+            
+            <div class="response">
+                <div class="label">✅ HTTP Response</div>
+                <div class="http-line"><span class="status">HTTP/1.1 200 OK</span></div>
+                <div class="http-line"><span class="header">Content-Type:</span> application/json</div>
+                <div class="cookie">
+                    <strong>Set-Cookie:</strong> sessionId=abc123xyz789; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=3600
+                </div>
+                <div class="body">
+                    {<br>
+                    &nbsp;&nbsp;"success": true,<br>
+                    &nbsp;&nbsp;"message": "Login successful"<br>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+</body>
+</html>
