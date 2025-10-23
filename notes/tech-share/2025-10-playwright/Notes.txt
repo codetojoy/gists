@@ -1,2 +1,6 @@
 
 * `--ui` mode 
+
+### resources
+
+* best practices - https://playwright.dev/docs/best-practices
