@@ -1,0 +1,11 @@
+{
+  "name": "date-picker-test",
+  "version": "1.0.0",
+  "description": "Playwright tests for jQuery datepicker",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0"
+  }
+}

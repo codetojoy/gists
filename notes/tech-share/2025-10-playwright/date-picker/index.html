@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Picker Example</title>
+
+    <!-- jQuery UI CSS -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Date Selection Form</h1>
+
+    <form>
+        <div class="form-group">
+            <label for="startDate">Start Date:</label>
+            <div id="startDate"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="endDate">End Date:</label>
+            <div id="endDate"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description">
+        </div>
+    </form>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- jQuery UI -->
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Initialize datepicker for start date
+            $("#startDate").datepicker({
+                dateFormat: "yy-mm-dd",
+                onSelect: function(selectedDate) {
+                    // Set minimum date for end date picker
+                    $("#endDate").datepicker("option", "minDate", selectedDate);
+                }
+            });
+
+            // Initialize datepicker for end date
+            $("#endDate").datepicker({
+                dateFormat: "yy-mm-dd",
+                onSelect: function(selectedDate) {
+                    // Set maximum date for start date picker
+                    $("#startDate").datepicker("option", "maxDate", selectedDate);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
