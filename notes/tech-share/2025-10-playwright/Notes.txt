@@ -5,6 +5,7 @@
     * TS and async/await
 * AI agents?
 * Microsoft backing 
+* mobile / breakpoints ? 
 
 ### resources
 
