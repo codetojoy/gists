@@ -2,6 +2,7 @@
 * `--ui` mode 
 * trace / snapshot
 * multi-language
+    * TS and async/await
 * AI agents?
 * Microsoft backing 
 
