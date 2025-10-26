@@ -1,7 +1,11 @@
 
 * `--ui` mode 
 * trace / snapshot
+* multi-language
+* AI agents?
+* Microsoft backing 
 
 ### resources
 
 * best practices - https://playwright.dev/docs/best-practices
+* auto waiting - https://playwright.dev/docs/actionability
