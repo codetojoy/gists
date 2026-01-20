@@ -1,0 +1,4 @@
+# Enable auto-env through sdkman configuration
+# sdkman_auto_env=true
+java=21.0.5-amzn
+kotlin=2.2.21
