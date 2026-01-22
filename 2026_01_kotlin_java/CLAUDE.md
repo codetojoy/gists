@@ -12,10 +12,11 @@ Java-Kotlin interoperability sandbox demonstrating bidirectional calls between t
 
 ## Project Structure
 
-- `src/Animal.kt` - Kotlin class called from Java
-- `src/Vehicle.java` - Java class called from Kotlin
+- `src/Animal.kt` - Kotlin class called from Java (returns `Sequence<String>` for locations)
+- `src/Vehicle.java` - Java class called from Kotlin (returns `ArrayList<String>` for locations)
 - `src/JavaMain.java` - Java entry point
 - `src/KotlinMain.kt` - Kotlin entry point
+- `src/locations.txt` - 20 sample locations used by both demos
 - `run_java.sh` - Compiles and runs Java→Kotlin demo
 - `run_kotlin.sh` - Compiles and runs Kotlin→Java demo
 - `out/` - Compiled class files (generated)

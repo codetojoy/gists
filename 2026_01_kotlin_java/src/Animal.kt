@@ -1,3 +1,5 @@
+import java.io.File
+
 class Animal {
     fun makeSound(type: Int): String {
         return when (type) {
@@ -7,5 +9,9 @@ class Animal {
             4 -> "Oink"
             else -> "Unknown animal"
         }
+    }
+
+    fun getLocations(): Sequence<String> {
+        return File("src/locations.txt").useLines { it.toList() }.asSequence()
     }
 }

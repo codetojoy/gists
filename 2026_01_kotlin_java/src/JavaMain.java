@@ -1,3 +1,6 @@
+import kotlin.sequences.Sequence;
+import java.util.Iterator;
+
 public class JavaMain {
     public static void main(String[] args) {
         int type = 1;
@@ -9,5 +12,12 @@ public class JavaMain {
         String sound = animal.makeSound(type);
 
         System.out.println("Java calling Kotlin: Animal type " + type + " says '" + sound + "'");
+
+        System.out.println("\nLocations from Kotlin Sequence:");
+        Sequence<String> locations = animal.getLocations();
+        Iterator<String> iterator = locations.iterator();
+        while (iterator.hasNext()) {
+            System.out.println("  - " + iterator.next());
+        }
     }
 }

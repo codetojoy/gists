@@ -1,3 +1,8 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+
 public class Vehicle {
     public String getFuel(int type) {
         return switch (type) {
@@ -7,5 +12,9 @@ public class Vehicle {
             case 4 -> "Hydrogen";
             default -> "Unknown fuel";
         };
+    }
+
+    public ArrayList<String> getLocations() throws IOException {
+        return new ArrayList<>(Files.readAllLines(Paths.get("src/locations.txt")));
     }
 }

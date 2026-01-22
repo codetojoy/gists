@@ -22,7 +22,8 @@ echo "Compiling Kotlin class (Animal.kt)..."
 kotlinc "$SRC_DIR/Animal.kt" -d "$OUT_DIR"
 
 echo "Compiling Java class (JavaMain.java)..."
-javac -cp "$OUT_DIR" -d "$OUT_DIR" "$SRC_DIR/JavaMain.java"
+KOTLIN_LIB="$(dirname $(which kotlinc))/../lib/kotlin-stdlib.jar"
+javac -cp "$OUT_DIR:$KOTLIN_LIB" -d "$OUT_DIR" "$SRC_DIR/JavaMain.java"
 
 echo "Running Java program..."
 java -cp "$OUT_DIR:$(dirname $(which kotlinc))/../lib/kotlin-stdlib.jar" JavaMain "$@"

@@ -5,4 +5,8 @@ fun main(args: Array<String>) {
     val fuel = vehicle.getFuel(type)
 
     println("Kotlin calling Java: Vehicle type $type uses '$fuel'")
+
+    println("\nLocations from Java ArrayList:")
+    val locations = vehicle.getLocations()
+    locations.forEach { println("  - $it") }
 }
